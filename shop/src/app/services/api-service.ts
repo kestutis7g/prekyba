@@ -9,6 +9,8 @@ import { IParkingHistory } from 'src/model/Parking/History/IParkingHistory';
 import { IParkingHistoryFilterOptions } from 'src/model/Parking/History/IParkingHistoryFilterOptions';
 import { ISchedule } from 'src/model/Parking/Settings/ISchedule';
 import { IItem } from 'src/model/IItem';
+import { ICart } from 'src/model/ICart';
+import { IUser } from 'src/model/IUser';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +28,16 @@ export class ApiService {
   getItemById(id: number) {
     return this.http.get<IItem>(this.APIUrl + 'Item/' + id);
   }
+
+  addItemToCart(cartItem: ICart) {
+    return this.http.post(this.APIUrl + 'Cart', cartItem);
+  }
+
+  addUser(user: IUser) {
+    return this.http.post(this.APIUrl + 'User', user);
+  }
+
+
 
   getParkingList(skip: number, pageSize: number) {
     return this.http.get<IParking>(this.APIUrl + 'parking');

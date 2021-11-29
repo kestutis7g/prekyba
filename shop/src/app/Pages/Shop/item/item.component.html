@@ -23,4 +23,10 @@
   </div>
   {{item?.name}}
   vat o jos kaina yra: {{item?.price}}
+
+  <input type="number" id="fname" name="fname" [(ngModel)]="quantity"><br><br>
+
+  <div>
+    <button mat-raised-button (click)="addToCart(item!.id)">Į krepšelį</button>
+  </div>
 </div>

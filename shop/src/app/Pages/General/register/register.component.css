@@ -10,11 +10,15 @@
   margin-right: auto;
   text-align: center;
 }
-p:hover{
-  font-size: 15px;
-  transition-duration: 0.5s;
+
+h1 {
+  text-align: center;
 }
 
-p{
-  transition-duration: 0.5s;
+p {
+  text-align: center;
+}
+
+div {
+  text-align: center;
 }

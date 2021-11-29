@@ -1,45 +1,45 @@
 <head>
-    <link rel="stylesheet" href="./login.component.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <style>
-        h1 {
-            text-align: center;
-        }
+  <link rel="stylesheet" href="./login.component.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    h1 {
+      text-align: center;
+    }
 
-        p {
-            text-align: center;
-        }
+    p {
+      text-align: center;
+    }
 
-        div {
-            text-align: center;
-        }
-    </style>
+    div {
+      text-align: center;
+    }
+  </style>
 </head>
 
 <h1>
-    Prisijungimas
+  Prisijungimas
 </h1>
 <div class="register-form">
-    <form action="/action_page.php" class="form">
-        <p>
-            <mat-form-field appearance="legacy">
-                <mat-label>Vartotojo vardas</mat-label>
-                <input matInput placeholder=" ">
-            </mat-form-field>
-        </p>
+  <form action="/action_page.php" class="form">
+    <p>
+      <mat-form-field appearance="legacy">
+        <mat-label>Vartotojo vardas</mat-label>
+        <input matInput placeholder=" ">
+      </mat-form-field>
+    </p>
 
-        <p>
-            <mat-form-field appearance="legacy">
-                <mat-label>Slaptažodis</mat-label>
-                <input matInput placeholder=" ">
-            </mat-form-field>
-        </p>
+    <p>
+      <mat-form-field appearance="legacy">
+        <mat-label>Slaptažodis</mat-label>
+        <input matInput placeholder=" ">
+      </mat-form-field>
+    </p>
 
-        <input type="submit" value="Prisijungti" class="btn btn-dark">
-        <p> </p>
-        <input routerLink="/register" type="submit" value="Registruotis" class="btn btn-dark">
+    <button type="submit" class="btn btn-dark">Prisijungti</button>
+    <p> </p>
+    <button routerLink="/register" type="submit" class="btn btn-dark">Registruotis</button>
 
 
-    </form>
+  </form>
 </div>

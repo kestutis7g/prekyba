@@ -37,8 +37,6 @@ export class HistoryComponent implements OnInit {
 
   itemList?: IItem[];
 
-
-
   constructor(private service: ApiService,
     private route: Router) { }
 
@@ -60,8 +58,4 @@ export class HistoryComponent implements OnInit {
     console.log(id);
     this.route.navigate(["item/" + id]);
   }
-
-
-
-
 }

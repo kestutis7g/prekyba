@@ -11,5 +11,7 @@ namespace ShopAPI.Context
         }
 
         public DbSet<ItemModel> Items { get; set; }
+        public DbSet<CartModel> Carts { get; set; }
+        public DbSet<UserModel> Users { get; set; }
     }
 }

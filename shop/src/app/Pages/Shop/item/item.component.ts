@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/services/api-service';
+import { ICart } from 'src/model/ICart';
 import { IItem } from 'src/model/IItem';
 
 @Component({
@@ -11,7 +12,7 @@ import { IItem } from 'src/model/IItem';
 export class ItemComponent implements OnInit {
 
   item: IItem | undefined
-
+  quantity: number = 0
   constructor(
     private service: ApiService,
     private route: ActivatedRoute
@@ -19,8 +20,7 @@ export class ItemComponent implements OnInit {
 
   ngOnInit() {
     let route = this.route.params.subscribe(params => {
-      console.log(params) //log the entire params object
-      console.log(params['id']) //log the value of id
+
       this.service.getItemById(params['id']).subscribe(
         data => {
           this.item = data;
@@ -31,6 +31,26 @@ export class ItemComponent implements OnInit {
         }
       )
     });
+  }
+
+  addToCart(id: number) {
+    console.log(id);
+    let cartItem: ICart = {
+      id: 0,
+      itemId: id,
+      userId: 0,
+      quantity: this.quantity
+    }
+
+    this.service.addItemToCart(cartItem).subscribe(
+      data => {
+
+      },
+      error => {
+        console.log(error);
+      }
+    )
+
   }
 
 }
