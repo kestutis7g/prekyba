@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "SportSystemAPI": {
+    "ShopAPI": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

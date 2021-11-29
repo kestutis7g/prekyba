@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SportSystemAPI.Model;
+using ShopAPI.Model;
 
-namespace SportSystemAPI.Data.Item
+namespace ShopAPI.Data.Item
 {
     public interface IItemRepo
     {

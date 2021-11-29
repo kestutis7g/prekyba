@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SportSystemAPI.Context;
+using ShopAPI.Context;
 
 #nullable disable
 
-namespace SportSystemAPI.Migrations
+namespace ShopAPI.Migrations
 {
-    [DbContext(typeof(SportSystemContext))]
+    [DbContext(typeof(ShopContext))]
     [Migration("20211123194928_Initial")]
     partial class Initial
     {
@@ -23,7 +23,7 @@ namespace SportSystemAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("SportSystemAPI.Model.ItemModel", b =>
+            modelBuilder.Entity("ShopAPI.Model.ItemModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

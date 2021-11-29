@@ -1,17 +1,15 @@
-h1:hover{
-    font-size: 70px;
-    transition-duration: 0.5s;
-  }
-  
-  h1{
+  p {
     transition-duration: 0.5s;
   }
 
-  p:hover{
-    font-size: 25px;
-    transition-duration: 0.5s;
+  h1 {
+    text-align: center;
   }
-  
- p{
-    transition-duration: 0.5s;
+
+  p {
+    text-align: center;
+  }
+
+  div {
+    text-align: center;
   }

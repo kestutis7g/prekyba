@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace SportSystemAPI.Migrations
+namespace ShopAPI.Migrations
 {
     public partial class Initial : Migration
     {

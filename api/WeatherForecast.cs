@@ -1,4 +1,4 @@
-namespace SportSystemAPI;
+namespace ShopAPI;
 
 public class WeatherForecast
 {

@@ -5,10 +5,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
-using SportSystemAPI.Context;
-using SportSystemAPI.Data.Item;
+using ShopAPI.Context;
+using ShopAPI.Data.Item;
 
-namespace SportSystemAPI
+namespace ShopAPI
 {
     public class Startup
     {
@@ -26,11 +26,11 @@ namespace SportSystemAPI
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SportSystemAPI", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ShopAPI", Version = "v1" });
             });
 
-            services.AddDbContext<SportSystemContext>(opt => opt.UseSqlServer
-                (Configuration.GetConnectionString("SportSystem")));
+            services.AddDbContext<ShopContext>(opt => opt.UseSqlServer
+                (Configuration.GetConnectionString("Shop")));
 
             services.AddScoped<IItemRepo, SqlItemRepo>();
         }
@@ -42,7 +42,7 @@ namespace SportSystemAPI
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SportSystemAPI v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ShopAPI v1"));
 
                 app.UseCors(x => x
                     .AllowAnyOrigin()

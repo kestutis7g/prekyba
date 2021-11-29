@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using SportSystemAPI.Data.Item;
-using SportSystemAPI.Model;
+using ShopAPI.Data.Item;
+using ShopAPI.Model;
 
-namespace SportSystemAPI.Controllers
+namespace ShopAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -64,6 +64,22 @@ namespace SportSystemAPI.Controllers
             _repository.SaveChanges();
 
             return NoContent();
+        }
+
+        // Delete api/item/{id}
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteItemByIdAsync([FromRoute] int id)
+        {
+            if (id <= 0)
+                return BadRequest("Not a valid item id");
+
+            using (ShopContext dbContext = new ShopContext())
+            {
+                dbContext.Employees.Remove(dbContext.Employees.FirstOrDefault(e => e.ID == id));
+                dbContext.SaveChanges();
+            }
+
+            return Ok();
         }
     }
 }

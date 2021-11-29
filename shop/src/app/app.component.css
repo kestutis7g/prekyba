@@ -5,13 +5,7 @@
 .toolbar-endspacer {
     flex: 1 1 auto;
   }
-.menu-padding:hover{
-  font-size: 22px;
-  background-color: #E9E9E9;
-  transition-duration: 0.5s;
-}
 
 .menu-padding{
   padding:10px;
-  transition-duration: 0.5s;
 }

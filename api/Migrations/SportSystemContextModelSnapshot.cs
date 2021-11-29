@@ -3,14 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SportSystemAPI.Context;
+using ShopAPI.Context;
 
 #nullable disable
 
-namespace SportSystemAPI.Migrations
+namespace ShopAPI.Migrations
 {
-    [DbContext(typeof(SportSystemContext))]
-    partial class SportSystemContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(ShopContext))]
+    partial class ShopContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace SportSystemAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("SportSystemAPI.Model.ItemModel", b =>
+            modelBuilder.Entity("ShopAPI.Model.ItemModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

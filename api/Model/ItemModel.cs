@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace SportSystemAPI.Model
+namespace ShopAPI.Model
 {
     public class ItemModel
     {

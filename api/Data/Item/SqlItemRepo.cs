@@ -2,19 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SportSystemAPI.Model;
+using ShopAPI.Model;
 using Microsoft.EntityFrameworkCore;
-using SportSystemAPI.Context;
+using ShopAPI.Context;
 
-namespace SportSystemAPI.Data.Item
+namespace ShopAPI.Data.Item
 {
     public class SqlItemRepo : IItemRepo
     {
-        public SqlItemRepo(SportSystemContext context)
+        public SqlItemRepo(ShopContext context)
         {
             _context = context;
         }
-        private readonly SportSystemContext _context;
+        private readonly ShopContext _context;
 
         public bool SaveChanges()
         {
