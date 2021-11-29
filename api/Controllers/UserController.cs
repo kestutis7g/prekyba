@@ -31,12 +31,24 @@ namespace ShopAPI.Controllers
             return Ok(userList);
         }
 
-
+        /*
         // GET api/user/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<UserModel>> GetUserByIdAsync([FromRoute] int id)
         {
             var userFromRepo = await _repository.GetUserByIdAsync(id);
+            if (userFromRepo is null)
+            {
+                return NotFound();
+            }
+            return Ok(userFromRepo);
+        }*/
+
+        // GET api/user/{login}
+        [HttpGet("{login}")]
+        public async Task<ActionResult<UserModel>> GetUserByLoginAsync([FromRoute] string login)
+        {
+            var userFromRepo = await _repository.GetUserByLoginAsync(login);
             if (userFromRepo is null)
             {
                 return NotFound();
@@ -66,6 +78,7 @@ namespace ShopAPI.Controllers
             return NoContent();
         }
 
+        /*
         // Delete api/user/{id}
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteUserByIdAsync([FromRoute] int id)
@@ -80,5 +93,6 @@ namespace ShopAPI.Controllers
             await _repository.SaveChangesAsync();
             return NoContent();
         }
+        */
     }
 }

@@ -27,9 +27,17 @@ namespace ShopAPI.Data.User
 
             return await Task.FromResult(userList);
         }
-        public async Task<UserModel> GetUserByIdAsync(int id)
+
+        /*public async Task<UserModel> GetUserByIdAsync(int id)
         {
             UserModel user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
+
+            return user;
+        }*/
+
+        public async Task<UserModel> GetUserByLoginAsync(string login)
+        {
+            UserModel user = await _context.Users.FirstOrDefaultAsync(x => x.Login == login);
 
             return user;
         }

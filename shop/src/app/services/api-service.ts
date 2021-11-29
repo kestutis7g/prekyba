@@ -37,6 +37,10 @@ export class ApiService {
     return this.http.post(this.APIUrl + 'User', user);
   }
 
+  getUserLogin(login: string) {
+    return this.http.get<IUser>(this.APIUrl + 'User/' + login);
+  }
+
 
 
   getParkingList(skip: number, pageSize: number) {

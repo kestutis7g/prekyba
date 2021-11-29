@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/services/api-service';
 import { IUser } from 'src/model/IUser';
 
 @Component({
@@ -10,23 +11,31 @@ export class LoginComponent implements OnInit {
 
   name: string = "";
   pass: string = "";
-  constructor() { }
+  data: IUser | undefined
+  prisijungta: string = "";
+  constructor(
+    private service: ApiService
+  ) { }
 
   ngOnInit(): void {
   }
 
   loginUser() {
 
-    let user: IUser = this.register!;
-    user.type = "user"
-    this.service.addUser(user).subscribe(
-      data => {
+    console.log(this.name + "   " + this.pass)
 
-      },
-      error => {
-        console.log(error);
-      }
-    )
+    this.service.getUserLogin(this.name)
+      .subscribe(
+        data => {
+          this.data = data;
+          console.log(this.data);
+        },
+        error => {
+          console.log(error);
+        }
+      );
 
+    if (this.data?.login == this.name && this.data?.password == this.pass) this.prisijungta = "Prisijungta"
+    else this.prisijungta = "Neteisingas prisijungimas"
   }
 }
