@@ -50,7 +50,7 @@ namespace ShopAPI.Controllers
         {
             await _repository.CreateItemAsync(itemModel);
 
-            _repository.SaveChangesAsync();
+            await _repository.SaveChangesAsync();
 
             return NoContent();
         }
@@ -61,7 +61,7 @@ namespace ShopAPI.Controllers
         {
             await _repository.UpdateItemAsync(itemModel);
 
-            _repository.SaveChangesAsync();
+            await _repository.SaveChangesAsync();
 
             return NoContent();
         }
@@ -71,13 +71,13 @@ namespace ShopAPI.Controllers
         public async Task<ActionResult> DeleteItemByIdAsync([FromRoute] int id)
         {
 
-            ItemModel item = _repository.GetItemByIdAsync(id);
+            var item = await _repository.GetItemByIdAsync(id);
             if (item is null)
-                return BadRequest("Not a valid item id");
+                return NotFound("Not a valid item id");
 
-            _repository.DeleteItemAsync(item);
+            await _repository.DeleteItemAsync(item);
 
-            _repository.SaveChangesAsync();
+            await _repository.SaveChangesAsync();
             return NoContent();
         }
     }

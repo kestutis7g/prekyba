@@ -9,3 +9,7 @@
 .menu-padding{
   padding:10px;
 }
+
+.pointer{
+  cursor: pointer;
+}

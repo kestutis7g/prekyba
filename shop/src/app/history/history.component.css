@@ -1,4 +1,27 @@
 /* Structure */
+img {
+  -webkit-filter: grayscale(100%);
+  /* Safari 6.0 - 9.0 */
+  filter: grayscale(0%);
+
+  float: left;
+  width: 100px;
+  height: 150px;
+  object-fit: cover;
+  margin: 0rem 0rem 2rem;;
+}
+
+img:hover {
+  -webkit-filter: grayscale(0%);
+  /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+
+  float: left;
+  width: 100px;
+  height: 150px;
+  object-fit: cover;
+}
+
 .parking-container {
     position: relative;
     margin: 4rem 28rem 0rem
@@ -7,16 +30,35 @@
 .col-xs-2 {
   display: inline-block;
   float: none;
-  padding: 10px 5px;
-  color: green;
-  border: 1px solid pink;
+  padding: 10px 10px;
+  color: black;
+  border: 2px solid gray;
   cursor: pointer;
 
 }
 
 .container {
-  border: 1px solid lightblue;
+  border: 1px solid white;
 
+}
+
+.name {
+  padding: 10px 10px;
+  margin: 0rem 0rem 1rem;
+  color: black;
+  font-weight: bold;
+}
+
+h1 {
+  text-align: center;
+}
+
+p {
+  text-align: center;
+}
+
+div {
+  text-align: center;
 }
 
 

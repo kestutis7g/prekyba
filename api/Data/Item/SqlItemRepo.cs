@@ -29,19 +29,19 @@ namespace ShopAPI.Data.Item
         }
         public async Task<ItemModel> GetItemByIdAsync(int id)
         {
-            ItemModel item = (ItemModel)_context.Items.FirstOrDefault(x => x.Id == id);
+            ItemModel item = await _context.Items.FirstOrDefaultAsync(x => x.Id == id);
 
-            return await Task.FromResult(item);
+            return item;
         }
 
         public async Task CreateItemAsync(ItemModel itemModel)
         {
-            _context.Items.AddAsync(itemModel);
+            await _context.Items.AddAsync(itemModel);
         }
 
         public async Task UpdateItemAsync(ItemModel itemModel)
         {
-            //nothing to see here
+            await Task.CompletedTask;
         }
 
         public async Task DeleteItemAsync(ItemModel item)
@@ -50,7 +50,7 @@ namespace ShopAPI.Data.Item
             {
                 throw new ArgumentException(nameof(item));
             }
-            _context.Items.Remove(item);
+            await Task.FromResult(_context.Items.Remove(item));
 
         }
 

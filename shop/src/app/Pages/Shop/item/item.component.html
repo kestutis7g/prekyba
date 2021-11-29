@@ -8,48 +8,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-  <style>
-    h1 {
-      text-align: center;
-    }
-
-    p {
-      text-align: center;
-    }
-
-    div {
-      text-align: center;
-    }
-
-    #melyna {
-      color: #0000ff;
-      font-weight: bold;
-    }
-
-    img {
-      -webkit-filter: grayscale(100%);
-      /* Safari 6.0 - 9.0 */
-      filter: grayscale(100%);
-
-      float: left;
-      width: 500px;
-      height: 500px;
-      object-fit: cover;
-    }
-
-    img:hover {
-      -webkit-filter: grayscale(0%);
-      /* Safari 6.0 - 9.0 */
-      filter: grayscale(0%);
-
-      float: left;
-      width: 500px;
-      height: 500px;
-      object-fit: cover;
-    }
-  </style>
-
-
 </head>
 
 <div class="jumbotron text-center">
@@ -60,6 +18,9 @@
 
 
 <div>
+  <div>
+    <img routerLink="/item" src={{item?.picture}} alt={{item?.name}}>
+  </div>
   {{item?.name}}
   vat o jos kaina yra: {{item?.price}}
 </div>

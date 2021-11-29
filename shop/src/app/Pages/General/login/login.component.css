@@ -3,7 +3,7 @@
     max-width: 500px;
     width: 100%;
 }
-  
+
 .example-full-width {
     width: 100%;
 }
@@ -18,13 +18,4 @@
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-}
-
-p:hover{
-  font-size: 15px;
-  transition-duration: 0.5s;
-}
-
-p{
-  transition-duration: 0.5s;
 }

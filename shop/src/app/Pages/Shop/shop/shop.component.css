@@ -2,24 +2,6 @@
     width: 300px;
     height: auto;
 }
-h1:hover{
-    font-size: 300px;
-    transition-duration: 0.5s;
-  }
-
-  h1{
-    transition-duration: 0.5s;
-  }
-
-  p:hover{
-    font-size: 25px;
-    transition-duration: 0.5s;
-  }
-
- p{
-    transition-duration: 0.5s;
-  }
-
   .parking-table-container {
     position: relative;
     min-height: 200px;

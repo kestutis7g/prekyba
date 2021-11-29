@@ -8,76 +8,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-  <style>
-    h1 {
-      text-align: center;
-    }
-
-    p {
-      text-align: center;
-    }
-
-    div {
-      text-align: center;
-    }
-
-    #melyna {
-      color: #0000ff;
-      font-weight: bold;
-    }
-
-    img {
-      -webkit-filter: grayscale(100%);
-      /* Safari 6.0 - 9.0 */
-      filter: grayscale(100%);
-
-      float: left;
-      width: 500px;
-      height: 500px;
-      object-fit: cover;
-    }
-
-    img:hover {
-      -webkit-filter: grayscale(0%);
-      /* Safari 6.0 - 9.0 */
-      filter: grayscale(0%);
-
-      float: left;
-      width: 500px;
-      height: 500px;
-      object-fit: cover;
-    }
-
-    span.a {
-      display: inline;
-      /* the default for span */
-      width: 100px;
-      height: 100px;
-      padding: 5px;
-      border: 1px solid blue;
-      background-color: yellow;
-    }
-
-    span.b {
-      display: inline-block;
-      width: 100px;
-      height: 100px;
-      padding: 5px;
-      border: 1px solid blue;
-      background-color: yellow;
-    }
-
-    span.c {
-      display: block;
-      width: 100px;
-      height: 100px;
-      padding: 5px;
-      border: 1px solid blue;
-      background-color: yellow;
-    }
-  </style>
-
-
 </head>
 
 <body>
@@ -91,7 +21,11 @@
     <div class="row mb-3">
       <div *ngFor="let item of itemList!" class="col-xs-2 themed-grid-col" (click)="pushButton(item.id)">
 
-        {{item.name}} {{item.price}}
+        <img routerLink="/item" src={{item.picture}} alt={{item.name}} style="width:100%">
+        <div class="name">
+          {{item.name}}
+        </div>
+        ${{item.price}}
 
       </div>
     </div>
