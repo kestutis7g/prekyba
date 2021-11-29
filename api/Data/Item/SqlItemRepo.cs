@@ -16,32 +16,43 @@ namespace ShopAPI.Data.Item
         }
         private readonly ShopContext _context;
 
-        public bool SaveChanges()
+        public Task SaveChangesAsync()
         {
-            return _context.SaveChanges() >= 0;
+            return _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<ItemModel>> GetItemListAsync()
         {
             var itemList = _context.Items.ToList();
 
-            return itemList;
+            return await Task.FromResult(itemList);
         }
         public async Task<ItemModel> GetItemByIdAsync(int id)
         {
-            var item = _context.Items.FirstOrDefault(x => x.Id == id);
+            ItemModel item = (ItemModel)_context.Items.FirstOrDefault(x => x.Id == id);
 
-            return item;
+            return await Task.FromResult(item);
         }
 
         public async Task CreateItemAsync(ItemModel itemModel)
         {
-            _context.Items.Add(itemModel);
+            _context.Items.AddAsync(itemModel);
         }
 
         public async Task UpdateItemAsync(ItemModel itemModel)
         {
             //nothing to see here
         }
+
+        public async Task DeleteItemAsync(ItemModel item)
+        {
+            if (item is null)
+            {
+                throw new ArgumentException(nameof(item));
+            }
+            _context.Items.Remove(item);
+
+        }
+
     }
 }
