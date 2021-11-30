@@ -31,7 +31,7 @@ namespace ShopAPI.Data.Cart
         {
             var cart = _context.Carts.Where(x => x.UserId == id).ToList();
 
-            return cart;
+            return await Task.FromResult(cart);
         }
 
 

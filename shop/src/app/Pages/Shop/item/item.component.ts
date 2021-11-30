@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api-service';
 import { ICart } from 'src/model/ICart';
 import { IItem } from 'src/model/IItem';
@@ -15,11 +15,12 @@ export class ItemComponent implements OnInit {
   quantity: number = 0
   constructor(
     private service: ApiService,
-    private route: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private route: Router
   ) { }
 
   ngOnInit() {
-    let route = this.route.params.subscribe(params => {
+    let route = this.activatedRoute.params.subscribe(params => {
 
       this.service.getItemById(params['id']).subscribe(
         data => {
@@ -51,6 +52,11 @@ export class ItemComponent implements OnInit {
       }
     )
 
+  }
+
+  pushButton(id: number) {
+    console.log(id);
+    this.route.navigate(["edit-item/" + id]);
   }
 
 }

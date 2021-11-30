@@ -44,6 +44,18 @@ namespace ShopAPI.Controllers
             return Ok(itemFromRepo);
         }
 
+        // GET api/item/{userId}
+        [HttpGet("list/{userId}")]
+        public async Task<ActionResult<List<ItemModel>>> GetItemListByUserIdAsync([FromRoute] int userId)
+        {
+            var itemFromRepo = await _repository.GetItemListByUserIdAsync(userId);
+            if (itemFromRepo is null)
+            {
+                return NotFound();
+            }
+            return Ok(itemFromRepo);
+        }
+
         // POST api/item
         [HttpPost]
         public async Task<ActionResult> CreateItemAsync([FromBody] ItemModel itemModel)
@@ -59,7 +71,24 @@ namespace ShopAPI.Controllers
         [HttpPut]
         public async Task<ActionResult> UpdateItemAsync([FromBody] ItemModel itemModel)
         {
-            await _repository.UpdateItemAsync(itemModel);
+            var model = await _repository.GetItemByIdAsync(itemModel.Id);
+            // model.Name = itemModel.Name ?? model.Name;
+            // model.Picture = itemModel.Picture ?? model.Picture;
+            // model.Price = itemModel.Price ?? model.Price;
+            // model.Description = itemModel.Description ?? model.Description;
+            // model.Quantity = itemModel.Quantity ?? model.Quantity;
+            // model.Discount = itemModel.Discount ?? model.Discount;
+            // model.Type = itemModel.Type ?? model.Type;
+
+            model.Name = !String.IsNullOrEmpty(itemModel.Name) ? itemModel.Name : model.Name;
+            model.Picture = !String.IsNullOrEmpty(itemModel.Picture) ? itemModel.Picture : model.Picture;
+            model.Price = itemModel.Price != null ? itemModel.Price : model.Price;
+            model.Description = !String.IsNullOrEmpty(itemModel.Description) ? itemModel.Description : model.Description;
+            model.Quantity = itemModel.Quantity != null ? itemModel.Quantity : model.Quantity;
+            model.Discount = itemModel.Discount != null ? itemModel.Discount : model.Discount;
+            model.Type = !String.IsNullOrEmpty(itemModel.Type) ? itemModel.Type : model.Type;
+
+            await _repository.UpdateItemAsync(model);
 
             await _repository.SaveChangesAsync();
 

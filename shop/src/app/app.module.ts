@@ -36,6 +36,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatGridListModule } from '@angular/material/grid-list';
 
 import { EncrDecrService } from './services/EncrDecrService';
+import { EditItemComponent } from './Pages/Shop/edit-item/edit-item.component';
+
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import { EncrDecrService } from './services/EncrDecrService';
     PaymentComponent,
     AddItemComponent,
     ItemComponent,
-    HistoryComponent
+    HistoryComponent,
+    EditItemComponent
   ],
   imports: [
     BrowserModule,

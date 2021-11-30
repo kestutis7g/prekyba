@@ -25,8 +25,12 @@ export class ApiService {
     return this.http.get<IItem[]>(this.APIUrl + 'Item');
   }
 
-  getItemById(id: number) {
+  getItemById(id: number): Observable<IItem> {
     return this.http.get<IItem>(this.APIUrl + 'Item/' + id);
+  }
+
+  getItemListByUserId(userId: number): Observable<IItem[]> {
+    return this.http.get<IItem[]>(this.APIUrl + 'Item/list/' + userId);
   }
 
   getCartListById(id: number): Observable<ICart[]> {
@@ -45,7 +49,17 @@ export class ApiService {
     return this.http.get<IUser>(this.APIUrl + 'User/' + login);
   }
 
+  deleteItemFromCart(id: number) {
+    return this.http.delete(this.APIUrl + 'Cart/' + id);
+  }
 
+  addItem(item: IItem) {
+    return this.http.post(this.APIUrl + 'Item', item);
+  }
+
+  updateItem(item: IItem) {
+    return this.http.put(this.APIUrl + 'Item', item);
+  }
 
 
 

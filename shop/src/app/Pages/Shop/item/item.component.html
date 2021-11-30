@@ -10,25 +10,34 @@
 
 </head>
 
-<div class="jumbotron text-center">
-  <p>Prekes duomenys</p>
-  <p>Ce rasite detalesni prekes aprasymą ir visa reikalinga informaciją</p>
-</div>
-<p>Prekes aprasumas bla bla bla skriiiis ram pam pam</p>
-
-
 <div>
   <div>
     <img routerLink="/item" src={{item?.picture}} alt={{item?.name}}>
   </div>
-  {{item?.name}}
-  vat o jos kaina yra: {{item?.price}}
+  <h1>
+    {{item?.name}}
+  </h1>
+  <p>
+    Aprasymas
+  </p>
+  <div>
+    {{item?.description}}
+  </div>
+  <div>
+    ${{item?.price}}
+  </div>
+
+
 
   <input type="number" id="fname" name="fname" [(ngModel)]="quantity"><br><br>
-
 
   <button mat-icon-button color="black" text-align: right (click)="addToCart(item!.id)"
     aria-label="Example icon button with a heart icon">
     <mat-icon>add_shopping_cart</mat-icon>
+  </button>
+
+  <button mat-icon-button color="black" text-align: right (click)="pushButton(item!.id)"
+    aria-label="Example icon button with a heart icon">
+    <mat-icon>edit</mat-icon>
   </button>
 </div>

@@ -71,7 +71,16 @@ namespace ShopAPI.Controllers
         [HttpPut]
         public async Task<ActionResult> UpdateUserAsync([FromBody] UserModel userModel)
         {
-            await _repository.UpdateUserAsync(userModel);
+            var model = await _repository.GetUserByLoginAsync(userModel.Login);
+            model.Name = userModel.Name;
+            model.Lastname = userModel.Lastname;
+            model.Email = userModel.Email;
+            model.Phone = userModel.Phone;
+            model.Type = userModel.Type;
+            model.Password = userModel.Password;
+
+
+            await _repository.UpdateUserAsync(model);
 
             await _repository.SaveChangesAsync();
 

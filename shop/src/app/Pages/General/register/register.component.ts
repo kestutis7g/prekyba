@@ -47,8 +47,6 @@ export class RegisterComponent implements OnInit {
     else {
       this.error = "Slaptažodis nesutampa"
     }
-
-
   }
 
 }

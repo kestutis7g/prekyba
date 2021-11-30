@@ -15,6 +15,7 @@ import { ItemComponent } from './Pages/Shop/item/item.component';
 
 
 import { HistoryComponent } from './history/history.component';
+import { EditItemComponent } from './Pages/Shop/edit-item/edit-item.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: "add-item", component: AddItemComponent },
   { path: "item/:id", component: ItemComponent },
   { path: "history", component: HistoryComponent },
+  { path: "edit-item/:id", component: EditItemComponent }
 ];
 
 @NgModule({

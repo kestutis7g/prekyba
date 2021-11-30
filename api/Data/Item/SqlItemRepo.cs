@@ -34,6 +34,22 @@ namespace ShopAPI.Data.Item
             return item;
         }
 
+        public async Task<List<ItemModel>> GetItemListByUserIdAsync(int userId)
+        {
+            List<ItemModel> itemList = new List<ItemModel>();
+            var itemListByUser = _context.Carts.Where(x => x.UserId == userId).ToList();
+            foreach (var item in itemListByUser)
+            {
+                var temp = await GetItemByIdAsync(item.ItemId);
+                temp.Quantity = item.Quantity;
+                temp.Id = item.Id;
+                itemList.Add(temp);
+            }
+            //var itemList = await _context.Items.Where(x => x.Id.Contains(itemListByUser));
+
+            return await Task.FromResult(itemList);
+        }
+
         public async Task CreateItemAsync(ItemModel itemModel)
         {
             await _context.Items.AddAsync(itemModel);
