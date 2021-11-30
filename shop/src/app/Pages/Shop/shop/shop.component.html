@@ -15,17 +15,18 @@
     <p>Apziurekite esamu prekiu kataloga</p>
   </div>
 
-  <div>
-
-    <button routerLink="/add-item" mat-raised-button>Sukurti preke</button>
-
-  </div>
 
   <div class="container">
     <div class="row mb-3">
       <div *ngFor="let item of itemList!" class="col-xs-2 themed-grid-col" (click)="pushButton(item.id)">
+        <div class="parent">
+          <div class="child">
+            <span>
+              <img routerLink="/item" src={{item.picture}} alt={{item.name}} style="width:100%">
+            </span>
+          </div>
+        </div>
 
-        <img routerLink="/item" src={{item.picture}} alt={{item.name}} style="width:100%">
         <div class="name">
           {{item.name}}
         </div>

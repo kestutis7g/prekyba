@@ -15,7 +15,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.username = localStorage.getItem('username') || 'Guest';
-    console.log(localStorage.getItem('type') == "admin" || localStorage.getItem('type') == "seller")
     if (localStorage.getItem('type') == "guest") {
       this.guest = true;
       this.signout = false;

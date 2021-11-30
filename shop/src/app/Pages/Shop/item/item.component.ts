@@ -12,7 +12,8 @@ import { IItem } from 'src/model/IItem';
 export class ItemComponent implements OnInit {
 
   item: IItem | undefined
-  quantity: number = 0
+  quantity: number = 1
+  canEdit: boolean = false;
   constructor(
     private service: ApiService,
     private activatedRoute: ActivatedRoute,
@@ -32,26 +33,34 @@ export class ItemComponent implements OnInit {
         }
       )
     });
+
+    if (localStorage.getItem('type') == "admin" || localStorage.getItem('type') == "seller") {
+      this.canEdit = true;
+    }
+    else {
+      this.canEdit = false;
+    }
   }
 
   addToCart(id: number) {
-    console.log(id);
-    let cartItem: ICart = {
-      id: 0,
-      itemId: id,
-      userId: parseInt(localStorage.getItem('userId') || "0"),
-      quantity: this.quantity
-    }
-
-    this.service.addItemToCart(cartItem).subscribe(
-      data => {
-
-      },
-      error => {
-        console.log(error);
+    if (this.quantity > 0) {
+      console.log(id);
+      let cartItem: ICart = {
+        id: 0,
+        itemId: id,
+        userId: parseInt(localStorage.getItem('userId') || "0"),
+        quantity: this.quantity
       }
-    )
 
+      this.service.addItemToCart(cartItem).subscribe(
+        data => {
+
+        },
+        error => {
+          console.log(error);
+        }
+      )
+    }
   }
 
   pushButton(id: number) {

@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api-service';
@@ -10,7 +10,7 @@ import { IItem } from 'src/model/IItem';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
-export class CartComponent implements OnInit, AfterViewInit {
+export class CartComponent implements OnInit {
   @ViewChild(MatTable) table!: MatTable<IItem>;
   cartDisplayedColumns = ['userId', 'itemId', 'quantity']
   displayedColumns = ['name', 'price', 'quantity', 'discount', 'type', 'button']
@@ -19,21 +19,15 @@ export class CartComponent implements OnInit, AfterViewInit {
 
   itemList: IItem[] = [];
   cartList?: ICart[];
+  pay: boolean = false;
 
   constructor(
     private service: ApiService,
-    private route: Router,
-    private changeDetectorRefs: ChangeDetectorRef
+    private route: Router
   ) { }
-  ngAfterViewInit(): void {
-    console.log("ce yra table sudas ", this.table)
-    this.itemList = this.itemList
-  }
 
   ngOnInit(): void {
     this.refreshCartList();
-
-
 
     // this.service.getCartListById(parseInt(localStorage.getItem('userId') || "0"))
     //   .subscribe(
@@ -59,17 +53,6 @@ export class CartComponent implements OnInit, AfterViewInit {
     //     }
     //   );
     // console.log(this.itemList);
-
-    // this.service.getItemList()
-    //   .subscribe(
-    //     data => {
-    //       this.itemList = data;
-    //       console.log(this.itemList);
-    //     },
-    //     error => {
-    //       console.log(error);
-    //     }
-    //   );
   }
 
   deleteItem(id: number) {
@@ -82,7 +65,18 @@ export class CartComponent implements OnInit, AfterViewInit {
       .subscribe(
         data => {
           this.itemList = data;
-          console.log(this.itemList);
+
+          if (localStorage.getItem('type') != "guest") {
+            if (this.itemList.length > 0) {
+              this.pay = true;
+            }
+            else {
+              this.pay = false;
+            }
+          }
+          else {
+            this.pay = false;
+          }
         },
         error => {
           console.log(error);
@@ -90,7 +84,6 @@ export class CartComponent implements OnInit, AfterViewInit {
       );
   }
   pushButton(id: number) {
-    console.log(id);
     this.route.navigate(["item/" + id]);
   }
 

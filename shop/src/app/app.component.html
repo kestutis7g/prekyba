@@ -7,15 +7,13 @@
 
     <span class="toolbar-spacer menu-padding"></span>
     <span class="toolbar-spacer menu-padding pointer" routerLink="/shop">Parduotuvė</span>
-    <span class="toolbar-spacer menu-padding pointer" routerLink="/history">Test</span>
-
 
     <span class="toolbar-endspacer"></span>
     <span class="toolbar-spacer menu-padding">{{username}}</span>
     <span class="toolbar-spacer menu-padding pointer" *ngIf="addItem" routerLink="/add-item">
       <mat-icon>library_add</mat-icon>
     </span>
-    <span class="toolbar-spacer menu-padding pointer" *ngIf="signout" routerLink="/cart">
+    <span class="toolbar-spacer menu-padding pointer" routerLink="/cart">
       <mat-icon>shopping_cart</mat-icon>
     </span>
     <span class="toolbar-spacer menu-padding pointer" *ngIf="guest" routerLink="/register">Registruotis</span>

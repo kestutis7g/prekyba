@@ -23,6 +23,13 @@
   <div>
     {{item?.description}}
   </div>
+  <br>
+  <div>
+    Tipas: {{item?.type}}
+  </div>
+  <div>
+    Sandėlyje likę: {{item?.quantity}}
+  </div>
   <div>
     ${{item?.price}}
   </div>
@@ -36,7 +43,7 @@
     <mat-icon>add_shopping_cart</mat-icon>
   </button>
 
-  <button mat-icon-button color="black" text-align: right (click)="pushButton(item!.id)"
+  <button mat-icon-button color="black" text-align: right *ngIf="canEdit" (click)="pushButton(item!.id)"
     aria-label="Example icon button with a heart icon">
     <mat-icon>edit</mat-icon>
   </button>
