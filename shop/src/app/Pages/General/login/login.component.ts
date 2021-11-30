@@ -13,6 +13,8 @@ export class LoginComponent implements OnInit {
   pass: string = "";
   data: IUser | undefined
   prisijungta: string = "";
+  visibility: string = "password"
+  visibilityIcon: string = "visibility"
   constructor(
     private service: ApiService
   ) { }
@@ -37,5 +39,16 @@ export class LoginComponent implements OnInit {
 
     if (this.data?.login == this.name && this.data?.password == this.pass) this.prisijungta = "Prisijungta"
     else this.prisijungta = "Neteisingas prisijungimas"
+  }
+
+  myFunction() {
+    if (this.visibility == "password") {
+      this.visibility = "text"
+      this.visibilityIcon = "visibility_off"
+    }
+    else {
+      this.visibility = "password"
+      this.visibilityIcon = "visibility"
+    }
   }
 }
