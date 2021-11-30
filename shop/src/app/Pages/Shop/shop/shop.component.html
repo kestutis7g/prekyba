@@ -7,49 +7,6 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-  <style>
-    h1 {
-      text-align: center;
-    }
-
-    p {
-      text-align: center;
-    }
-
-    div {
-      text-align: center;
-    }
-
-    #melyna {
-      color: #0000ff;
-      font-weight: bold;
-    }
-
-    img {
-      -webkit-filter: grayscale(100%);
-      /* Safari 6.0 - 9.0 */
-      filter: grayscale(100%);
-
-      float: left;
-      width: 500px;
-      height: 500px;
-      object-fit: cover;
-    }
-
-    img:hover {
-      -webkit-filter: grayscale(0%);
-      /* Safari 6.0 - 9.0 */
-      filter: grayscale(0%);
-
-      float: left;
-      width: 500px;
-      height: 500px;
-      object-fit: cover;
-    }
-  </style>
-
-
 </head>
 
 <body>
@@ -59,131 +16,22 @@
   </div>
 
   <div>
-    <button routerLink="/cart" mat-raised-button>Krepselis</button>
+
     <button routerLink="/add-item" mat-raised-button>Sukurti preke</button>
-    <button routerLink="/item" mat-raised-button>Eiti į prekės aprašymą</button>
-  </div>
-
-  <br>
-
-
-  <div class="parking-container mat-elevation-z8">
-
-    <div class="parking-table-container">
-
-      <table mat-table [dataSource]="itemList!" class="parking-table">
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef>Name</th>
-          <td mat-cell *matCellDef="let row">{{row.name}}</td>
-          <span class="b">Aliquam</span> <span class="b">venenatis</span>
-        </ng-container>
-        <ng-container matColumnDef="description">
-          <th mat-header-cell *matHeaderCellDef>desc</th>
-          <td mat-cell *matCellDef="let row">{{row.description}}</td>
-        </ng-container>
-        <ng-container matColumnDef="price">
-          <th mat-header-cell *matHeaderCellDef>price</th>
-          <td mat-cell *matCellDef="let row">{{row.price}}</td>
-        </ng-container>
-        <ng-container matColumnDef="quantity">
-          <th mat-header-cell *matHeaderCellDef>Quantity</th>
-          <td mat-cell *matCellDef="let row">{{row.quantity}}</td>
-        </ng-container>
-        <ng-container matColumnDef="discount">
-          <th mat-header-cell *matHeaderCellDef>Discount</th>
-          <td mat-cell *matCellDef="let row">{{row.discount}}</td>
-        </ng-container>
-        <ng-container matColumnDef="type">
-          <th mat-header-cell *matHeaderCellDef>Type</th>
-          <td mat-cell *matCellDef="let row">{{row.type}}</td>
-        </ng-container>
-
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-    </div>
 
   </div>
-
-
-
-
-
-
-
-
-
 
   <div class="container">
-    <div class="row">
+    <div class="row mb-3">
+      <div *ngFor="let item of itemList!" class="col-xs-2 themed-grid-col" (click)="pushButton(item.id)">
 
-      <div class="col-sm-6">
-        <div class="w3-container w3-teal">
-          <h3>Mano automobilis</h3>
+        <img routerLink="/item" src={{item.picture}} alt={{item.name}} style="width:100%">
+        <div class="name">
+          {{item.name}}
         </div>
+        ${{item.price}}
 
-        <img routerLink="/item"
-          src="https://th.bing.com/th/id/R.c1942f3aa5b8b42917cc061ee968323c?rik=5AVD8FSK%2fBSclQ&riu=http%3a%2f%2fwallsdesk.com%2fwp-content%2fuploads%2f2016%2f09%2fBMW-e39-Widescreen.jpg&ehk=uDxr2rxauNKvLfW%2f7FXOiWjocXcgfqDj2ByWze0xQqM%3d&risl=&pid=ImgRaw&r=0"
-          alt="E39" style="width:100%">
-
-        <div class="w3-container w3-cyan">
-          <p>Automobilio savininkas- Kęstutis Girnius</p>
-        </div>
       </div>
-
-      <div class="col-sm-6">
-        <div class="w3-container w3-teal">
-          <h3>Mano automobilis</h3>
-        </div>
-
-        <img routerLink="/item"
-          src="https://besthqwallpapers.com/Uploads/10-1-2021/151098/thumb2-bmw-7-series-tuning-e38-stance-black-bmw-e38.jpg"
-          alt="E38" style="width:100%">
-
-        <div class="w3-container w3-cyan">
-          <p>Automobilio savininkas- Kęstutis Girnius</p>
-        </div>
-      </div>
-
-
-    </div>
-    <div class="row">
-      <div class="row">
-        <div><br></div>
-      </div>
-
-      <div class="col-sm-6">
-        <div class="w3-container w3-teal">
-          <h3>Ne mano automobilis</h3>
-        </div>
-
-        <img routerLink="/item" src="https://www.auto-data.net/images/f105/Audi-80-IV-B3-Typ-89-89Q-8A.jpg" alt="Bulka"
-          style="width:100%">
-
-        <div class="w3-container w3-cyan">
-          <p>Automobilio savininkas- Vladimiras Nalivai </p>
-        </div>
-      </div>
-
-      <div class="col-sm-6">
-        <div class="w3-container w3-teal">
-          <h3>Mano automobilis</h3>
-        </div>
-
-        <img routerLink="/item"
-          src="https://www.stanceworks.com/wp-content/uploads/2017/03/bmw-e36-felony-form-kit-m3.jpg" alt="E36"
-          style="width:100%">
-
-
-        <div class="w3-container w3-cyan">
-          <p>Automobilio savininkas- Kęstutis Girnius</p>
-        </div>
-      </div>
-
-      <br><br><br>
-
-
     </div>
   </div>
 

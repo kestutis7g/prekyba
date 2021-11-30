@@ -78,21 +78,16 @@ namespace ShopAPI.Controllers
             return NoContent();
         }
 
-        /*
+
         // Delete api/user/{id}
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteUserByIdAsync([FromRoute] int id)
         {
-
-            var user = await _repository.GetUserByIdAsync(id);
-            if (user is null)
-                return NotFound("Not a valid user id");
-
-            await _repository.DeleteUserAsync(user);
+            await _repository.DeleteUserAsync(id);
 
             await _repository.SaveChangesAsync();
             return NoContent();
         }
-        */
+
     }
 }

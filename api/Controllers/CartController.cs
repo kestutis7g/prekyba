@@ -34,9 +34,9 @@ namespace ShopAPI.Controllers
 
         // GET api/cart/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<CartModel>> GetCartByIdAsync([FromRoute] int id)
+        public async Task<ActionResult<IEnumerable<CartModel>>> GetCartListByIdAsync([FromRoute] int id)
         {
-            var cartFromRepo = await _repository.GetCartByIdAsync(id);
+            var cartFromRepo = await _repository.GetCartListByIdAsync(id);
             if (cartFromRepo is null)
             {
                 return NotFound();
@@ -71,11 +71,7 @@ namespace ShopAPI.Controllers
         public async Task<ActionResult> DeleteCartByIdAsync([FromRoute] int id)
         {
 
-            var cart = await _repository.GetCartByIdAsync(id);
-            if (cart is null)
-                return NotFound("Not a valid cart id");
-
-            await _repository.DeleteCartAsync(cart);
+            await _repository.DeleteCartAsync(id);
 
             await _repository.SaveChangesAsync();
             return NoContent();

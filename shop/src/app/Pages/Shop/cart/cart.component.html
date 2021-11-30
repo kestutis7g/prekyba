@@ -1,7 +1,73 @@
 <div>
-    <h1>
-        Jums reikia moketi 420,69$
-    </h1>
+  <h1>
+    Jums reikia moketi 420,69$
+  </h1>
 </div>
 
 <button routerLink="/payment" mat-raised-button>Apmoketi</button>
+
+
+<div class="parking-container mat-elevation-z8">
+
+  <div class="parking-table-container">
+
+    <table mat-table [dataSource]="cartList!" class="parking-table">
+      <ng-container matColumnDef="userId">
+        <th mat-header-cell *matHeaderCellDef>UserId</th>
+        <td mat-cell *matCellDef="let row">{{row.userId}}</td>
+        <span class="b">Aliquam</span> <span class="b">venenatis</span>
+      </ng-container>
+      <ng-container matColumnDef="itemId">
+        <th mat-header-cell *matHeaderCellDef>ItemId</th>
+        <td mat-cell *matCellDef="let row">{{row.itemId}}</td>
+      </ng-container>
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef>Quantity</th>
+        <td mat-cell *matCellDef="let row">{{row.quantity}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="cartDisplayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: cartDisplayedColumns;"></tr>
+    </table>
+  </div>
+
+</div>
+
+<div class="parking-container mat-elevation-z8">
+
+  <div class="parking-table-container">
+
+    <table mat-table [dataSource]="itemList!" class="parking-table">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let row">{{row.name}}</td>
+        <span class="b">Aliquam</span> <span class="b">venenatis</span>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>desc</th>
+        <td mat-cell *matCellDef="let row">{{row.description}}</td>
+      </ng-container>
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef>price</th>
+        <td mat-cell *matCellDef="let row">{{row.price}}</td>
+      </ng-container>
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef>Quantity</th>
+        <td mat-cell *matCellDef="let row">{{row.quantity}}</td>
+      </ng-container>
+      <ng-container matColumnDef="discount">
+        <th mat-header-cell *matHeaderCellDef>Discount</th>
+        <td mat-cell *matCellDef="let row">{{row.discount}}</td>
+      </ng-container>
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>Type</th>
+        <td mat-cell *matCellDef="let row">{{row.type}}</td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+</div>

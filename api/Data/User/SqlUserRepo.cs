@@ -27,8 +27,8 @@ namespace ShopAPI.Data.User
 
             return await Task.FromResult(userList);
         }
-
-        /*public async Task<UserModel> GetUserByIdAsync(int id)
+        /*
+        public async Task<UserModel> GetUserByIdAsync(int id)
         {
             UserModel user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
 
@@ -52,8 +52,9 @@ namespace ShopAPI.Data.User
             await Task.CompletedTask;
         }
 
-        public async Task DeleteUserAsync(UserModel user)
+        public async Task DeleteUserAsync(int id)
         {
+            UserModel user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
             if (user is null)
             {
                 throw new ArgumentException(nameof(user));

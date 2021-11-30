@@ -38,7 +38,7 @@ export class ItemComponent implements OnInit {
     let cartItem: ICart = {
       id: 0,
       itemId: id,
-      userId: 0,
+      userId: parseInt(localStorage.getItem('userId') || "0"),
       quantity: this.quantity
     }
 

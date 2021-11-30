@@ -35,6 +35,8 @@ import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatGridListModule } from '@angular/material/grid-list';
 
+import { EncrDecrService } from './services/EncrDecrService';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,7 +68,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatCheckboxModule,
     MatGridListModule
   ],
-  providers: [],
+  providers: [EncrDecrService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

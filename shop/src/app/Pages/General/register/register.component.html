@@ -13,14 +13,14 @@
   <p>
     <mat-form-field appearance="legacy">
       <mat-label>Vartotojo vardas</mat-label>
-      <input matInput placeholder=" " [(ngModel)]="register.name" minlength="8" required>
+      <input matInput placeholder=" " [(ngModel)]="register.name" minlength="3" required>
     </mat-form-field>
   </p>
 
   <p>
     <mat-form-field appearance="legacy">
       <mat-label>Vartotojo pavardė</mat-label>
-      <input matInput placeholder=" " [(ngModel)]="register.lastname" minlength="8" required>
+      <input matInput placeholder=" " [(ngModel)]="register.lastname" minlength="3" required>
     </mat-form-field>
   </p>
 
@@ -41,24 +41,26 @@
   <p>
     <mat-form-field appearance="legacy">
       <mat-label>Prisijungimo vardas</mat-label>
-      <input matInput placeholder=" " [(ngModel)]="register.login" minlength="8" required>
+      <input matInput placeholder=" " [(ngModel)]="register.login" minlength="5" required>
     </mat-form-field>
   </p>
 
   <p>
     <mat-form-field appearance="legacy">
       <mat-label>Slaptažodis</mat-label>
-      <input type="password" matInput placeholder=" " [(ngModel)]="register.password" minlength="8" required>
+      <input type="password" matInput placeholder=" " [(ngModel)]="register.password" minlength="5" required>
     </mat-form-field>
   </p>
   <p>
     <mat-form-field appearance="legacy">
       <mat-label>Pakartokite slaptažodį</mat-label>
-      <input type="password" matInput placeholder=" " minlength="8" required>
+      <input type="password" matInput placeholder=" " [(ngModel)]="confirmPass" minlength="5" required>
     </mat-form-field>
   </p>
 
   <button type="submit" class="btn btn-dark" (click)="registerUser()">Registruotis</button>
-
+  <div style="color: red">
+    {{error}}
+  </div>
 
 </div>

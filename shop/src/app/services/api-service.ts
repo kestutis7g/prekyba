@@ -29,6 +29,10 @@ export class ApiService {
     return this.http.get<IItem>(this.APIUrl + 'Item/' + id);
   }
 
+  getCartListById(id: number): Observable<ICart[]> {
+    return this.http.get<ICart[]>(this.APIUrl + 'Cart/' + id);
+  }
+
   addItemToCart(cartItem: ICart) {
     return this.http.post(this.APIUrl + 'Cart', cartItem);
   }
@@ -40,6 +44,11 @@ export class ApiService {
   getUserLogin(login: string) {
     return this.http.get<IUser>(this.APIUrl + 'User/' + login);
   }
+
+
+
+
+
 
 
 

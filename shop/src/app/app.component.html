@@ -11,8 +11,18 @@
 
 
     <span class="toolbar-endspacer"></span>
-    <span class="toolbar-spacer menu-padding pointer" routerLink="/register">Registruotis</span>
-    <span class="toolbar-spacer menu-padding pointer" routerLink="/login">Prisijungti</span>
+    <span class="toolbar-spacer menu-padding">{{username}}</span>
+    <span class="toolbar-spacer menu-padding pointer" *ngIf="addItem" routerLink="/add-item">
+      <mat-icon>library_add</mat-icon>
+    </span>
+    <span class="toolbar-spacer menu-padding pointer" *ngIf="signout" routerLink="/cart">
+      <mat-icon>shopping_cart</mat-icon>
+    </span>
+    <span class="toolbar-spacer menu-padding pointer" *ngIf="guest" routerLink="/register">Registruotis</span>
+    <span class="toolbar-spacer menu-padding pointer" *ngIf="guest" routerLink="/login">Prisijungti</span>
+    <span class="toolbar-spacer menu-padding pointer" *ngIf="signout" (click)="signOutUser()">Atsijungti</span>
+
+
 
   </mat-toolbar>
 </p>

@@ -14,6 +14,6 @@ namespace ShopAPI.Data.User
         Task<UserModel> GetUserByLoginAsync(string login);
         Task CreateUserAsync(UserModel userModel);
         Task UpdateUserAsync(UserModel userModel);
-        Task DeleteUserAsync(UserModel userModel);
+        Task DeleteUserAsync(int id);
     }
 }
