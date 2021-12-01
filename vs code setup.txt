@@ -1,0 +1,70 @@
+Get-ExecutionPolicy
+Set-ExecutionPolicy AllSigned
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+choco install haskell-dev
+npm -v
+node -v
+npm install -g typescript
+npm i -g @angular/cli 
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass 
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+ng -version
+ng new sportsystem
+ng add @angular/material
+ng g c home ---- sukuria nauja angular page
+ng build
+git init https://github.com/kestutis7g/sportsystem.git
+git config --global user.email "kestutisgirnius@gmail.com"
+git config --global user.name "kestutis7g"
+git remote add origin https://github.com/kestutis7g/sporto-saliu-sistema.git
+dotnet new 
+dotnet new webapi
+dotnet add package Microsoft.EntityFrameworkCore
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+dotnet tool install --global dotnet-ef
+dotnet ef
+dotnet add package Microsoft.EntityFrameworkCore.Design
+git remote add origin git@github.com:kestutis7g/sportsystem.git
+git remote -v
+git remote remove origin
+npm install @popperjs/core
+npm install bootstrap@latest
+npm install jquery -- save 
+dotnet ef  migrations
+dotnet ef  migrations  add Initial
+dotnet build
+dotnet ef database drop
+dotnet ef database update
+npm install ts - md5--save
+npm install crypto-js --save
+npm install @types/crypto-js --save
+npm install @types/crypto-js -save 
+dotnet watch run
+ng serve     
+dotnet run
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
