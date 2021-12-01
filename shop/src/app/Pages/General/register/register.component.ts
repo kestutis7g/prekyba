@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api-service';
 import { EncrDecrService } from 'src/app/services/EncrDecrService';
 import { IUser } from 'src/model/IUser';
@@ -17,6 +18,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private service: ApiService,
+    private route: Router,
     private EncrDecr: EncrDecrService
   ) { }
 
@@ -33,11 +35,12 @@ export class RegisterComponent implements OnInit {
 
       user.password = this.EncrDecr.set('123456$#@$^@1ERF', user.password);
       var decrypted = this.EncrDecr.get('123456$#@$^@1ERF', user.password);
-      console.log('Decrypted :' + decrypted);
 
       this.service.addUser(user).subscribe(
         data => {
-
+          this.route.navigate(["/login"]).then(() => {
+            window.location.reload();
+          });
         },
         error => {
           console.log(error);
