@@ -1,7 +1,7 @@
-<div class="parking-container mat-elevation-z8">
-  <div class="parking-table-container">
+<div class="cart-container mat-elevation-z8">
+  <div class="cart-table-container">
 
-    <table #table mat-table [dataSource]="itemList" class="parking-table">
+    <table #table mat-table [dataSource]="itemList" class="cart-table">
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Name</th>
         <td mat-cell *matCellDef="let row">{{row.name}}</td>
@@ -26,7 +26,7 @@
       <ng-container matColumnDef="button">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let row">
-          <button (click)="deleteItem(row.id)">
+          <button mat-button (click)="deleteItem(row.id)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>

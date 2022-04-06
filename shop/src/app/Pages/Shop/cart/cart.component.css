@@ -22,7 +22,7 @@ img:hover {
   object-fit: cover;
 }
 
-.parking-container {
+.cart-container {
     position: relative;
     margin: 4rem 28rem 0rem
 }
@@ -58,7 +58,7 @@ p {
 }
 
 
-.parking-table-container {
+.cart-table-container {
     position: relative;
     min-height: 200px;
     max-height: 600px;
@@ -85,7 +85,7 @@ button {
     width: 7rem;
 }
 
-.parking-loading-shade {
+.cart-loading-shade {
     position: absolute;
     top: 0;
     left: 0;
@@ -98,7 +98,7 @@ button {
     justify-content: center;
 }
 
-.parking-rate-limit-reached {
+.cart-rate-limit-reached {
     max-width: 360px;
     text-align: center;
 }

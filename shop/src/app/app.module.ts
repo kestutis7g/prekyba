@@ -13,7 +13,6 @@ import { RegisterComponent } from './Pages/General/register/register.component';
 import { ShopComponent } from './Pages/Shop/shop/shop.component';
 import { CartComponent } from './Pages/Shop/cart/cart.component';
 import { PaymentComponent } from './Pages/Shop/payment/payment.component';
-import { AddItemComponent } from './Pages/Shop/add-item/add-item.component';
 import { ItemComponent } from './Pages/Shop/item/item.component';
 
 
@@ -36,7 +35,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatGridListModule } from '@angular/material/grid-list';
 
 import { EncrDecrService } from './services/EncrDecrService';
-import { EditItemComponent } from './Pages/Shop/edit-item/edit-item.component';
+import { AddItemComponent } from './Pages/Workspace/add-item/add-item.component';
+import { EditItemComponent } from './Pages/Workspace/edit-item/edit-item.component';
+import { WorkspaceComponent } from './Pages/Workspace/workspace/workspace.component';
+import { ItemBalanceComponent } from './Pages/Workspace/item-balance/item-balance.component';
+import { DeleteItemComponent } from './Pages/Workspace/delete-item/delete-item.component';
+
 
 
 @NgModule({
@@ -51,7 +55,10 @@ import { EditItemComponent } from './Pages/Shop/edit-item/edit-item.component';
     AddItemComponent,
     ItemComponent,
     HistoryComponent,
-    EditItemComponent
+    EditItemComponent,
+    WorkspaceComponent,
+    ItemBalanceComponent,
+    DeleteItemComponent
   ],
   imports: [
     BrowserModule,

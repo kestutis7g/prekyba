@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
 
   guest: boolean = true;
   signout: boolean = false;
-  addItem: boolean = false;
+  worker: boolean = false;
   username: string = ""
 
   ngOnInit(): void {
@@ -18,17 +18,17 @@ export class AppComponent implements OnInit {
     if (localStorage.getItem('type') == "guest") {
       this.guest = true;
       this.signout = false;
-      this.addItem = false;
+      this.worker = false;
     }
     else if (localStorage.getItem('type') == "admin" || localStorage.getItem('type') == "seller") {
-      this.addItem = true
+      this.worker = true
       this.guest = false;
       this.signout = true;
     }
     else {
       this.guest = false;
       this.signout = true;
-      this.addItem = false;
+      this.worker = false;
     }
   }
 

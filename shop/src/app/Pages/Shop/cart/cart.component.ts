@@ -18,7 +18,7 @@ export class CartComponent implements OnInit {
   isLoadingResults = true;
 
   itemList: IItem[] = [];
-  cartList?: ICart[];
+  //cartList?: ICart[];
   pay: boolean = false;
 
   constructor(
