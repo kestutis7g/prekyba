@@ -14,7 +14,7 @@ import { AddItemComponent } from './Pages/Shop/add-item/add-item.component';
 import { ItemComponent } from './Pages/Shop/item/item.component';
 
 
-import { HistoryComponent } from './history/history.component';
+import { HistoryComponent } from './testpage/history.component';
 import { EditItemComponent } from './Pages/Shop/edit-item/edit-item.component';
 
 const routes: Routes = [

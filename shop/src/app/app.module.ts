@@ -17,7 +17,7 @@ import { AddItemComponent } from './Pages/Shop/add-item/add-item.component';
 import { ItemComponent } from './Pages/Shop/item/item.component';
 
 
-import { HistoryComponent } from './history/history.component'
+import { HistoryComponent } from './testpage/history.component'
 
 // angular material
 import { MatToolbarModule } from '@angular/material/toolbar';
