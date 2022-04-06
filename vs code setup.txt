@@ -36,7 +36,6 @@ dotnet ef database drop
 dotnet ef database update
 npm install ts - md5--save
 npm install crypto-js --save
-npm install @types/crypto-js --save
 npm install @types/crypto-js -save 
 dotnet watch run
 ng serve     
