@@ -11,6 +11,7 @@ Prieš pradedant diegimą rekomenduojama ištrinti iš ./api folderio bin ir obj
 Turint kompiuteryje suinstaliuotas reikalingas programas, VisualStudio Code Terminale ( Ctrl + ` ) rašomos šios komandos tolesniam diegimui:
 
 API folderyje:
+
 dotnet add package Microsoft.EntityFrameworkCore
 
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer
@@ -24,10 +25,15 @@ dotnet build
 dotnet run
 
 SHOP folderyje:
+
 npm install
+
 npm i -g typescript
+
 npm i -g @angular/cli
+
 ng add @angular/material
+
 ng serve
 
 Duomenų bazę galima pasiekti https://localhost:7285/swagger 
