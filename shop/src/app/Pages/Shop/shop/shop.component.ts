@@ -74,28 +74,35 @@ export class ShopComponent implements OnInit {
     this.isVisible = this.addedToCart?.[i];
   }
 
-  RefreshAddedToCart() {
-
-    //this.addedToCart = new Array<boolean>(this.itemList!.length);
-    for (let i = 0; i < this.itemList!.length; i++) {
-      let added: boolean;
-      added = false;
-      for (let c = 0; c < this.cartList!.length; c++) {
-
-        if (this.itemList![i].id == this.cartList![c].itemId) {
-          added = true;
-        }
-
-      }
-      this.addedToCart?.push(added);
-    }
-
-    console.log(this.addedToCart);
+  Refresh() {
+    window.location.reload();
   }
 
-  pushButton(id: number) {
+  OpenItemWindow(id: number) {
     console.log(id);
     this.route.navigate(["item/" + id]);
+  }
+
+  AddToCart(id: number) {
+
+    console.log(id);
+    let cartItem: ICart = {
+      id: 0,
+      itemId: id,
+      userId: parseInt(localStorage.getItem('userId') || "0"),
+      quantity: 1
+    }
+
+    this.service.addItemToCart(cartItem).subscribe(
+      data => {
+
+      },
+      error => {
+        console.log(error);
+      }
+    )
+
+
   }
 
 
