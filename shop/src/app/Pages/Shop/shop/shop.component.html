@@ -11,8 +11,8 @@
 
 <body>
   <div class="jumbotron text-center">
-    <h1>Parduotuve</h1>
-    <p>Apziurekite esamu prekiu kataloga</p>
+    <h1>Shop</h1>
+
   </div>
 
 
@@ -34,13 +34,13 @@
 
 
         <div *ngIf="!addedToCart?.[i]">
-          <button class="btn-rnd" mat-raised-button color="primary" (click)="addToCart(item.id)">Add to
+          <button class="cart-edit-button" mat-raised-button color="primary" (click)="addToCart(item.id)">Add to
             cart</button>
         </div>
 
         <div *ngIf="addedToCart?.[i]">
           <div >
-            <button class="m-auto" mat-mini-fab color="primary" aria-label="remove" (click)="removeFromCart(item.id)">
+            <button class="cart-edit-button m-auto" mat-mini-fab color="primary" aria-label="remove" (click)="removeFromCart(item.id)">
               <mat-icon>remove</mat-icon>
             </button>
 
@@ -48,7 +48,7 @@
               {{quantityInCart(item.id)}}
             </label>
 
-            <button class="m-auto" mat-mini-fab color="primary" aria-label="add" (click)="addToCart(item.id)">
+            <button class="cart-edit-button m-auto" mat-mini-fab color="primary" aria-label="add" (click)="addToCart(item.id)">
               <mat-icon>add</mat-icon>
             </button>
           </div>

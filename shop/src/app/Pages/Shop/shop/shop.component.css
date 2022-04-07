@@ -60,8 +60,12 @@ div {
   text-align: center;
 }
 
-.btn-rnd {
+.cart-edit-button {
   border-radius: 20px;
+}
+
+.cart-edit-button:hover {
+  background-color:blue;
 }
 
 

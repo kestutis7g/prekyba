@@ -3,7 +3,8 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
 import { ItemService } from 'src/app/services/item.service';
-import { Cart, Item } from 'src/types/shop.types';
+import { Cart, Item } from 'src/model/shop.types';
+
 
 @Component({
   selector: 'app-cart',

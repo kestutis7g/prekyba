@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api-service';
 import { EncrDecrService } from 'src/app/services/EncrDecrService';
-import { IUser } from 'src/types/IUser';
+import { IUser } from 'src/model/IUser';
 
 
 @Component({

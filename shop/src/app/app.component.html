@@ -3,10 +3,10 @@
     <button mat-icon-button aria-label="Example icon-button with menu icon">
       <mat-icon>menu</mat-icon>
     </button>
-    <span class="menu-padding pointer" routerLink="/home">Pradinis puslapis</span>
+    <span class="menu-padding pointer" routerLink="/home">Home</span>
 
     <span class="toolbar-spacer menu-padding"></span>
-    <span class="toolbar-spacer menu-padding pointer" routerLink="/shop">Parduotuvė</span>
+    <span class="toolbar-spacer menu-padding pointer" routerLink="/shop">Shop</span>
 
     <span class="toolbar-endspacer"></span>
     <span class="toolbar-spacer menu-padding">{{username}}</span>
@@ -19,9 +19,9 @@
     <span class="toolbar-spacer menu-padding pointer" routerLink="/cart">
       <mat-icon>shopping_cart</mat-icon>
     </span>
-    <span class="toolbar-spacer menu-padding pointer" *ngIf="guest" routerLink="/register">Registruotis</span>
-    <span class="toolbar-spacer menu-padding pointer" *ngIf="guest" routerLink="/login">Prisijungti</span>
-    <span class="toolbar-spacer menu-padding pointer" *ngIf="signout" (click)="signOutUser()">Atsijungti</span>
+    <span class="toolbar-spacer menu-padding pointer" *ngIf="guest" routerLink="/register">Register</span>
+    <span class="toolbar-spacer menu-padding pointer" *ngIf="guest" routerLink="/login">Sigh-in</span>
+    <span class="toolbar-spacer menu-padding pointer" *ngIf="signout" (click)="signOutUser()">Sign-out</span>
 
 
 

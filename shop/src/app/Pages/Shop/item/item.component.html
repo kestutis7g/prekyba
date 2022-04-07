@@ -18,17 +18,17 @@
     {{item?.name}}
   </h1>
   <p>
-    Aprasymas
+    Description
   </p>
   <div>
     {{item?.description}}
   </div>
   <br>
   <div>
-    Tipas: {{item?.type}}
+    Type: {{item?.type}}
   </div>
   <div>
-    Sandėlyje likę: {{item?.quantity}}
+    Amount left: {{item?.quantity}}
   </div>
   <div>
     ${{item?.price}}
@@ -39,12 +39,12 @@
   <!-- <input type="number" id="fname" name="fname" [(ngModel)]="quantity"><br><br> -->
 
   <div *ngIf="!addedToCart">
-    <button class="btn-rnd" mat-raised-button color="primary" (click)="addToCart(item?.id)">Add to cart</button>
+    <button class="cart-edit-button" mat-raised-button color="primary" (click)="addToCart(item?.id)">Add to cart</button>
   </div>
 
   <div *ngIf="addedToCart">
     <div >
-      <button class="m-auto" mat-mini-fab color="primary" aria-label="remove" (click)="removeFromCart(item?.id)">
+      <button class="cart-edit-button m-auto" mat-mini-fab color="primary" aria-label="remove" (click)="removeFromCart(item?.id)">
         <mat-icon>remove</mat-icon>
       </button>
 
@@ -52,7 +52,7 @@
           {{quantityInCart(item?.id)}}
       </label>
 
-      <button class="m-auto" mat-mini-fab color="primary" aria-label="add" (click)="addToCart(item?.id)">
+      <button class="cart-edit-button m-auto" mat-mini-fab color="primary" aria-label="add" (click)="addToCart(item?.id)">
         <mat-icon>add</mat-icon>
       </button>
     </div>

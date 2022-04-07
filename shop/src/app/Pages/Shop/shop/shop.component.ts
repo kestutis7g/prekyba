@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { Router, RouterModule } from '@angular/router';
-import { Cart, Item } from 'src/types/shop.types';
+
 import { ItemService } from 'src/app/services/item.service';
 import { CartService } from 'src/app/services/cart.service';
+import { Cart, Item } from 'src/model/shop.types';
 
 
 
