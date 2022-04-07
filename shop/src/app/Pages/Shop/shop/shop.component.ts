@@ -46,12 +46,10 @@ export class ShopComponent implements OnInit {
                     if (this.itemList![i].id == this.cartList![c].itemId) {
                       added = true;
                     }
-
                   }
                   this.addedToCart?.push(added);
                 }
                 console.log(this.addedToCart);
-
 
               },
               error => {
@@ -59,19 +57,11 @@ export class ShopComponent implements OnInit {
               }
 
             );
-
         },
         error => {
           console.log(error);
         }
       );
-
-
-
-  }
-
-  hideList(i: number) {
-    this.isVisible = this.addedToCart?.[i];
   }
 
   Refresh() {
@@ -83,12 +73,11 @@ export class ShopComponent implements OnInit {
     this.route.navigate(["item/" + id]);
   }
 
-  AddToCart(id: number) {
+  AddToCart(itemId: number) {
 
-    console.log(id);
     let cartItem: ICart = {
       id: 0,
-      itemId: id,
+      itemId: itemId,
       userId: parseInt(localStorage.getItem('userId') || "0"),
       quantity: 1
     }
@@ -100,11 +89,55 @@ export class ShopComponent implements OnInit {
       error => {
         console.log(error);
       }
-    )
-
-
+    );
+    this.Refresh();
   }
 
+  RemoveFromCart(itemId: number) {
 
+    if (this.QuantityInCart(itemId) > 1) {
+      let cartItem: ICart = {
+        id: 0,
+        itemId: itemId,
+        userId: parseInt(localStorage.getItem('userId') || "0"),
+        quantity: -1
+      }
+
+      this.service.addItemToCart(cartItem).subscribe(
+        data => {
+
+        },
+        error => {
+          console.log(error);
+        }
+      )
+    }
+    else {
+      for (let i = 0; i < this.cartList!.length; i++) {
+        if (this.cartList?.[i].itemId == itemId) {
+          this.service.deleteItemFromCart(this.cartList?.[i].id).subscribe(
+            data => {
+
+            },
+            error => {
+              console.log(error);
+            }
+          );
+          break;
+        }
+      }
+
+    }
+    this.Refresh();
+  }
+
+  QuantityInCart(itemId: number) {
+    for (let i = 0; i < this.cartList!.length; i++) {
+      if (this.cartList?.[i].itemId == itemId) {
+        return this.cartList?.[i].quantity;
+      }
+    }
+    return 0;
+  }
 
 }

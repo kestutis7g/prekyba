@@ -5,7 +5,8 @@ img {
   width: 100px;
   height: 150px;
   object-fit: cover;
-  margin: 0rem 0rem 2rem;;
+  margin: 0rem 0rem 2rem;
+  ;
 }
 
 img:hover {
@@ -16,10 +17,7 @@ img:hover {
   object-fit: cover;
 }
 
-.parking-container {
-    position: relative;
-    margin: 4rem 28rem 0rem
-}
+
 
 .col-xs-2 {
   display: inline-block;
@@ -33,7 +31,6 @@ img:hover {
 
 .container {
   border: 1px solid white;
-
 }
 
 .name {
@@ -73,47 +70,40 @@ div {
 
 
 
-
-.parking-table-container {
-    position: relative;
-    min-height: 200px;
-    max-height: 600px;
-    overflow: auto;
-}
-
 table {
-    width: 100%;
+  width: 100%;
 }
 
 button {
-    margin: 4px 2px;
+  margin: 4px 2px;
 }
 
 .dropdown-box {
-    position: relative;
-    margin: 8px;
-    width: 6rem;
+  position: relative;
+  margin: 8px;
+  width: 6rem;
 }
 
 .search-box {
-    position: relative;
-    margin: 8px;
-    width: 7rem;
+  position: relative;
+  margin: 8px;
+  width: 7rem;
 }
 
 /* Column Widths */
 .mat-column-number,
 .mat-column-state {
-    max-width: 64px;
+  max-width: 64px;
 }
 
 .mat-column-created {
-    max-width: 124px;
+  max-width: 124px;
 }
 
 .success {
-    color: green;
+  color: green;
 }
+
 .failure {
-    color: red;
+  color: red;
 }

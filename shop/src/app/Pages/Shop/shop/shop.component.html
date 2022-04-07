@@ -32,18 +32,26 @@
         </div>
         ${{item.price}}
 
-        <!---
-        <div *ngIf="hideList(i)">
-          <button mat-raised-button color="primary">Add to cart</button>
-        </div>
-        -->
 
         <div *ngIf="!addedToCart?.[i]">
-          <button mat-raised-button color="primary" (click)="AddToCart(item.id); Refresh();">Add to
+          <button mat-raised-button color="primary" (click)="AddToCart(item.id)">Add to
             cart</button>
         </div>
         <div *ngIf="addedToCart?.[i]">
-          <button mat-raised-button color="primary" (click)="AddToCart(item.id)">Added</button>
+          <div>
+            <button mat-mini-fab color="primary" aria-label="remove" (click)="RemoveFromCart(item.id)">
+              <mat-icon>remove</mat-icon>
+            </button>
+
+            <label class="name">
+              {{QuantityInCart(item.id)}}
+            </label>
+
+            <button mat-mini-fab color="primary" aria-label="add" (click)="AddToCart(item.id)">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+
         </div>
 
 
