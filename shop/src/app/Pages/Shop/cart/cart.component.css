@@ -57,6 +57,13 @@ p {
   text-align: center;
 }
 
+.cart-edit-button {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .cart-table-container {
     position: relative;
