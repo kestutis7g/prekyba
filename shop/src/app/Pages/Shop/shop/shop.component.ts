@@ -59,7 +59,6 @@ export class ShopComponent implements OnInit {
             }
             this.addedToCart?.push(added);
           }
-          console.log(this.addedToCart);
 
         },
         error: (error) => {
@@ -69,16 +68,11 @@ export class ShopComponent implements OnInit {
   }
 
 
-
-  Refresh() {
-    window.location.reload();
-  }
-
-  OpenItemWindow(id: number) {
+  openItemWindow(id: number) {
     this.route.navigate(["item" , id]);
   }
 
-  AddToCart(itemId: number) {
+  addToCart(itemId: number) {
 
     let cartItem: Cart = {
       id: 0,
@@ -95,12 +89,11 @@ export class ShopComponent implements OnInit {
         console.log(error);
       }
     );
-    //this.Refresh();
   }
 
-  RemoveFromCart(itemId: number) {
+  removeFromCart(itemId: number) {
 
-    if (this.QuantityInCart(itemId) > 1) {
+    if (this.quantityInCart(itemId) > 1) {
       let cartItem: Cart = {
         id: 0,
         itemId: itemId,
@@ -133,10 +126,9 @@ export class ShopComponent implements OnInit {
       }
 
     }
-    //this.Refresh();
   }
 
-  QuantityInCart(itemId: number) {
+  quantityInCart(itemId: number) {
     for (let i = 0; i < this.cartList!.length; i++) {
       if (this.cartList?.[i].itemId == itemId) {
         return this.cartList?.[i].quantity;

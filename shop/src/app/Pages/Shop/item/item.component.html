@@ -36,31 +36,30 @@
 
 
 
-  <input type="number" id="fname" name="fname" [(ngModel)]="quantity"><br><br>
+  <!-- <input type="number" id="fname" name="fname" [(ngModel)]="quantity"><br><br> -->
 
   <div *ngIf="!addedToCart">
-    <button class="btn-rnd" mat-raised-button color="primary">Add to
-      cart</button>
+    <button class="btn-rnd" mat-raised-button color="primary" (click)="addToCart(item?.id)">Add to cart</button>
   </div>
 
   <div *ngIf="addedToCart">
     <div >
-      <button class="m-auto" mat-mini-fab color="primary" aria-label="remove">
+      <button class="m-auto" mat-mini-fab color="primary" aria-label="remove" (click)="removeFromCart(item?.id)">
         <mat-icon>remove</mat-icon>
       </button>
 
         <label class="cart-item-txt m-0">
-        {{QuantityInCart}}
+          {{quantityInCart(item?.id)}}
       </label>
 
-      <button class="m-auto" mat-mini-fab color="primary" aria-label="add">
+      <button class="m-auto" mat-mini-fab color="primary" aria-label="add" (click)="addToCart(item?.id)">
         <mat-icon>add</mat-icon>
       </button>
     </div>
 
   </div>
 
-  <button mat-icon-button color="black" text-align: right (click)="addToCart(item!.id)"
+  <!-- <button mat-icon-button color="black" text-align: right (click)="addToCart(item!.id)"
     aria-label="Example icon button with a heart icon">
     <mat-icon>add_shopping_cart</mat-icon>
   </button>
@@ -68,5 +67,5 @@
   <button mat-icon-button color="black" text-align: right *ngIf="canEdit" (click)="pushButton(item!.id)"
     aria-label="Example icon button with a heart icon">
     <mat-icon>edit</mat-icon>
-  </button>
+  </button> -->
 </div>

@@ -16,7 +16,6 @@ export class ItemComponent implements OnInit {
   canEdit: boolean = false;
 
   addedToCart: boolean = false;
-  QuantityInCart: number = 0;
   cartList?: Cart[];
   constructor(
     private itemService: ItemService,
@@ -35,7 +34,7 @@ export class ItemComponent implements OnInit {
       this.itemService.getItemById(id).subscribe({
         next: (data) => {
           this.item = data;
-
+          this.getCartList();
         },
         error: (error) => {
           console.log(error);
@@ -57,9 +56,7 @@ export class ItemComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.cartList = data;
-
           this.addedToCart = data.findIndex(x => x.itemId === this.item?.id) !== -1;
-          console.log("ce toke nesamone", this.item);
 
         },
         error: (error) => {
@@ -68,25 +65,82 @@ export class ItemComponent implements OnInit {
       });
   }
 
-  addToCart(id: number) {
-    if (this.quantity > 0) {
 
+
+  addToCart(itemId?: number) {
+    if(!itemId){
+      return;
+    }
+    if (this.quantity <= 0) {
+      return;
+    }
+
+    let cartItem: Cart = {
+      id: 0,
+      itemId: itemId,
+      userId: parseInt(localStorage.getItem('userId') || "0"),
+      quantity: this.quantity
+    }
+
+    this.cartService.addItemToCart(cartItem).subscribe(
+      data => {
+        this.getCartList();
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  removeFromCart(itemId?: number) {
+    if(!itemId){
+      return;
+    }
+    if (this.quantityInCart(itemId) > 1) {
       let cartItem: Cart = {
         id: 0,
-        itemId: id,
+        itemId: itemId,
         userId: parseInt(localStorage.getItem('userId') || "0"),
-        quantity: this.quantity
+        quantity: -1
       }
 
       this.cartService.addItemToCart(cartItem).subscribe(
         data => {
-
+          this.getCartList();
         },
         error => {
           console.log(error);
         }
       )
     }
+    else {
+      for (let i = 0; i < this.cartList!.length; i++) {
+        if (this.cartList?.[i].itemId == itemId) {
+          this.cartService.deleteItemFromCart(this.cartList?.[i].id).subscribe(
+            data => {
+              this.getCartList();
+            },
+            error => {
+              console.log(error);
+            }
+          );
+          break;
+        }
+      }
+
+    }
+  }
+
+  quantityInCart(itemId?: number) {
+    if(!itemId){
+      return 0;
+    }
+    for (let i = 0; i < this.cartList!.length; i++) {
+      if (this.cartList?.[i].itemId == itemId) {
+        return this.cartList?.[i].quantity;
+      }
+    }
+    return 0;
   }
 
   pushButton(id: number) {

@@ -19,7 +19,7 @@
   <div class="container">
     <div class="row mb-3">
       <div *ngFor="let item of itemList!; let i = index;" class="col-xs-2 themed-grid-col">
-        <div class="parent" (click)="OpenItemWindow(item.id)">
+        <div class="parent" (click)="openItemWindow(item.id)">
           <div class="child">
             <span>
               <img src={{item.picture}} alt={{item.name}} style="width:100%">
@@ -34,21 +34,21 @@
 
 
         <div *ngIf="!addedToCart?.[i]">
-          <button class="btn-rnd" mat-raised-button color="primary" (click)="AddToCart(item.id)">Add to
+          <button class="btn-rnd" mat-raised-button color="primary" (click)="addToCart(item.id)">Add to
             cart</button>
         </div>
 
         <div *ngIf="addedToCart?.[i]">
           <div >
-            <button class="m-auto" mat-mini-fab color="primary" aria-label="remove" (click)="RemoveFromCart(item.id)">
+            <button class="m-auto" mat-mini-fab color="primary" aria-label="remove" (click)="removeFromCart(item.id)">
               <mat-icon>remove</mat-icon>
             </button>
 
               <label class="cart-item-txt m-0">
-              {{QuantityInCart(item.id)}}
+              {{quantityInCart(item.id)}}
             </label>
 
-            <button class="m-auto" mat-mini-fab color="primary" aria-label="add" (click)="AddToCart(item.id)">
+            <button class="m-auto" mat-mini-fab color="primary" aria-label="add" (click)="addToCart(item.id)">
               <mat-icon>add</mat-icon>
             </button>
           </div>
