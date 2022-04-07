@@ -38,13 +38,11 @@ export class LoginComponent implements OnInit {
 
   loginUser() {
 
-    console.log(this.name + "   " + this.pass)
-
     this.service.getUserLogin(this.name)
       .subscribe(
         data => {
           this.data = data;
-          console.log(this.data);
+
           if (this.data?.login == this.name && this.EncrDecr.get('123456$#@$^@1ERF', this.data?.password) == this.pass) {
             this.prisijungta = "Prisijungta"
 
@@ -54,7 +52,6 @@ export class LoginComponent implements OnInit {
             //window.location.reload();
           }
           else {
-            console.log(this.name + this.pass)
             this.prisijungta = "Neteisingas prisijungimas"
 
           }

@@ -26,7 +26,6 @@ export class WorkspaceComponent implements OnInit {
       .subscribe(
         data => {
           this.itemList = data;
-          console.log(this.itemList);
         },
         error => {
           console.log(error);
@@ -36,8 +35,7 @@ export class WorkspaceComponent implements OnInit {
   }
 
   pushButton(id: number) {
-    console.log(id);
-    this.route.navigate(["item/" + id]);
+    this.route.navigate(["item", id]);
   }
 
   deleteItem(id: number, name: string) {

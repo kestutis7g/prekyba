@@ -35,7 +35,6 @@ export class HistoryComponent implements OnInit {
   }
 
   pushButton(id: number) {
-    console.log(id);
-    this.route.navigate(["item/" + id]);
+    this.route.navigate(["item", id]);
   }
 }

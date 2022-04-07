@@ -25,7 +25,6 @@ export class PaymentComponent implements OnInit {
       .subscribe(
         data => {
           this.itemList = data;
-          console.log(this.itemList);
         },
         error => {
           console.log(error);

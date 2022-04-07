@@ -30,30 +30,6 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.refreshCartList();
     this.getCartList();
-    // this.itemService.getCartListById(parseInt(localStorage.getItem('userId') || "0"))
-    //   .subscribe(
-    //     dataCart => {
-    //       this.cartList = dataCart;
-    //       if (this.cartList != null) {
-    //         this.cartList.forEach(item => {
-    //           this.itemService.getItemById(item.itemId)
-    //             .subscribe(
-    //               dataItem => {
-    //                 this.itemList.push(dataItem)
-    //                 console.log("itemas 0 : ", this.itemList[0]);
-    //               },
-    //               error => {
-    //                 console.log(error);
-    //               }
-    //             );
-    //         });
-    //       }
-    //     },
-    //     error => {
-    //       console.log(error);
-    //     }
-    //   );
-    // console.log(this.itemList);
   }
 
   deleteItem(id: number) {
@@ -140,7 +116,6 @@ export class CartComponent implements OnInit {
     }
 
     let itemId = this.getItemIdByCartId(id);
-    console.log(this.quantityInCart(id))
 
     if (this.quantityInCart(id) > 1) {
       let cartItem: Cart = {
