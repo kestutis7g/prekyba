@@ -27,8 +27,12 @@ export class ItemComponent implements OnInit {
 
   ngOnInit() {
     let route = this.activatedRoute.params.subscribe(params => {
+      const id = params['id'];
+      if(!id){
+        return;
+      }
 
-      this.itemService.getItemById(params['id']).subscribe({
+      this.itemService.getItemById(id).subscribe({
         next: (data) => {
           this.item = data;
 

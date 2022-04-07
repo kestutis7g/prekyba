@@ -75,8 +75,7 @@ export class ShopComponent implements OnInit {
   }
 
   OpenItemWindow(id: number) {
-    console.log(id);
-    this.route.navigate(["item/" + id]);
+    this.route.navigate(["item" , id]);
   }
 
   AddToCart(itemId: number) {

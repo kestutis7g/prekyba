@@ -23,7 +23,6 @@ import { HistoryComponent } from './testpage/history.component';
 
 
 const routes: Routes = [
-  { path: "", component: HomeComponent },
   { path: "home", component: HomeComponent },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
@@ -35,7 +34,8 @@ const routes: Routes = [
   { path: "history", component: HistoryComponent },
   { path: "edit-item/:id", component: EditItemComponent },
   { path: "workspace", component: WorkspaceComponent },
-  { path: "item-balance", component: ItemBalanceComponent }
+  { path: "item-balance", component: ItemBalanceComponent },
+  { path: "**", redirectTo: "home"}
 ];
 
 @NgModule({
