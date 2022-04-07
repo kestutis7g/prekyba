@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from 'src/app/services/api-service';
-import { IItem } from 'src/model/IItem';
+import { CartService } from 'src/app/services/cart.service';
+import { ItemService } from 'src/app/services/item.service';
+import { Item } from 'src/types/shop.types';
 
 @Component({
   selector: 'app-payment',
@@ -11,15 +12,16 @@ import { IItem } from 'src/model/IItem';
 export class PaymentComponent implements OnInit {
 
   constructor(
-    private service: ApiService,
+    private itemService: ItemService,
+    private cartService: CartService,
     private route: Router,
 
   ) { }
 
-  itemList: IItem[] = [];
+  itemList: Item[] = [];
 
   ngOnInit(): void {
-    this.service.getItemListByUserId(parseInt(localStorage.getItem('userId') || "0"))
+    this.itemService.getItemListByUserId(parseInt(localStorage.getItem('userId') || "0"))
       .subscribe(
         data => {
           this.itemList = data;
@@ -33,7 +35,7 @@ export class PaymentComponent implements OnInit {
 
   clearCart() {
     this.itemList.forEach(item => {
-      this.service.deleteItemFromCart(item.id).subscribe(() => this.route.navigate(["/home"]));
+      this.cartService.deleteItemFromCart(item.id).subscribe(() => this.route.navigate(["/home"]));
     });
 
   }

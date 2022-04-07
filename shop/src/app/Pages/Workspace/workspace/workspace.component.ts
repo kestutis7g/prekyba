@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from 'src/app/services/api-service';
-import { IItem } from 'src/model/IItem';
+import { ItemService } from 'src/app/services/item.service';
+import { Item } from 'src/types/shop.types';
 
 @Component({
   selector: 'app-workspace',
@@ -14,14 +14,14 @@ export class WorkspaceComponent implements OnInit {
   //displayedColumns = ['name', 'price', 'description', 'quantity', 'discount', 'type']
   isLoadingResults = true;
 
-  itemList: IItem[] = [];
+  itemList: Item[] = [];
   dialog: any;
 
-  constructor(private service: ApiService,
+  constructor(private itemService: ItemService,
     private route: Router) { }
 
   ngOnInit(): void {
-    this.service.getItemList()
+    this.itemService.getItemList()
       .subscribe(
         data => {
           this.itemList = data;
@@ -41,7 +41,7 @@ export class WorkspaceComponent implements OnInit {
 
   deleteItem(id: number, name: string) {
     if (confirm("Are you sure to delete " + name)) {
-      this.service.deleteItemFromList(id).subscribe(() => this.ngOnInit());
+      this.itemService.deleteItemFromList(id).subscribe(() => this.ngOnInit());
     }
 
   }

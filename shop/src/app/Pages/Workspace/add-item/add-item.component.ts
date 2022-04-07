@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/services/api-service';
-import { IItem } from 'src/model/IItem';
+import { ItemService } from 'src/app/services/item.service';
+import { Item } from 'src/types/shop.types';
 
 @Component({
   selector: 'app-add-item',
@@ -10,18 +10,23 @@ import { IItem } from 'src/model/IItem';
 export class AddItemComponent implements OnInit {
 
   constructor(
-    private service: ApiService
+    private itemService: ItemService
   ) { }
 
-  item: IItem = new IItem();
+  item: Item | null = null;
 
   ngOnInit(): void {
+    this.itemService.getItemDefaults().subscribe({
+      next: (item) =>{
+        this.item = item;
+      }
+    });
   }
 
   addItem() {
-    let item: IItem = this.item!;
+    let item: Item = this.item!;
 
-    this.service.addItem(item).subscribe(
+    this.itemService.addItem(item).subscribe(
       data => {
 
       },

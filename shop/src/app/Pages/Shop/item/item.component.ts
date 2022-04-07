@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiService } from 'src/app/services/api-service';
-import { ICart } from 'src/model/ICart';
-import { IItem } from 'src/model/IItem';
+import { CartService } from 'src/app/services/cart.service';
+import { ItemService } from 'src/app/services/item.service';
+import { Cart, Item } from 'src/types/shop.types';
 
 @Component({
   selector: 'app-item',
@@ -11,11 +11,16 @@ import { IItem } from 'src/model/IItem';
 })
 export class ItemComponent implements OnInit {
 
-  item: IItem | undefined
+  item: Item | undefined
   quantity: number = 1
   canEdit: boolean = false;
+
+  addedToCart: boolean = false;
+  QuantityInCart: number = 0;
+  cartList?: Cart[];
   constructor(
-    private service: ApiService,
+    private itemService: ItemService,
+    private cartService: CartService,
     private activatedRoute: ActivatedRoute,
     private route: Router
   ) { }
@@ -23,14 +28,14 @@ export class ItemComponent implements OnInit {
   ngOnInit() {
     let route = this.activatedRoute.params.subscribe(params => {
 
-      this.service.getItemById(params['id']).subscribe(
-        data => {
+      this.itemService.getItemById(params['id']).subscribe({
+        next: (data) => {
           this.item = data;
-          console.log(this.item);
+
         },
-        error => {
+        error: (error) => {
           console.log(error);
-        }
+        }}
       )
     });
 
@@ -42,17 +47,34 @@ export class ItemComponent implements OnInit {
     }
   }
 
+  getCartList(){
+
+    this.cartService.getCartListByUserId(parseInt(localStorage.getItem('userId') || "0"))
+      .subscribe({
+        next: (data) => {
+          this.cartList = data;
+
+          this.addedToCart = data.findIndex(x => x.itemId === this.item?.id) !== -1;
+          console.log("ce toke nesamone", this.item);
+
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      });
+  }
+
   addToCart(id: number) {
     if (this.quantity > 0) {
-      console.log(id);
-      let cartItem: ICart = {
+
+      let cartItem: Cart = {
         id: 0,
         itemId: id,
         userId: parseInt(localStorage.getItem('userId') || "0"),
         quantity: this.quantity
       }
 
-      this.service.addItemToCart(cartItem).subscribe(
+      this.cartService.addItemToCart(cartItem).subscribe(
         data => {
 
         },
@@ -64,7 +86,6 @@ export class ItemComponent implements OnInit {
   }
 
   pushButton(id: number) {
-    console.log(id);
     this.route.navigate(["edit-item/" + id]);
   }
 

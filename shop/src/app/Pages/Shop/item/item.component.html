@@ -38,6 +38,28 @@
 
   <input type="number" id="fname" name="fname" [(ngModel)]="quantity"><br><br>
 
+  <div *ngIf="!addedToCart">
+    <button class="btn-rnd" mat-raised-button color="primary">Add to
+      cart</button>
+  </div>
+
+  <div *ngIf="addedToCart">
+    <div >
+      <button class="m-auto" mat-mini-fab color="primary" aria-label="remove">
+        <mat-icon>remove</mat-icon>
+      </button>
+
+        <label class="cart-item-txt m-0">
+        {{QuantityInCart}}
+      </label>
+
+      <button class="m-auto" mat-mini-fab color="primary" aria-label="add">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+
+  </div>
+
   <button mat-icon-button color="black" text-align: right (click)="addToCart(item!.id)"
     aria-label="Example icon button with a heart icon">
     <mat-icon>add_shopping_cart</mat-icon>

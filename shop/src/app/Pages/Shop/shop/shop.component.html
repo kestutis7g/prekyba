@@ -34,20 +34,21 @@
 
 
         <div *ngIf="!addedToCart?.[i]">
-          <button mat-raised-button color="primary" (click)="AddToCart(item.id)">Add to
+          <button class="btn-rnd" mat-raised-button color="primary" (click)="AddToCart(item.id)">Add to
             cart</button>
         </div>
+
         <div *ngIf="addedToCart?.[i]">
-          <div>
-            <button mat-mini-fab color="primary" aria-label="remove" (click)="RemoveFromCart(item.id)">
+          <div >
+            <button class="m-auto" mat-mini-fab color="primary" aria-label="remove" (click)="RemoveFromCart(item.id)">
               <mat-icon>remove</mat-icon>
             </button>
 
-            <label class="name">
+              <label class="cart-item-txt m-0">
               {{QuantityInCart(item.id)}}
             </label>
 
-            <button mat-mini-fab color="primary" aria-label="add" (click)="AddToCart(item.id)">
+            <button class="m-auto" mat-mini-fab color="primary" aria-label="add" (click)="AddToCart(item.id)">
               <mat-icon>add</mat-icon>
             </button>
           </div>

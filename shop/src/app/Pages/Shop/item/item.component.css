@@ -24,3 +24,15 @@ img {
   object-fit: cover;
 }
 
+.cart-item-txt{
+  font-size: medium;
+  padding: 10px 10px;
+  margin: 0rem 0rem 1rem;
+  color: black;
+  font-weight: bold;
+}
+
+.btn-rnd {
+  border-radius: 20px;
+}
+

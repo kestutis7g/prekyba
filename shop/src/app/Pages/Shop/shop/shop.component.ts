@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/services/api-service';
-import { IItem } from 'src/model/IItem';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { Router, RouterModule } from '@angular/router';
-import { ICart } from 'src/model/ICart';
+import { Cart, Item } from 'src/types/shop.types';
+import { ItemService } from 'src/app/services/item.service';
+import { CartService } from 'src/app/services/cart.service';
+
 
 
 @Component({
@@ -17,52 +18,57 @@ export class ShopComponent implements OnInit {
   //displayedColumns = ['name', 'price', 'description', 'quantity', 'discount', 'type']
   isLoadingResults = true;
 
-  itemList?: IItem[];
-  cartList?: ICart[];
+  itemList?: Item[];
+  cartList?: Cart[];
   addedToCart!: boolean[];
   isVisible: boolean = true;
 
-  constructor(private service: ApiService,
+  constructor(private itemService: ItemService, private cartService: CartService,
     private route: Router) { }
 
   ngOnInit(): void {
-    this.service.getItemList()
-      .subscribe(
-        data => {
+    this.itemService.getItemList()
+      .subscribe({
+        next: (data) => {
           this.itemList = data;
-
-          this.service.getCartListByUserId(parseInt(localStorage.getItem('userId') || "0"))
-            .subscribe(
-              data => {
-                this.cartList = data;
-
-
-                this.addedToCart = new Array<boolean>();
-                for (let i = 0; i < this.itemList!.length; i++) {
-                  let added: boolean;
-                  added = false;
-                  for (let c = 0; c < this.cartList!.length; c++) {
-
-                    if (this.itemList![i].id == this.cartList![c].itemId) {
-                      added = true;
-                    }
-                  }
-                  this.addedToCart?.push(added);
-                }
-                console.log(this.addedToCart);
-
-              },
-              error => {
-                console.log(error);
-              }
-
-            );
+          this.getCartList();
         },
-        error => {
+        error: (error) => {
           console.log(error);
-        }
+        }}
       );
   }
+
+  getCartList(){
+
+    this.cartService.getCartListByUserId(parseInt(localStorage.getItem('userId') || "0"))
+      .subscribe({
+        next: (data) => {
+          this.cartList = data;
+
+
+          this.addedToCart = new Array<boolean>();
+          for (let i = 0; i < this.itemList!.length; i++) {
+            let added: boolean;
+            added = false;
+            for (let c = 0; c < this.cartList!.length; c++) {
+
+              if (this.itemList![i].id == this.cartList![c].itemId) {
+                added = true;
+              }
+            }
+            this.addedToCart?.push(added);
+          }
+          console.log(this.addedToCart);
+
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      });
+  }
+
+
 
   Refresh() {
     window.location.reload();
@@ -75,37 +81,37 @@ export class ShopComponent implements OnInit {
 
   AddToCart(itemId: number) {
 
-    let cartItem: ICart = {
+    let cartItem: Cart = {
       id: 0,
       itemId: itemId,
       userId: parseInt(localStorage.getItem('userId') || "0"),
       quantity: 1
     }
 
-    this.service.addItemToCart(cartItem).subscribe(
+    this.cartService.addItemToCart(cartItem).subscribe(
       data => {
-
+        this.getCartList();
       },
       error => {
         console.log(error);
       }
     );
-    this.Refresh();
+    //this.Refresh();
   }
 
   RemoveFromCart(itemId: number) {
 
     if (this.QuantityInCart(itemId) > 1) {
-      let cartItem: ICart = {
+      let cartItem: Cart = {
         id: 0,
         itemId: itemId,
         userId: parseInt(localStorage.getItem('userId') || "0"),
         quantity: -1
       }
 
-      this.service.addItemToCart(cartItem).subscribe(
+      this.cartService.addItemToCart(cartItem).subscribe(
         data => {
-
+          this.getCartList();
         },
         error => {
           console.log(error);
@@ -115,9 +121,9 @@ export class ShopComponent implements OnInit {
     else {
       for (let i = 0; i < this.cartList!.length; i++) {
         if (this.cartList?.[i].itemId == itemId) {
-          this.service.deleteItemFromCart(this.cartList?.[i].id).subscribe(
+          this.cartService.deleteItemFromCart(this.cartList?.[i].id).subscribe(
             data => {
-
+              this.getCartList();
             },
             error => {
               console.log(error);
@@ -128,7 +134,7 @@ export class ShopComponent implements OnInit {
       }
 
     }
-    this.Refresh();
+    //this.Refresh();
   }
 
   QuantityInCart(itemId: number) {

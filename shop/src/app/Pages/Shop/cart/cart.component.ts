@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { ApiService } from 'src/app/services/api-service';
-import { ICart } from 'src/model/ICart';
-import { IItem } from 'src/model/IItem';
+import { CartService } from 'src/app/services/cart.service';
+import { ItemService } from 'src/app/services/item.service';
+import { Item } from 'src/types/shop.types';
 
 @Component({
   selector: 'app-cart',
@@ -11,31 +11,32 @@ import { IItem } from 'src/model/IItem';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  @ViewChild(MatTable) table!: MatTable<IItem>;
+  @ViewChild(MatTable) table!: MatTable<Item>;
   cartDisplayedColumns = ['userId', 'itemId', 'quantity']
   displayedColumns = ['name', 'price', 'quantity', 'discount', 'type', 'button']
   //displayedColumns = ['name', 'price', 'description', 'quantity', 'discount', 'type']
   isLoadingResults = true;
 
-  itemList: IItem[] = [];
+  itemList: Item[] = [];
   //cartList?: ICart[];
   pay: boolean = false;
 
   constructor(
-    private service: ApiService,
+    private itemService: ItemService,
+    private cartService: CartService,
     private route: Router
   ) { }
 
   ngOnInit(): void {
     this.refreshCartList();
 
-    // this.service.getCartListById(parseInt(localStorage.getItem('userId') || "0"))
+    // this.itemService.getCartListById(parseInt(localStorage.getItem('userId') || "0"))
     //   .subscribe(
     //     dataCart => {
     //       this.cartList = dataCart;
     //       if (this.cartList != null) {
     //         this.cartList.forEach(item => {
-    //           this.service.getItemById(item.itemId)
+    //           this.itemService.getItemById(item.itemId)
     //             .subscribe(
     //               dataItem => {
     //                 this.itemList.push(dataItem)
@@ -57,11 +58,11 @@ export class CartComponent implements OnInit {
 
   deleteItem(id: number) {
 
-    this.service.deleteItemFromCart(id).subscribe(() => this.refreshCartList());
+    this.cartService.deleteItemFromCart(id).subscribe(() => this.refreshCartList());
 
   }
   refreshCartList() {
-    this.service.getItemListByUserId(parseInt(localStorage.getItem('userId') || "0"))
+    this.itemService.getItemListByUserId(parseInt(localStorage.getItem('userId') || "0"))
       .subscribe(
         data => {
           this.itemList = data;

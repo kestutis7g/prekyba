@@ -40,6 +40,14 @@ img:hover {
   font-weight: bold;
 }
 
+.cart-item-txt{
+  font-size: medium;
+  padding: 10px 10px;
+  margin: 0rem 0rem 1rem;
+  color: black;
+  font-weight: bold;
+}
+
 h1 {
   text-align: center;
 }
@@ -51,6 +59,11 @@ p {
 div {
   text-align: center;
 }
+
+.btn-rnd {
+  border-radius: 20px;
+}
+
 
 .parent {
   overflow: hidden;

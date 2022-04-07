@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { ApiService } from 'src/app/services/api-service';
-import { IItem } from 'src/model/IItem';
+import { Item } from 'src/types/shop.types';
+import { ItemService } from '../services/item.service';
 
 
 @Component({
@@ -15,13 +15,13 @@ export class HistoryComponent implements OnInit {
   //displayedColumns = ['name', 'price', 'description', 'quantity', 'discount', 'type']
   isLoadingResults = true;
 
-  itemList?: IItem[];
+  itemList?: Item[];
 
-  constructor(private service: ApiService,
+  constructor(private itemService: ItemService,
     private route: Router) { }
 
   ngOnInit(): void {
-    this.service.getItemList()
+    this.itemService.getItemList()
       .subscribe(
         data => {
           this.itemList = data;

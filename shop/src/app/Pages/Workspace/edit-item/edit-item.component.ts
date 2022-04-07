@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiService } from 'src/app/services/api-service';
-import { IItem } from 'src/model/IItem';
+import { ItemService } from 'src/app/services/item.service';
+import { Item } from 'src/types/shop.types';
 
 @Component({
   selector: 'app-edit-item',
@@ -11,22 +11,27 @@ import { IItem } from 'src/model/IItem';
 export class EditItemComponent implements OnInit {
 
   constructor(
-    private service: ApiService,
+    private itemService: ItemService,
     private activatedRoute: ActivatedRoute,
     private route: Router
   ) { }
 
-  item: IItem = new IItem();
+  item: Item | null = null;
 
   ngOnInit(): void {
+    this.itemService.getItemDefaults().subscribe({
+      next: (item) =>{
+        this.item = item;
+      }
+    });
   }
 
   updateItem() {
-    let item: IItem = this.item!;
+    let item: Item = this.item!;
 
     let route = this.activatedRoute.params.subscribe(params => {
       item.id = params['id']
-      this.service.updateItem(item).subscribe(() => this.route.navigate(["/workspace"]))
+      this.itemService.updateItem(item).subscribe(() => this.route.navigate(["/workspace"]))
     });
   }
 
@@ -34,7 +39,7 @@ export class EditItemComponent implements OnInit {
 
     let route = this.activatedRoute.params.subscribe(params => {
 
-      this.service.deleteItemFromList(params['id']).subscribe(() => this.route.navigate(["/home"]))
+      this.itemService.deleteItemFromList(params['id']).subscribe(() => this.route.navigate(["/home"]))
     });
 
 
