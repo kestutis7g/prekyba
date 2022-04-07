@@ -26,7 +26,7 @@ export class EditItemComponent implements OnInit {
 
     let route = this.activatedRoute.params.subscribe(params => {
       item.id = params['id']
-      this.service.updateItem(item).subscribe()
+      this.service.updateItem(item).subscribe(() => this.route.navigate(["/workspace"]))
     });
   }
 

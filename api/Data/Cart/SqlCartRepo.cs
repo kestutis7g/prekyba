@@ -27,9 +27,9 @@ namespace ShopAPI.Data.Cart
 
             return await Task.FromResult(cartList);
         }
-        public async Task<IEnumerable<CartModel>> GetCartListByIdAsync(int id)
+        public async Task<IEnumerable<CartModel>> GetCartListByUserIdAsync(int userId)
         {
-            var cart = _context.Carts.Where(x => x.UserId == id).ToList();
+            var cart = _context.Carts.Where(x => x.UserId == userId).ToList();
 
             return await Task.FromResult(cart);
         }

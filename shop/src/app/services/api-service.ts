@@ -27,8 +27,8 @@ export class ApiService {
     return this.http.get<IItem[]>(this.APIUrl + 'Item/list/' + userId);
   }
 
-  getCartListById(id: number): Observable<ICart[]> {
-    return this.http.get<ICart[]>(this.APIUrl + 'Cart/' + id);
+  getCartListByUserId(userId: number): Observable<ICart[]> {
+    return this.http.get<ICart[]>(this.APIUrl + 'Cart/' + userId);
   }
 
   addItemToCart(cartItem: ICart) {

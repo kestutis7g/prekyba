@@ -39,7 +39,6 @@ import { AddItemComponent } from './Pages/Workspace/add-item/add-item.component'
 import { EditItemComponent } from './Pages/Workspace/edit-item/edit-item.component';
 import { WorkspaceComponent } from './Pages/Workspace/workspace/workspace.component';
 import { ItemBalanceComponent } from './Pages/Workspace/item-balance/item-balance.component';
-import { DeleteItemComponent } from './Pages/Workspace/delete-item/delete-item.component';
 
 
 
@@ -57,8 +56,7 @@ import { DeleteItemComponent } from './Pages/Workspace/delete-item/delete-item.c
     HistoryComponent,
     EditItemComponent,
     WorkspaceComponent,
-    ItemBalanceComponent,
-    DeleteItemComponent
+    ItemBalanceComponent
   ],
   imports: [
     BrowserModule,

@@ -32,11 +32,11 @@ namespace ShopAPI.Controllers
         }
 
 
-        // GET api/cart/{id}
-        [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<CartModel>>> GetCartListByIdAsync([FromRoute] int id)
+        // GET api/cart/{userIyd}
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<IEnumerable<CartModel>>> GetCartListByUserIdAsync([FromRoute] int userId)
         {
-            var cartFromRepo = await _repository.GetCartListByIdAsync(id);
+            var cartFromRepo = await _repository.GetCartListByUserIdAsync(userId);
             if (cartFromRepo is null)
             {
                 return NotFound();

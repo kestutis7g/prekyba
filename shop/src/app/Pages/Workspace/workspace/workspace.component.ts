@@ -39,8 +39,11 @@ export class WorkspaceComponent implements OnInit {
     this.route.navigate(["item/" + id]);
   }
 
-  deleteItem(id: number) {
-    this.service.deleteItemFromList(id).subscribe(() => this.ngOnInit());
+  deleteItem(id: number, name: string) {
+    if (confirm("Are you sure to delete " + name)) {
+      this.service.deleteItemFromList(id).subscribe(() => this.ngOnInit());
+    }
+
   }
 
   editItem(id: number) {

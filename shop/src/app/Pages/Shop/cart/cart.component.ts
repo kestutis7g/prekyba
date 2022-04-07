@@ -65,7 +65,6 @@ export class CartComponent implements OnInit {
       .subscribe(
         data => {
           this.itemList = data;
-
           if (localStorage.getItem('type') != "guest") {
             if (this.itemList.length > 0) {
               this.pay = true;

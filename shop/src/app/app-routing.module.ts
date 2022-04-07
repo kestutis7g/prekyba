@@ -17,7 +17,6 @@ import { EditItemComponent } from './Pages/Workspace/edit-item/edit-item.compone
 import { AddItemComponent } from './Pages/Workspace/add-item/add-item.component';
 import { WorkspaceComponent } from './Pages/Workspace/workspace/workspace.component';
 import { ItemBalanceComponent } from './Pages/Workspace/item-balance/item-balance.component';
-import { DeleteItemComponent } from './Pages/Workspace/delete-item/delete-item.component';
 
 import { HistoryComponent } from './testpage/history.component';
 
@@ -36,8 +35,7 @@ const routes: Routes = [
   { path: "history", component: HistoryComponent },
   { path: "edit-item/:id", component: EditItemComponent },
   { path: "workspace", component: WorkspaceComponent },
-  { path: "item-balance", component: ItemBalanceComponent },
-  { path: "delete-item/:id", component: DeleteItemComponent }
+  { path: "item-balance", component: ItemBalanceComponent }
 ];
 
 @NgModule({
