@@ -12,10 +12,15 @@ Turint kompiuteryje suinstaliuotas reikalingas programas, VisualStudio Code Term
 
 API folderyje:
 dotnet add package Microsoft.EntityFrameworkCore
+
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+
 dotnet tool install --global dotnet-ef
+
 dotnet add package Microsoft.EntityFrameworkCore.Design
+
 dotnet build
+
 dotnet run
 
 SHOP folderyje:
