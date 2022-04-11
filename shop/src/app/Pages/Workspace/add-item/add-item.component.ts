@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ItemService } from 'src/app/services/item.service';
 import { Item } from 'src/model/shop.types';
 
@@ -10,7 +11,7 @@ import { Item } from 'src/model/shop.types';
 export class AddItemComponent implements OnInit {
 
   constructor(
-    private itemService: ItemService
+    private itemService: ItemService, private router: Router
   ) { }
 
   item: Item | null = null;
@@ -28,7 +29,7 @@ export class AddItemComponent implements OnInit {
 
     this.itemService.addItem(item).subscribe(
       data => {
-
+        this.router.navigateByUrl('/workspace');
       },
       error => {
         console.log(error);
