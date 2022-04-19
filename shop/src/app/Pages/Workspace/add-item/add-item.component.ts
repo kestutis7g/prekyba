@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ItemService } from 'src/app/services/item.service';
 import { Item } from 'src/model/shop.types';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-item',
@@ -27,14 +28,23 @@ export class AddItemComponent implements OnInit {
   addItem() {
     let item: Item = this.item!;
 
-    this.itemService.addItem(item).subscribe(
-      data => {
+    this.itemService.addItem(item).subscribe({
+      next: () => {
         this.router.navigateByUrl('/workspace');
       },
-      error => {
+      error: (error) => {
         console.log(error);
-      }
+        this.displayStatus(error)
+      }}
     )
 
+  }
+
+  displayStatus(text: string){
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: text,
+    })
   }
 }

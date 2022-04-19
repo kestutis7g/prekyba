@@ -13,7 +13,7 @@
   <p>
     <mat-form-field appearance="legacy">
       <mat-label>Vartotojo vardas</mat-label>
-      <input matInput placeholder=" " [(ngModel)]="name">
+      <input matInput placeholder=" " [(ngModel)]="login">
     </mat-form-field>
   </p>
 
@@ -30,7 +30,7 @@
 
           <div style="display: table-cell;">
             <div style="width: 70%">
-              <button mat-icon-button color="black" text-align: right (click)="myFunction()"
+              <button mat-icon-button color="black" text-align: right (click)="changeVisibility()"
                 aria-label="Example icon button with a heart icon">
                 <mat-icon>{{visibilityIcon}}</mat-icon>
               </button>
@@ -45,11 +45,8 @@
     </mat-form-field>
   </p>
 
-  <button routerLink="/home" class="btn btn-dark" (click)="loginUser()">Prisijungti</button>
+  <button class="btn btn-dark" (click)="loginUser()">Prisijungti</button>
   <p> </p>
   <button routerLink="/register" type="submit" class="btn btn-dark">Registruotis</button>
 
-  <div>
-    {{prisijungta}}
-  </div>
 </div>

@@ -59,7 +59,17 @@ export class WorkspaceComponent implements OnInit {
       cancelButtonText: 'No, cancel!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.itemService.deleteItemFromList(id).subscribe(() => this.ngOnInit());
+        this.itemService.deleteItemFromList(id).subscribe({
+          next:() => this.ngOnInit(),
+          error: (error) => {
+            console.log(error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Could not delete',
+              text: 'Item is already in someones cart',
+            })
+          }}
+          );
         swalWithBootstrapButtons.fire(
           'Deleted!',
           '',

@@ -22,7 +22,7 @@ export class ApiService {
     return this.http.post(this.APIUrl + 'User', user);
   }
 
-  getUserLogin(login: string) {
+  getUserByLogin(login: string) {
     return this.http.get<IUser>(this.APIUrl + 'User/' + login);
   }
 

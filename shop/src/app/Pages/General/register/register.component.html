@@ -5,60 +5,57 @@
 </head>
 
 <h1>
-  Registracija
+  New user registration
 </h1>
 <div class="register-form">
   <p>
     <mat-form-field appearance="legacy">
-      <mat-label>Vartotojo vardas</mat-label>
+      <mat-label>Name</mat-label>
       <input matInput placeholder=" " [(ngModel)]="register.name" minlength="3" required>
     </mat-form-field>
   </p>
 
   <p>
     <mat-form-field appearance="legacy">
-      <mat-label>Vartotojo pavardė</mat-label>
+      <mat-label>Lastname</mat-label>
       <input matInput placeholder=" " [(ngModel)]="register.lastname" minlength="3" required>
     </mat-form-field>
   </p>
 
   <p>
     <mat-form-field appearance="legacy">
-      <mat-label>El. paštas</mat-label>
+      <mat-label>Email</mat-label>
       <input matInput placeholder=" " [(ngModel)]="register.email" minlength="8" required>
     </mat-form-field>
   </p>
 
   <p>
     <mat-form-field appearance="legacy">
-      <mat-label>Tel. nr.</mat-label>
+      <mat-label>Phone</mat-label>
       <input matInput placeholder=" " [(ngModel)]="register.phone">
     </mat-form-field>
   </p>
 
   <p>
     <mat-form-field appearance="legacy">
-      <mat-label>Prisijungimo vardas</mat-label>
+      <mat-label>Login</mat-label>
       <input matInput placeholder=" " [(ngModel)]="register.login" minlength="5" required>
     </mat-form-field>
   </p>
 
   <p>
     <mat-form-field appearance="legacy">
-      <mat-label>Slaptažodis</mat-label>
+      <mat-label>Password</mat-label>
       <input type="password" matInput placeholder=" " [(ngModel)]="register.password" minlength="5" required>
     </mat-form-field>
   </p>
   <p>
     <mat-form-field appearance="legacy">
-      <mat-label>Pakartokite slaptažodį</mat-label>
+      <mat-label>Repeat password</mat-label>
       <input type="password" matInput placeholder=" " [(ngModel)]="confirmPass" minlength="5" required>
     </mat-form-field>
   </p>
 
-  <button routerLink="/login" class="btn btn-dark" (click)="registerUser()">Registruotis</button>
-  <div style="color: red">
-    {{error}}
-  </div>
+  <button class="btn btn-dark" (click)="registerUser()">Register</button>
 
 </div>

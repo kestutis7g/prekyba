@@ -3,6 +3,7 @@ import { RouteConfigLoadEnd, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api-service';
 import { EncrDecrService } from 'src/app/services/EncrDecrService';
 import { IUser } from 'src/model/IUser';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { IUser } from 'src/model/IUser';
 })
 export class LoginComponent implements OnInit {
 
-  name: string = "";
+  login: string = "";
   pass: string = "";
   data: IUser = {
     id: 0,
@@ -23,7 +24,6 @@ export class LoginComponent implements OnInit {
     login: "Guest",
     password: ""
   }
-  prisijungta: string = "";
 
   visibility: string = "password"
   visibilityIcon: string = "visibility"
@@ -38,37 +38,46 @@ export class LoginComponent implements OnInit {
 
   loginUser() {
 
-    this.service.getUserLogin(this.name)
-      .subscribe(
-        data => {
+    this.service.getUserByLogin(this.login)
+      .subscribe({
+        next: (data) => {
           this.data = data;
+          this.validate();
 
-          if (this.data?.login == this.name && this.EncrDecr.get('123456$#@$^@1ERF', this.data?.password) == this.pass) {
-            this.prisijungta = "Prisijungta"
-
-            this.route.navigate(["/home"]).then(() => {
-              window.location.reload();
-            });
-            //window.location.reload();
-          }
-          else {
-            this.prisijungta = "Neteisingas prisijungimas"
-
-          }
-
-          localStorage.setItem('username', this.data?.login);
-          localStorage.setItem('type', this.data?.type);
-          localStorage.setItem('userId', this.data?.id.toString());
         },
-        error => {
+        error: (error) => {
           console.log(error);
-        }
+          this.displayStatus('User does not exist')
+        }}
       );
-
 
   }
 
-  myFunction() {
+  validate() {
+    if (this.data?.login == this.login && this.EncrDecr.get('123456$#@$^@1ERF', this.data?.password) == this.pass) {
+
+      this.route.navigate(["/home"]).then(() => {
+        window.location.reload();
+      });
+      //window.location.reload();
+      localStorage.setItem('username', this.data?.login);
+      localStorage.setItem('type', this.data?.type);
+      localStorage.setItem('userId', this.data?.id.toString());
+    }
+    else {
+      this.displayStatus('Wrong password or login');
+    }
+  }
+
+  displayStatus(text: string){
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: text,
+    })
+  }
+
+  changeVisibility() {
     if (this.visibility == "password") {
       this.visibility = "text"
       this.visibilityIcon = "visibility_off"
