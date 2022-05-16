@@ -30,7 +30,6 @@ namespace ShopAPI.Data.Item
         public async Task<ItemModel> GetItemByIdAsync(int id)
         {
             ItemModel item = await _context.Items.FirstOrDefaultAsync(x => x.Id == id);
-
             return item;
         }
 

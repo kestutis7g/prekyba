@@ -14,7 +14,7 @@ namespace ShopAPI.Context
         public DbSet<ItemModel> Items { get; set; }
         public DbSet<CartModel> Carts { get; set; }
         public DbSet<UserModel> Users { get; set; }
-
+        public DbSet<OrderModel> Orders { get; set; }
         #region Required
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -9,6 +9,7 @@ using ShopAPI.Context;
 using ShopAPI.Data.Item;
 using ShopAPI.Data.Cart;
 using ShopAPI.Data.User;
+using ShopAPI.Data.Order;
 namespace ShopAPI
 {
     public class Startup
@@ -36,6 +37,7 @@ namespace ShopAPI
             services.AddScoped<IItemRepo, SqlItemRepo>();
             services.AddScoped<ICartRepo, SqlCartRepo>();
             services.AddScoped<IUserRepo, SqlUserRepo>();
+            services.AddScoped<IOrderRepo, SqlOrderRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
