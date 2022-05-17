@@ -43,10 +43,10 @@ namespace ShopAPI.Controllers
         }
 
         // GET api/order/{userId}
-        [HttpGet("{userId}")]
-        public async Task<ActionResult<List<OrderModel>>> GetOrderByUserIdAsync([FromRoute] int userId)
+        [HttpGet("list/{userId}")]
+        public async Task<ActionResult<List<OrderModel>>> GetOrderListByUserIdAsync([FromRoute] int userId)
         {
-            var orderFromRepo = await _repository.GetOrderByUserIdAsync(userId);
+            var orderFromRepo = await _repository.GetOrderListByUserIdAsync(userId);
             if (orderFromRepo is null)
             {
                 return NotFound();
