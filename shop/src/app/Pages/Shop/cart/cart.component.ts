@@ -14,7 +14,7 @@ import { Cart, Item } from 'src/model/shop.types';
 export class CartComponent implements OnInit {
   @ViewChild(MatTable) table!: MatTable<Item>;
   cartDisplayedColumns = ['userId', 'itemId', 'quantity']
-  displayedColumns = ['name', 'price', 'quantity', 'discount', 'type', 'remove', 'add', 'delete']
+  displayedColumns = ['name', 'price', 'quantity', 'discount', 'fullPrice', 'type', 'remove', 'add', 'delete']
   //displayedColumns = ['name', 'price', 'description', 'quantity', 'discount', 'type']
   isLoadingResults = true;
 
@@ -92,22 +92,36 @@ export class CartComponent implements OnInit {
   addToCart(id: number) {
 
     let itemId = this.getItemIdByCartId(id);
-
-    let cartItem: Cart = {
-      id: 0,
-      itemId: itemId,
-      userId: parseInt(localStorage.getItem('userId') || "0"),
-      quantity: 1
-    }
-
-    this.cartService.addItemToCart(cartItem).subscribe({
+    //patikrinam ar tiek dar yra itemu
+    let item: Item | undefined
+    this.itemService.getItemById(itemId).subscribe({
       next: (data) => {
-        this.refreshCartList();
+        item = data;
+
+        if (item!.quantity! > this.quantityInCart(id)) {
+
+          let cartItem: Cart = {
+            id: 0,
+            itemId: itemId,
+            userId: parseInt(localStorage.getItem('userId') || "0"),
+            quantity: 1
+          }
+
+          this.cartService.addItemToCart(cartItem).subscribe({
+            next: (data) => {
+              this.refreshCartList();
+            },
+            error: (error) => {
+              console.log(error);
+            }}
+          );
+        }
       },
       error: (error) => {
         console.log(error);
       }}
-    );
+    )
+
   }
 
   removeFromCart(id?: number) {

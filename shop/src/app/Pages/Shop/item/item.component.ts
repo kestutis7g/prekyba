@@ -72,7 +72,7 @@ export class ItemComponent implements OnInit {
     if(!itemId){
       return;
     }
-    if (this.quantity <= 0) {
+    if (this.quantity <= 0 || this.item!.quantity! <= this.quantityInCart(this.item!.id)) {
       return;
     }
 

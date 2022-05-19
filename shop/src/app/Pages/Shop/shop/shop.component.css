@@ -52,13 +52,39 @@ h1 {
   text-align: center;
 }
 
-p {
-  text-align: center;
-}
-
 div {
   text-align: center;
+
 }
+
+.stretch-badge > .mat-badge-content {
+  width: auto;
+  border-radius: 13px;
+  right: unset;
+  min-width: 25px;
+  min-height: 20px;
+  border-radius: 10px;
+}
+
+.price {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.discount {
+  padding: 0px 20px;
+  display:flex;
+  align-items:right;
+  justify-content:right;
+  text-align: right;
+  color:red;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+}
+
+
 
 .cart-edit-button {
   border-radius: 20px;

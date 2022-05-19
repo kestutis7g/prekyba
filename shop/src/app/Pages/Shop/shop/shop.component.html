@@ -30,7 +30,31 @@
         <div class="name">
           {{item.name}}
         </div>
-        ${{item.price}}
+
+        <div class="price" *ngIf="(item.discount! > 0)">
+
+          <td [ngClass]="(item.discount! > 0) ? 'strikethrough' : 'null'" style="text-align: center;">
+            <div [matBadge]="item.discount +'%'" matBadgeOverlap="false" style="text-align: center;" class="stretch-badge">
+              €{{item.price}}
+            </div>
+          </td>
+
+          <div *ngIf="(item.discount! > 0)" class="discount">
+            {{item.price! - (item.price!*item.discount!/100) | currency:'EUR':true: '1.0-2'}}
+          </div>
+        </div>
+
+        <div class="price" *ngIf="(item.discount! == 0)">
+          <td style="text-align: center;">
+              €{{item.price}}
+          </td>
+        </div>
+
+
+
+
+
+
 
 
         <div *ngIf="!addedToCart?.[i]">
@@ -61,5 +85,6 @@
       </div>
     </div>
   </div>
+
 
 </body>

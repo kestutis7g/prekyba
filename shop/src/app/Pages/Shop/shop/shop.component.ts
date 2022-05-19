@@ -74,22 +74,35 @@ export class ShopComponent implements OnInit {
   }
 
   addToCart(itemId: number) {
+    //patikrinam ar tiek dar yra itemu
+    let item: Item | undefined
+    this.itemService.getItemById(itemId).subscribe({
+      next: (data) => {
+        item = data;
+        if (item!.quantity! > this.quantityInCart(item.id)) {
 
-    let cartItem: Cart = {
-      id: 0,
-      itemId: itemId,
-      userId: parseInt(localStorage.getItem('userId') || "0"),
-      quantity: 1
-    }
+          let cartItem: Cart = {
+            id: 0,
+            itemId: itemId,
+            userId: parseInt(localStorage.getItem('userId') || "0"),
+            quantity: 1
+          }
 
-    this.cartService.addItemToCart(cartItem).subscribe(
-      data => {
-        this.getCartList();
+          this.cartService.addItemToCart(cartItem).subscribe({
+            next: (data) => {
+              this.getCartList();
+            },
+            error: (error) => {
+              console.log(error);
+            }
+          });
+        }
       },
-      error => {
+      error: (error) => {
         console.log(error);
-      }
-    );
+      }}
+    )
+
   }
 
   removeFromCart(itemId: number) {
