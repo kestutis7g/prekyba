@@ -16,3 +16,20 @@ export type Item = {
   type: string;
 }
 
+export type Order = {
+  number: number;
+  date: string;
+  sum: number;
+  discount: number;
+  comment: string;
+  status: string;
+  userId: number;
+}
+
+export type OrderItem = {
+  id: number;
+  quantity: number;
+  orderNumber: number;
+  itemId: number;
+}
+

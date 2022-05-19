@@ -7,6 +7,12 @@
 <h1>
   Užpildykite apmokėjimo duomenis
 </h1>
+<h1>
+  {{total | currency:'EUR':true: '1.0-2'}}
+</h1>
+<h1>
+  {{discount | currency:'EUR':true: '1.0-2'}}
+</h1>
 <div class="payment-form">
   <form action="/action_page.php" class="form">
 
@@ -40,7 +46,7 @@
 
 
 
-    <button routerLink="/payment" mat-raised-button (click)="clearCart()">Apmokėti</button>
+    <button routerLink="/payment" mat-raised-button (click)="pay()">Apmokėti</button>
 
 
   </form>

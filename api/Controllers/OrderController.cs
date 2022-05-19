@@ -56,13 +56,13 @@ namespace ShopAPI.Controllers
 
         // POST api/order
         [HttpPost]
-        public async Task<ActionResult> CreateOrderAsync([FromBody] OrderModel orderModel)
+        public async Task<ActionResult<OrderModel>> CreateOrderAsync([FromBody] OrderModel orderModel)
         {
             await _repository.CreateOrderAsync(orderModel);
 
             await _repository.SaveChangesAsync();
 
-            return NoContent();
+            return Ok(orderModel);
         }
 
         // PUT api/order

@@ -34,7 +34,7 @@ export class AddItemComponent implements OnInit {
       },
       error: (error) => {
         console.log(error);
-        this.displayStatus(error)
+        this.displayStatus("Nepavyko sukurti prekes")
       }}
     )
 
