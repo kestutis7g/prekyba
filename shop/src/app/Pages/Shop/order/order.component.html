@@ -1,1 +1,17 @@
-<p>order works!</p>
+<h1>
+  Nr. {{order?.number}}
+</h1>
+<div>
+  {{order?.date}}
+</div>
+<br>
+<div>
+  Visa užsakymo kaina: {{order?.sum | currency:'EUR': 'symbol-narrow':'1.2-2'}}
+</div>
+<div>
+  Pritaikytų nuolaidų suma: {{order?.discount | currency:'EUR': 'symbol-narrow':'1.2-2'}}
+</div>
+<div>
+  Užsakymo busena: {{order?.status}}
+</div>
+

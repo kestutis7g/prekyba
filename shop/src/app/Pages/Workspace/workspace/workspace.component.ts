@@ -19,25 +19,24 @@ export class WorkspaceComponent implements OnInit {
   itemList: Item[] = [];
   dialog: any;
 
-  constructor(private itemService: ItemService,
-    private route: Router) { }
+  constructor(
+    private itemService: ItemService,
+    private route: Router
+    ) { }
 
   ngOnInit(): void {
     this.itemService.getItemList()
-      .subscribe(
-        data => {
+      .subscribe({
+        next: (data) => {
           this.itemList = data;
         },
-        error => {
+        error: (error) => {
           console.log(error);
-        }
+        }}
       );
 
   }
 
-  pushButton(id: number) {
-    this.route.navigate(["item", id]);
-  }
 
   deleteItem(id: number, name: string) {
 

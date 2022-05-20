@@ -22,7 +22,7 @@
       <ng-container matColumnDef="fullPrice">
         <th mat-header-cell *matHeaderCellDef>Full Price</th>
         <td mat-cell *matCellDef="let row">
-          {{(row.price! - (row.price!*row.discount!/100)) * row.quantity | currency:'EUR':true: '1.0-2'}}
+          {{(row.price! - (row.price!*row.discount!/100)) * row.quantity | currency:'EUR': 'symbol-narrow':'1.2-2'}}
         </td>
       </ng-container>
       <ng-container matColumnDef="type">

@@ -36,6 +36,14 @@ namespace ShopAPI.Context
                 .HasForeignKey(x => x.OrderNumber)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<RouteModel>()
+                .HasOne(x => x.Order)
+                .WithMany()
+                .HasForeignKey(x => x.OrderNumber)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
         #endregion
     }

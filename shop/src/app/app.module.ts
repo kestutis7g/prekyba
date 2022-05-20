@@ -43,6 +43,7 @@ import { AddItemComponent } from './Pages/Workspace/add-item/add-item.component'
 import { EditItemComponent } from './Pages/Workspace/edit-item/edit-item.component';
 import { WorkspaceComponent } from './Pages/Workspace/workspace/workspace.component';
 import { ItemBalanceComponent } from './Pages/Workspace/item-balance/item-balance.component';
+import { AdminOrderListComponent } from './Pages/Workspace/admin-order-list/admin-order-list.component';
 
 
 
@@ -63,7 +64,8 @@ import { ItemBalanceComponent } from './Pages/Workspace/item-balance/item-balanc
     WorkspaceComponent,
     ItemBalanceComponent,
     OrderComponent,
-    OrderListComponent
+    OrderListComponent,
+    AdminOrderListComponent
   ],
   imports: [
     BrowserModule,

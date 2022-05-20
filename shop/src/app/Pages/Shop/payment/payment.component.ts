@@ -133,7 +133,7 @@ export class PaymentComponent implements OnInit {
       sum: this.total,
       discount: this.discount,
       comment: this.comment,
-      status: "SUKURTAS",
+      status: "APMOKĖTAS",
       userId: parseInt(localStorage.getItem('userId') || "0")
     }
 

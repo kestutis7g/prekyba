@@ -16,6 +16,7 @@
     </span>
     --->
     <span class="toolbar-spacer menu-padding pointer" *ngIf="worker" routerLink="/workspace">Workspace</span>
+    <span class="toolbar-spacer menu-padding pointer" *ngIf="!guest" routerLink="/order-list">Orders</span>
     <span class="toolbar-spacer menu-padding pointer" routerLink="/cart">
       <mat-icon>shopping_cart</mat-icon>
     </span>

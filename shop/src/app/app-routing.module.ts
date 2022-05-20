@@ -19,6 +19,8 @@ import { EditItemComponent } from './Pages/Workspace/edit-item/edit-item.compone
 import { AddItemComponent } from './Pages/Workspace/add-item/add-item.component';
 import { WorkspaceComponent } from './Pages/Workspace/workspace/workspace.component';
 import { ItemBalanceComponent } from './Pages/Workspace/item-balance/item-balance.component';
+import { AdminOrderListComponent } from './Pages/Workspace/admin-order-list/admin-order-list.component';
+
 
 import { HistoryComponent } from './testpage/history.component';
 
@@ -39,6 +41,7 @@ const routes: Routes = [
   { path: "item-balance", component: ItemBalanceComponent },
   { path: "order/:id", component: OrderComponent },
   { path: "order-list", component: OrderListComponent },
+  { path: "admin-order-list", component: AdminOrderListComponent },
   { path: "**", redirectTo: "home"}
 ];
 

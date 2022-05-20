@@ -69,7 +69,16 @@ namespace ShopAPI.Controllers
         [HttpPut]
         public async Task<ActionResult> UpdateOrderAsync([FromBody] OrderModel orderModel)
         {
-            await _repository.UpdateOrderAsync(orderModel);
+            var model = await _repository.GetOrderByNumberAsync(orderModel.Number);
+
+            model.Date = !String.IsNullOrEmpty(orderModel.Date) ? orderModel.Date : model.Date;
+            model.Sum = orderModel.Sum != null ? orderModel.Sum : model.Sum;
+            model.Discount = orderModel.Discount != null ? orderModel.Discount : model.Discount;
+            model.Comment = !String.IsNullOrEmpty(orderModel.Comment) ? orderModel.Comment : model.Comment;
+            model.Status = !String.IsNullOrEmpty(orderModel.Status) ? orderModel.Status : model.Status;
+            model.UserId = orderModel.UserId != null ? orderModel.UserId : model.UserId;
+
+            await _repository.UpdateOrderAsync(model);
 
             await _repository.SaveChangesAsync();
 

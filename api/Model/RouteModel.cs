@@ -4,6 +4,7 @@ namespace ShopAPI.Model
 {
     public class RouteModel
     {
+        public OrderModel Order { get; set; }
         [Key]
         public int Id { get; set; }
         public string DispatchDate { get; set; }
