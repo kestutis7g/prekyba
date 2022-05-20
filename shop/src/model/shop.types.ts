@@ -16,6 +16,13 @@ export type Item = {
   type: string;
 }
 
+export type ItemBalance = {
+  id: number;
+  amount: number;
+  date: string;
+  itemId: number;
+}
+
 export type Order = {
   number: number;
   date: string;
@@ -32,4 +39,23 @@ export type OrderItem = {
   orderNumber: number;
   itemId: number;
 }
+
+export type Route = {
+  id: number;
+  dispatchDate: string;
+  deliveryDate: string;
+  orderNumber: number;
+  addressId:number;
+  userId: number;
+}
+
+export type Address = {
+  id: number;
+  city: string;
+  street: string;
+  building: number;
+  apartment:number;
+  zipCode: number;
+}
+
 

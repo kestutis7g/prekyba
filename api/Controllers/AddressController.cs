@@ -45,13 +45,13 @@ namespace ShopAPI.Controllers
 
         // POST api/address
         [HttpPost]
-        public async Task<ActionResult> CreateAddressAsync([FromBody] AddressModel addressModel)
+        public async Task<ActionResult<AddressModel>> CreateAddressAsync([FromBody] AddressModel addressModel)
         {
             await _repository.CreateAddressAsync(addressModel);
 
             await _repository.SaveChangesAsync();
 
-            return NoContent();
+            return Ok(addressModel);
         }
 
         // PUT api/address

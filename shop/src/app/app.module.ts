@@ -14,7 +14,8 @@ import { ShopComponent } from './Pages/Shop/shop/shop.component';
 import { CartComponent } from './Pages/Shop/cart/cart.component';
 import { PaymentComponent } from './Pages/Shop/payment/payment.component';
 import { ItemComponent } from './Pages/Shop/item/item.component';
-
+import { OrderComponent } from './Pages/Shop/order/order.component';
+import { OrderListComponent } from './Pages/Shop/order-list/order-list.component';
 
 import { HistoryComponent } from './testpage/history.component'
 
@@ -45,6 +46,7 @@ import { ItemBalanceComponent } from './Pages/Workspace/item-balance/item-balanc
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +61,9 @@ import { ItemBalanceComponent } from './Pages/Workspace/item-balance/item-balanc
     HistoryComponent,
     EditItemComponent,
     WorkspaceComponent,
-    ItemBalanceComponent
+    ItemBalanceComponent,
+    OrderComponent,
+    OrderListComponent
   ],
   imports: [
     BrowserModule,

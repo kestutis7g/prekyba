@@ -11,6 +11,8 @@ import { ShopComponent } from './Pages/Shop/shop/shop.component';
 import { CartComponent } from './Pages/Shop/cart/cart.component';
 import { PaymentComponent } from './Pages/Shop/payment/payment.component';
 import { ItemComponent } from './Pages/Shop/item/item.component';
+import { OrderComponent } from './Pages/Shop/order/order.component';
+import { OrderListComponent } from './Pages/Shop/order-list/order-list.component';
 
 //Darbuotojo irankiai
 import { EditItemComponent } from './Pages/Workspace/edit-item/edit-item.component';
@@ -35,6 +37,8 @@ const routes: Routes = [
   { path: "edit-item/:id", component: EditItemComponent },
   { path: "workspace", component: WorkspaceComponent },
   { path: "item-balance", component: ItemBalanceComponent },
+  { path: "order/:id", component: OrderComponent },
+  { path: "order-list", component: OrderListComponent },
   { path: "**", redirectTo: "home"}
 ];
 

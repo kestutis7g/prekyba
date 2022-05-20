@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
 import { ItemService } from 'src/app/services/item.service';
-import { Cart, Item, Order, OrderItem } from 'src/model/shop.types';
+import { Address, Cart, Item, Order, OrderItem, Route } from 'src/model/shop.types';
 import { DatePipe } from '@angular/common';
 import Swal from 'sweetalert2';
 import { OrderService } from 'src/app/services/order.service';
 import { OrderItemService } from 'src/app/services/orderItem.service';
+import { AddressService } from 'src/app/services/address.service';
+import { RouteService } from 'src/app/services/route.service';
 
 @Component({
   selector: 'app-payment',
@@ -21,6 +23,8 @@ export class PaymentComponent implements OnInit {
     private cartService: CartService,
     private orderService: OrderService,
     private orderItemService: OrderItemService,
+    private addressService: AddressService,
+    private routeService: RouteService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private datePipe: DatePipe
@@ -33,6 +37,18 @@ export class PaymentComponent implements OnInit {
   orderItem: OrderItem | null = null;
   item: Item | null = null;
 
+  //inputs
+  address: Address | null = null;
+  comment: string = "";
+  address_b: string = "";
+  address_a: string = "";
+  address_z: string = "";
+
+  saskaita: string = "";
+  galiojimas: string = "";
+  ccv: string = "";
+  pin: string = "";
+
   total: number = 0;
   discount: number = 0;
 
@@ -41,6 +57,12 @@ export class PaymentComponent implements OnInit {
     this.itemService.getItemDefaults().subscribe({
       next: (item) =>{
         this.item = item;
+      }
+    });
+
+    this.addressService.getAddressDefaults().subscribe({
+      next: (address) =>{
+        this.address = address;
       }
     });
 
@@ -53,7 +75,7 @@ export class PaymentComponent implements OnInit {
             .subscribe({
             next: (data) => {
               this.cartList = data;
-              console.log(this.cartList);
+
             },
             error: (error) => {
              console.log(error);
@@ -72,6 +94,34 @@ export class PaymentComponent implements OnInit {
   }
 
 
+  initiatePayment() {
+    if(this.address?.city == "" || this.address?.street == ""){
+      this.displayStatus("Užpildykite visus būtinus adreso laukus")
+      return;
+    }
+    if(!parseInt(this.address_b) || !parseInt(this.address_a) || !parseInt(this.address_z)){
+      this.displayStatus("Neteisingai įrašytas adresas")
+      return;
+    }
+    if(this.address_z.length != 5){
+      console.log(this.address_z.length)
+      this.displayStatus("Neteisingas zip kodo formatas")
+      return;
+    }
+
+    if(this.saskaita == "" || this.galiojimas == "" || this.ccv == "" || this.pin == ""){
+      this.displayStatus("Užpildykite apmokėjimo duomenis")
+      return;
+    }
+    if(this.saskaita.length < 12 || this.galiojimas.length < 4 || this.ccv.length != 3 || this.pin.length != 4){
+      this.displayStatus("Neteisingas apmokėjimo duomenų formatas")
+      console.log(this.saskaita.length, this.galiojimas.length, this.ccv.length, this.pin.length)
+      return;
+    }
+    this.pay()
+
+
+  }
 
   pay() {
     //order kurimas
@@ -82,8 +132,8 @@ export class PaymentComponent implements OnInit {
       date: date!.toString(),
       sum: this.total,
       discount: this.discount,
-      comment: "",
-      status: "",
+      comment: this.comment,
+      status: "SUKURTAS",
       userId: parseInt(localStorage.getItem('userId') || "0")
     }
 
@@ -122,6 +172,54 @@ export class PaymentComponent implements OnInit {
             }}
           )
 
+          //sukuria address irasa
+          let address: Address = {
+            id : 0,
+            city: this.address!.city,
+            street: this.address!.street,
+            building: parseInt(this.address_b),
+            apartment: parseInt(this.address_a),
+            zipCode: parseInt(this.address_z)
+          }
+
+          let addressId: number;
+          this.addressService.addAddress(address).subscribe({
+            next: (address) => {
+              addressId = address.id;
+
+              let route: Route = {
+                id : 0,
+                dispatchDate: "",
+                deliveryDate: "",
+                orderNumber: orderNumber,
+                addressId: addressId,
+                userId: parseInt(localStorage.getItem('userId') || "0")
+              }
+
+              //sukuria route irasa
+              this.routeService.addRoute(route).subscribe({
+                next: () => {
+                },
+                error: (error) => {
+                  console.log(error);
+                  this.displayStatus("Nepavyko sukurti address")
+                }}
+              )
+
+              //isvalomas krepselis
+              this.itemList.forEach(item => {
+                this.cartService.deleteItemFromCart(item.id).subscribe(() => this.router.navigate(["order" , orderNumber]));
+              });
+
+
+            },
+            error: (error) => {
+              console.log(error);
+              this.displayStatus("Nepavyko sukurti address")
+            }}
+          )
+
+
         });
         this.router.navigateByUrl('/home');
       },
@@ -132,10 +230,7 @@ export class PaymentComponent implements OnInit {
     )
 
 
-    //isvalomas krepselis
-    this.itemList.forEach(item => {
-      this.cartService.deleteItemFromCart(item.id).subscribe(() => this.router.navigate(["/home"]));
-    });
+
 
   }
 
