@@ -10,10 +10,6 @@ namespace ShopAPI.Context
         {
 
         }
-        public ShopContext()
-        {
-
-        }
 
         public DbSet<ItemModel> Items { get; set; }
         public DbSet<CartModel> Carts { get; set; }

@@ -81,11 +81,11 @@ export class ItemBalanceComponent implements OnInit {
 
           //sekanti diena
           date.setDate( date.getDate() + 1 );
-          date.setHours(12);
-          date.setMinutes(0);
-          date.setSeconds(0);
+          //date.setHours(12);
+          //date.setMinutes(0);
+          //date.setSeconds(0);
           //pakeiciam formta
-          let d =this.datePipe.transform(date, 'yyyy-MM-dd HH:mm:ss');
+          let d =this.datePipe.transform(date, 'yyyy-MM-dd');
           //pridedam i labels
           this.labels.push(d!.toString())
           previousBalance -= this.averageConsumption;

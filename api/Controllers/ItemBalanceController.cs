@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ShopAPI.Data.ItemBalance;
+using ShopAPI.Data.Item;
 using ShopAPI.Model;
 
 namespace ShopAPI.Controllers
@@ -12,12 +13,16 @@ namespace ShopAPI.Controllers
     [Route("api/[controller]")]
     public class ItemBalanceController : ControllerBase
     {
-        public ItemBalanceController(IItemBalanceRepo repository)
+        public ItemBalanceController(IItemBalanceRepo repository, IItemRepo itemRepository)
         {
             _repository = repository;
+            _itemRepository = itemRepository;
         }
 
+
         public readonly IItemBalanceRepo _repository;
+        public readonly IItemRepo _itemRepository;
+
 
         // GET api/itemBalance
         [HttpGet]
@@ -73,6 +78,49 @@ namespace ShopAPI.Controllers
             await _repository.DeleteItemBalanceAsync(id);
 
             await _repository.SaveChangesAsync();
+            return NoContent();
+        }
+
+
+        // PUT api/itemBalance
+        [HttpPut("daily")]
+        public async Task<ActionResult> DailyItemBalanceAsync()
+        {
+            var itemList = await _itemRepository.GetItemListAsync();
+
+            DateTime time = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 12, 0, 0);
+            string date = DateTime.Now.ToString("yyyy-MM-dd");
+
+            List<ItemBalanceModel> todaysItemBalance = await _repository.GetItemBalanceListByDateAsync(date);
+
+
+            if (todaysItemBalance.Count == 0)
+            {
+                foreach (var item in itemList)
+                {
+                    ItemBalanceModel balance = new ItemBalanceModel();
+                    balance.Id = 0;
+                    balance.Amount = item.Quantity;
+                    balance.Date = date;
+                    balance.ItemId = item.Id;
+
+                    await _repository.CreateItemBalanceAsync(balance);
+                    await _repository.SaveChangesAsync();
+
+                }
+            }
+            else
+            {
+                Console.WriteLine("Sendien irasas jau sukurtas");
+                return NoContent();
+            }
+
+
+
+            //await _repository.UpdateItemBalanceAsync(itemBalanceModel);
+
+            await _repository.SaveChangesAsync();
+
             return NoContent();
         }
 

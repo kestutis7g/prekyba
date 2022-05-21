@@ -34,6 +34,12 @@ namespace ShopAPI.Data.ItemBalance
 
             return await Task.FromResult(itemBalanceListByItemId);
         }
+        public async Task<List<ItemBalanceModel>> GetItemBalanceListByDateAsync(string date)
+        {
+            var itemBalanceListByDate = _context.ItemBalance.Where(x => x.Date == date).ToList();
+
+            return await Task.FromResult(itemBalanceListByDate);
+        }
 
         public async Task CreateItemBalanceAsync(ItemBalanceModel itemBalanceModel)
         {
