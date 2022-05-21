@@ -25,11 +25,11 @@ export class ItemBalanceComponent implements OnInit {
   label: string = "";
   labels: string[] = [];
 
-  averageConsumption: number = 0;
-
 
   amount: number[] = [];
   predicted1: number[] = [];
+  predicted2: number[] = [];
+  predicted3: number[] = [];
 
 
   ngOnInit(): void {
@@ -51,33 +51,19 @@ export class ItemBalanceComponent implements OnInit {
 
         this.itemBalanceList.sort((a,b) => a.date.localeCompare(b.date));
 
-        let previousBalance: number = 0;
-        let count = 0;
+
         this.itemBalanceList.forEach(balance => {
           this.amount.push(balance.amount)
           this.labels.push(balance.date)
-          this.predicted1.push(balance.amount)
-          if(previousBalance > balance.amount){
-            count++;
-            this.averageConsumption = this.averageConsumption + (previousBalance - balance.amount);
-          }
-          previousBalance = balance.amount;
-
 
         });
-        //jei nera duomenu tada turetu nuspet kad kiekviena diena mazeja po viena
-        if(this.averageConsumption < 1){
-          this.averageConsumption = 1
-        }
-        else{
-          this.averageConsumption = this.averageConsumption / count;
-        }
+
 
 
         let date = new Date();
-        previousBalance = this.itemBalanceList[this.itemBalanceList.length-1].amount;
+        let maxPredict: number = 30;
 
-        while (previousBalance > 0) {
+        while (maxPredict > 0) {
 
           //sekanti diena
           date.setDate( date.getDate() + 1 );
@@ -88,28 +74,20 @@ export class ItemBalanceComponent implements OnInit {
           let d =this.datePipe.transform(date, 'yyyy-MM-dd');
           //pridedam i labels
           this.labels.push(d!.toString())
-          previousBalance -= this.averageConsumption;
-
-          if(previousBalance < 0) previousBalance = 0;
-          this.predicted1.push(previousBalance)
-
-
+          maxPredict--;
         }
 
-
-
-
-
-
-
-
-
+        this.getPrediction1()
+        this.getPrediction2()
+        this.getPrediction3()
 
         this.salesData = {
           labels: this.labels,
           datasets: [
             { label: 'Kiekis', data: this.amount, tension: 0.5 },
             { label: 'Predicted', data: this.predicted1, tension: 0.5 },
+            { label: 'Predicted', data: this.predicted2, tension: 0.5 },
+            { label: 'Predicted', data: this.predicted3, tension: 0.5 },
           ],
         };
       },
@@ -117,6 +95,119 @@ export class ItemBalanceComponent implements OnInit {
         console.log(error);
       }}
     );
+  }
+
+  getPrediction1(){
+    let previousBalance: number = 0;
+    let count = 0;
+    let averageConsumption: number = 0;
+    this.itemBalanceList.forEach(balance => {
+
+      this.predicted1.push(balance.amount)
+      if(previousBalance > balance.amount){
+        count++;
+        averageConsumption = averageConsumption + (previousBalance - balance.amount);
+      }
+      previousBalance = balance.amount;
+
+
+    });
+    //jei nera duomenu tada turetu nuspet kad kiekviena diena mazeja po viena
+    if(averageConsumption < 1){
+      averageConsumption = 1
+    }
+    else{
+      averageConsumption = averageConsumption / count;
+    }
+
+    previousBalance = this.itemBalanceList[this.itemBalanceList.length-1].amount;
+
+    let maxPredict: number = 30;
+    while (previousBalance > 0 && maxPredict > 0) {
+
+    previousBalance -= averageConsumption;
+
+    if(previousBalance < 0) previousBalance = 0;
+    this.predicted1.push(previousBalance)
+
+    }
+  }
+
+
+  getPrediction2(){
+    let previousBalance: number = 0;
+    let count = 0;
+    let averageConsumption: number = 0;
+
+    this.itemBalanceList.forEach(balance => {
+
+      this.predicted2.push(balance.amount)
+      if(previousBalance > 0){
+        count++;
+        averageConsumption = averageConsumption + (previousBalance - balance.amount);
+      }
+      previousBalance = balance.amount;
+
+
+    });
+    //jei nera duomenu tada turetu nuspet kad kiekviena diena mazeja po viena
+
+    if(count == 0) count = 1
+    averageConsumption = averageConsumption / count;
+
+
+    previousBalance = this.itemBalanceList[this.itemBalanceList.length-1].amount;
+
+    let maxPredict: number = 30;
+    while (previousBalance > 0 && maxPredict > 0) {
+
+      previousBalance -= averageConsumption;
+
+      if(previousBalance < 0) previousBalance = 0;
+      this.predicted2.push(previousBalance)
+      maxPredict--;
+    }
+  }
+
+  getPrediction3(){
+    let previousBalance: number = 0;
+    let count = 0;
+    let averageConsumption: number = 0;
+    this.itemBalanceList.forEach(balance => {
+
+      this.predicted3.push(balance.amount)
+      if(previousBalance > balance.amount){
+        count++;
+        averageConsumption = averageConsumption + (previousBalance - balance.amount);
+      }
+      previousBalance = balance.amount;
+
+
+    });
+    //jei nera duomenu tada turetu nuspet kad kiekviena diena mazeja po viena
+    if(averageConsumption < 1){
+      averageConsumption = 1
+    }
+    else{
+      averageConsumption = averageConsumption / count;
+    }
+
+    previousBalance = this.itemBalanceList[this.itemBalanceList.length-1].amount;
+
+    let maxPredict: number = 30;
+    let listIndex: number = 0;
+
+    while (previousBalance > 0 && maxPredict > 0) {
+
+      if(listIndex >= this.predicted3.length - 1) listIndex = 0;
+
+      previousBalance = this.predicted3[listIndex] - averageConsumption
+
+      if(previousBalance < 0) previousBalance = 0;
+      this.predicted3.push(previousBalance)
+      maxPredict--;
+      listIndex++;
+    }
   }
 
 
