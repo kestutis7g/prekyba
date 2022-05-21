@@ -44,6 +44,7 @@ import { EditItemComponent } from './Pages/Workspace/edit-item/edit-item.compone
 import { WorkspaceComponent } from './Pages/Workspace/workspace/workspace.component';
 import { ItemBalanceComponent } from './Pages/Workspace/item-balance/item-balance.component';
 import { AdminOrderListComponent } from './Pages/Workspace/admin-order-list/admin-order-list.component';
+import { NgChartsModule } from 'ng2-charts';
 
 
 
@@ -86,7 +87,8 @@ import { AdminOrderListComponent } from './Pages/Workspace/admin-order-list/admi
     MatSelectModule,
     FormsModule,
     MatCheckboxModule,
-    MatGridListModule
+    MatGridListModule,
+    NgChartsModule
   ],
   providers: [EncrDecrService],
   bootstrap: [AppComponent]

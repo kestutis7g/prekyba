@@ -99,4 +99,8 @@ export class WorkspaceComponent implements OnInit {
     this.route.navigate(["edit-item/" + id]);
   }
 
+  openItemBalance(id: number) {
+    this.route.navigate(["item-balance/" + id]);
+  }
+
 }

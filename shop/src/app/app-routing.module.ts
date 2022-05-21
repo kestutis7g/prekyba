@@ -38,7 +38,7 @@ const routes: Routes = [
   { path: "history", component: HistoryComponent },
   { path: "edit-item/:id", component: EditItemComponent },
   { path: "workspace", component: WorkspaceComponent },
-  { path: "item-balance", component: ItemBalanceComponent },
+  { path: "item-balance/:id", component: ItemBalanceComponent },
   { path: "order/:id", component: OrderComponent },
   { path: "order-list", component: OrderListComponent },
   { path: "admin-order-list", component: AdminOrderListComponent },
