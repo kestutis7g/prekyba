@@ -45,6 +45,8 @@ import { WorkspaceComponent } from './Pages/Workspace/workspace/workspace.compon
 import { ItemBalanceComponent } from './Pages/Workspace/item-balance/item-balance.component';
 import { AdminOrderListComponent } from './Pages/Workspace/admin-order-list/admin-order-list.component';
 import { NgChartsModule } from 'ng2-charts';
+import { CreateRouteComponent } from './Pages/Workspace/create-route/create-route.component';
+import { ViewRouteComponent } from './Pages/Workspace/view-route/view-route.component';
 
 
 
@@ -66,7 +68,9 @@ import { NgChartsModule } from 'ng2-charts';
     ItemBalanceComponent,
     OrderComponent,
     OrderListComponent,
-    AdminOrderListComponent
+    AdminOrderListComponent,
+    CreateRouteComponent,
+    ViewRouteComponent
   ],
   imports: [
     BrowserModule,

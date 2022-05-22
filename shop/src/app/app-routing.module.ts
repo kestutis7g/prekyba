@@ -20,7 +20,8 @@ import { AddItemComponent } from './Pages/Workspace/add-item/add-item.component'
 import { WorkspaceComponent } from './Pages/Workspace/workspace/workspace.component';
 import { ItemBalanceComponent } from './Pages/Workspace/item-balance/item-balance.component';
 import { AdminOrderListComponent } from './Pages/Workspace/admin-order-list/admin-order-list.component';
-
+import { CreateRouteComponent } from './Pages/Workspace/create-route/create-route.component';
+import { ViewRouteComponent } from './Pages/Workspace/view-route/view-route.component';
 
 import { HistoryComponent } from './testpage/history.component';
 
@@ -42,6 +43,8 @@ const routes: Routes = [
   { path: "order/:id", component: OrderComponent },
   { path: "order-list", component: OrderListComponent },
   { path: "admin-order-list", component: AdminOrderListComponent },
+  { path: "create-route", component: CreateRouteComponent },
+  { path: "view-route", component: ViewRouteComponent },
   { path: "**", redirectTo: "home"}
 ];
 

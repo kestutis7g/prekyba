@@ -15,7 +15,7 @@ namespace ShopAPI
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
             JobManager.Initialize(new ScheduledJobRegistry());
 
             CreateHostBuilder(args).Build().Run();
@@ -38,7 +38,7 @@ namespace ShopAPI
         {
             Schedule<MyJob>()
                     .NonReentrant() // Only one instance of the job can run at a time
-                    .ToRunOnceAt(DateTime.Now.AddSeconds(10))    // Delay startup for a while
+                    .ToRunOnceAt(DateTime.Now.AddSeconds(60))    // Delay startup for a while
                     .AndEvery(2).Seconds();     // Interval
 
             // TODO... Add more schedules here
