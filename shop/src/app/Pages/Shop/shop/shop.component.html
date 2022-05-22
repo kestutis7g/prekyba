@@ -21,6 +21,7 @@
     <mat-form-field appearance="fill" style="float: right; right: 28rem;">
       <mat-label>Rūšiuoti pagal:</mat-label>
       <mat-select>
+        <mat-option label="-" (click)="sortList('')"></mat-option>
         <mat-option *ngFor="let sort of sortBy" [value]="sort.value" (click)="sortList(sort.value)">
           {{sort.viewValue}}
         </mat-option>
@@ -31,6 +32,7 @@
     <mat-form-field appearance="fill" style="float: right; right: 30rem;">
       <mat-label>Filtruoti:</mat-label>
       <mat-select>
+        <mat-option label="-" (click)="filterList('')"></mat-option>
         <mat-option *ngFor="let filter of filter" [value]="filter.value" (click)="filterList(filter.value)">
           {{filter.viewValue}}
         </mat-option>

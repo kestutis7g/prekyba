@@ -37,7 +37,6 @@ export class ShopComponent implements OnInit {
   ];
 
   filter: Sort[] = [
-    {value: '', viewValue: '-'},
     {value: 'Tranportas', viewValue: 'Transportas'},
     {value: 'Kompiuterija', viewValue: 'Kompiuterija'},
     {value: 'Komunikacija', viewValue: 'Komunikacija'},
@@ -92,7 +91,7 @@ export class ShopComponent implements OnInit {
         break;
       }
       default: {
-        //statements;
+        this.getItemList()
         break;
       }
    }

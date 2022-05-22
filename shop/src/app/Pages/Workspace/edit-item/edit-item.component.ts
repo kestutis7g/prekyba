@@ -72,8 +72,14 @@ export class EditItemComponent implements OnInit {
       this.displayStatus("Įveskite visas privalomas reikšmes")
       return;
     }
-    if(!parseInt(item.price!.toString()) || !parseInt(item.quantity!.toString()) || !parseInt(item.discount!.toString())){
+    if(!parseInt(item.price!.toString()) || !parseInt(item.quantity!.toString())){
       this.displayStatus("Netaisingai įvestas skaičiaus formatas")
+      console.log(item.price, item.quantity)
+      return;
+    }
+    if(item.discount < 0 || item.discount != 0 && !parseInt(item.discount!.toString())){
+      this.displayStatus("Netaisingai įvestas nuolaidos skaičiaus formatas")
+      console.log(item.discount)
       return;
     }
     if(this.tipas == ''){
