@@ -1,57 +1,63 @@
-<h1>Add new item</h1>
+<h1>Pridėti naują prekę</h1>
 
 <div class="register-form" *ngIf="item">
   <p>
     <mat-form-field appearance="legacy">
-      <mat-label>Name</mat-label>
+      <mat-label>Pavadinimas</mat-label>
       <input matInput placeholder=" " [(ngModel)]="item.name" minlength="3" required>
     </mat-form-field>
   </p>
 
   <p>
     <mat-form-field appearance="legacy">
-      <mat-label>Picture URL</mat-label>
-      <input matInput placeholder=" " [(ngModel)]="item.picture" minlength="3" required>
+      <mat-label>Nuotraukos URL</mat-label>
+      <textarea matInput placeholder=" " [(ngModel)]="item.picture" minlength="3"></textarea>
     </mat-form-field>
   </p>
 
   <p>
     <mat-form-field appearance="legacy">
-      <mat-label>Price</mat-label>
+      <mat-label>Kaina</mat-label>
       <input matInput placeholder=" " [(ngModel)]="item.price" required>
     </mat-form-field>
   </p>
 
   <p>
     <mat-form-field appearance="legacy">
-      <mat-label>Description</mat-label>
-      <input matInput placeholder=" " [(ngModel)]="item.description" required>
+      <mat-label>Aprašymas</mat-label>
+      <textarea matInput placeholder=" " [(ngModel)]="item.description" required></textarea>
     </mat-form-field>
   </p>
 
   <p>
     <mat-form-field appearance="legacy">
-      <mat-label>Quantity</mat-label>
+      <mat-label>Kiekis</mat-label>
       <input matInput placeholder=" " [(ngModel)]="item.quantity" required>
     </mat-form-field>
   </p>
 
   <p>
     <mat-form-field appearance="legacy">
-      <mat-label>Discount</mat-label>
+      <mat-label>Nuolaida %</mat-label>
       <input matInput placeholder=" " [(ngModel)]="item.discount" required>
     </mat-form-field>
   </p>
-  <p>
-    <mat-form-field appearance="legacy">
-      <mat-label>Type</mat-label>
-      <input matInput placeholder=" " [(ngModel)]="item.type" minlength="5" required>
-    </mat-form-field>
-  </p>
-  
-  <button class="btn btn-dark" (click)="addItem()">Create</button>
-  <div style="color: red">
+  <mat-form-field appearance="fill">
+    <mat-label>Tipas</mat-label>
+    <mat-select [(value)]="tipas" required>
 
+      <mat-option value="Tranportas">Tranportas</mat-option>
+      <mat-option value="Kompiuterija">Kompiuterija</mat-option>
+      <mat-option value="Komunikacija">Komunikacija</mat-option>
+      <mat-option value="Drabužiai">Drabužiai</mat-option>
+      <mat-option value="Technika">Technika</mat-option>
+      <mat-option value="Buitis">Buitis</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div>
+    <button class="btn btn-dark" (click)="addItem()">Sukurti</button>
   </div>
+
 
 </div>

@@ -24,7 +24,7 @@
         <div style="display: table-row">
           <div style="width: 600px; display: table-cell;">
 
-            <input class="left" type={{visibility}} matInput placeholder=" " [(ngModel)]="pass" id="myInput">
+            <input class="left" type={{visibility}} matInput placeholder=" " [(ngModel)]="pass" id="myInput" (keydown.enter)="loginUser()">
 
           </div>
 
@@ -45,7 +45,7 @@
     </mat-form-field>
   </p>
 
-  <button class="btn btn-dark" (click)="loginUser()">Prisijungti</button>
+  <button class="btn btn-dark"  (click)="loginUser()">Prisijungti</button>
   <p> </p>
   <button routerLink="/register" type="submit" class="btn btn-dark">Registruotis</button>
 

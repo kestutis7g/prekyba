@@ -5,57 +5,57 @@
 </head>
 
 <h1>
-  New user registration
+  Naujo vartotojo registracija
 </h1>
 <div class="register-form">
   <p>
     <mat-form-field appearance="legacy">
-      <mat-label>Name</mat-label>
+      <mat-label>Vardas</mat-label>
       <input matInput placeholder=" " [(ngModel)]="register.name" minlength="3" required>
     </mat-form-field>
   </p>
 
   <p>
     <mat-form-field appearance="legacy">
-      <mat-label>Lastname</mat-label>
+      <mat-label>Pavardė</mat-label>
       <input matInput placeholder=" " [(ngModel)]="register.lastname" minlength="3" required>
     </mat-form-field>
   </p>
 
   <p>
     <mat-form-field appearance="legacy">
-      <mat-label>Email</mat-label>
+      <mat-label>E-paštas</mat-label>
       <input matInput placeholder=" " [(ngModel)]="register.email" minlength="8" required>
     </mat-form-field>
   </p>
 
   <p>
     <mat-form-field appearance="legacy">
-      <mat-label>Phone</mat-label>
+      <mat-label>Tel. numberis</mat-label>
       <input matInput placeholder=" " [(ngModel)]="register.phone">
     </mat-form-field>
   </p>
 
   <p>
     <mat-form-field appearance="legacy">
-      <mat-label>Login</mat-label>
+      <mat-label>Prisijungimo vardas</mat-label>
       <input matInput placeholder=" " [(ngModel)]="register.login" minlength="5" required>
     </mat-form-field>
   </p>
 
   <p>
     <mat-form-field appearance="legacy">
-      <mat-label>Password</mat-label>
+      <mat-label>Slaptažodis</mat-label>
       <input type="password" matInput placeholder=" " [(ngModel)]="register.password" minlength="5" required>
     </mat-form-field>
   </p>
   <p>
     <mat-form-field appearance="legacy">
-      <mat-label>Repeat password</mat-label>
+      <mat-label>Pakartokite slaptažodį</mat-label>
       <input type="password" matInput placeholder=" " [(ngModel)]="confirmPass" minlength="5" required>
     </mat-form-field>
   </p>
 
-  <button class="btn btn-dark" (click)="registerUser()">Register</button>
+  <button class="btn btn-dark" (click)="registerUser()">Registruotis</button>
 
 </div>

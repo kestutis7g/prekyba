@@ -50,12 +50,12 @@ export class WorkspaceComponent implements OnInit {
     })
 
     swalWithBootstrapButtons.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      title: 'Ar tikrai norite ištrinti?',
+      text: "Įrašo nebus galima sugrąžinti!",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, cancel!'
+      confirmButtonText: 'Taip, ištrinti!',
+      cancelButtonText: 'Ne, atšaukti!'
     }).then((result) => {
       if (result.isConfirmed) {
         this.itemService.deleteItemFromList(id).subscribe({
@@ -64,13 +64,13 @@ export class WorkspaceComponent implements OnInit {
             console.log(error);
             Swal.fire({
               icon: 'error',
-              title: 'Could not delete',
-              text: 'Item is already in someones cart',
+              title: 'Nebuvo galima pašalinti',
+              text: 'Prekė yra kažkieno krepšelyje',
             })
           }}
           );
         swalWithBootstrapButtons.fire(
-          'Deleted!',
+          'Ištrinta!',
           '',
           'success'
         )
@@ -79,7 +79,7 @@ export class WorkspaceComponent implements OnInit {
         result.dismiss === Swal.DismissReason.cancel
       ) {
         swalWithBootstrapButtons.fire(
-          'Cancelled',
+          'Atšaukta',
           '',
           'error'
         )

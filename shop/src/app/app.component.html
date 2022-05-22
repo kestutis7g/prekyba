@@ -1,29 +1,72 @@
 <p>
   <mat-toolbar>
-    <button mat-icon-button aria-label="Example icon-button with menu icon">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span class="menu-padding pointer" routerLink="/home">Home</span>
 
-    <span class="toolbar-spacer menu-padding"></span>
-    <span class="toolbar-spacer menu-padding pointer" routerLink="/shop">Shop</span>
+    <!--- <span class="menu-padding pointer" routerLink="/home">Pagrindinis</span> --->
+
+
+    <!---<span class="toolbar-spacer menu-padding pointer" routerLink="/shop">Parduotuvė</span>--->
+
+    <span class="toolbar-spacer menu-padding pointer">
+    <button mat-menu-item routerLink="/shop">
+      <mat-icon>store</mat-icon>
+      <span>Parduotuvė</span>
+    </button>
+    </span>
 
     <span class="toolbar-endspacer"></span>
+    <!---
     <span class="toolbar-spacer menu-padding">{{username}}</span>
+    -->
     <!---
     <span class="toolbar-spacer menu-padding pointer" *ngIf="worker" routerLink="/add-item">
       <mat-icon>library_add</mat-icon>
     </span>
     --->
-    <span class="toolbar-spacer menu-padding pointer" *ngIf="worker" routerLink="/workspace">Workspace</span>
-    <span class="toolbar-spacer menu-padding pointer" *ngIf="!guest" routerLink="/order-list">Orders</span>
+    <!---
+    <span class="toolbar-spacer menu-padding pointer" *ngIf="worker" routerLink="/workspace">Darbas</span>
+    <span class="toolbar-spacer menu-padding pointer" *ngIf="!guest" routerLink="/order-list">Mano užsakymai</span>
     <span class="toolbar-spacer menu-padding pointer" routerLink="/cart">
       <mat-icon>shopping_cart</mat-icon>
     </span>
-    <span class="toolbar-spacer menu-padding pointer" *ngIf="guest" routerLink="/register">Register</span>
-    <span class="toolbar-spacer menu-padding pointer" *ngIf="guest" routerLink="/login">Sign-in</span>
-    <span class="toolbar-spacer menu-padding pointer" *ngIf="signout" (click)="signOutUser()">Sign-out</span>
+    <span class="toolbar-spacer menu-padding pointer" *ngIf="guest" routerLink="/register">Registruotis</span>
+    <span class="toolbar-spacer menu-padding pointer" *ngIf="guest" routerLink="/login">Prisijungti</span>
+    <span class="toolbar-spacer menu-padding pointer" *ngIf="signout" (click)="signOutUser()">Atsijungti</span>
+    -->
 
+
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="user">
+        <mat-icon>account_circle</mat-icon>
+        <span>{{username}}</span>
+      </button>
+
+      <button mat-menu-item routerLink="/cart">
+        <mat-icon>shopping_cart</mat-icon>
+        <span>Krepšelis</span>
+      </button>
+
+      <button mat-menu-item *ngIf="!guest" routerLink="/order-list">
+        <mat-icon>credit_card</mat-icon>
+        <span>Mano užsakymai</span>
+      </button>
+    </mat-menu>
+
+    <mat-menu #user="matMenu">
+      <button mat-menu-item *ngIf="worker" routerLink="/workspace">
+        <mat-icon>work</mat-icon>
+        <span>Darbas</span>
+      </button>
+      <button mat-menu-item *ngIf="guest" routerLink="/register">Registruotis</button>
+      <button mat-menu-item *ngIf="guest" routerLink="/login">Prisijungti</button>
+      <button mat-menu-item *ngIf="signout" (click)="signOutUser()">
+        <mat-icon>cancel_presentation</mat-icon>
+        <span>Atsijungti</span>
+      </button>
+
+    </mat-menu>
 
 
   </mat-toolbar>

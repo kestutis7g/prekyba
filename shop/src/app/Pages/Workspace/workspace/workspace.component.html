@@ -11,41 +11,42 @@
 
 <body>
   <div class="jumbotron text-center">
-    <h1>Workspace</h1>
+    <h1>Darbo aplinka</h1>
+    <p>Prekių sąrašas</p>
   </div>
 
 
 
-  <button style="float: right; right: 30rem;" routerLink="/add-item" mat-raised-button>Add new item</button>
-  <button style="float: right; right: 30rem;" routerLink="/admin-order-list" mat-raised-button>All orders</button>
-  <button style="float: right; right: 30rem;" routerLink="/create-route" mat-raised-button>Create route</button>
+  <button style="float: right; right: 30rem;" routerLink="/add-item" mat-raised-button>Pridėti prekę</button>
+  <button style="float: right; right: 30rem;" routerLink="/admin-order-list" mat-raised-button>Visi užsakymai</button>
+  <button style="float: right; right: 30rem;" routerLink="/create-route" mat-raised-button>Sukurti maršrutą</button>
   <br>
   <div class="work-container mat-elevation-z8">
     <div class="work-table-container">
 
       <table #table mat-table [dataSource]="itemList" class="work-table">
         <ng-container matColumnDef="name">
-          <th class="col" mat-header-cell *matHeaderCellDef>Name</th>
+          <th class="col" mat-header-cell *matHeaderCellDef>Pavadinimas</th>
           <td class="col" mat-cell *matCellDef="let row">{{row.name}}</td>
         </ng-container>
         <ng-container matColumnDef="price">
-          <th class="col" mat-header-cell *matHeaderCellDef>Price</th>
+          <th class="col" mat-header-cell *matHeaderCellDef>Kaina</th>
           <td class="col" mat-cell *matCellDef="let row">{{row.price}}€</td>
         </ng-container>
         <ng-container matColumnDef="discount">
-          <th class="col" mat-header-cell *matHeaderCellDef>Discount</th>
+          <th class="col" mat-header-cell *matHeaderCellDef>Nuolaida</th>
           <td class="col" mat-cell *matCellDef="let row">{{row.discount}}%</td>
         </ng-container>
         <ng-container matColumnDef="quantity">
-          <th class="col" mat-header-cell *matHeaderCellDef>Quantity</th>
+          <th class="col" mat-header-cell *matHeaderCellDef>Kiekis</th>
           <td class="col" mat-cell *matCellDef="let row">{{row.quantity}}</td>
         </ng-container>
         <ng-container matColumnDef="description">
-          <th class="col" mat-header-cell *matHeaderCellDef>Description</th>
+          <th class="col" mat-header-cell *matHeaderCellDef>Aprašymas</th>
           <td class="col" mat-cell *matCellDef="let row">{{row.description}}</td>
         </ng-container>
         <ng-container matColumnDef="type">
-          <th class="col" mat-header-cell *matHeaderCellDef>Type</th>
+          <th class="col" mat-header-cell *matHeaderCellDef>Tipas</th>
           <td class="col" mat-cell *matCellDef="let row">{{row.type}}</td>
         </ng-container>
         <ng-container matColumnDef="edit">

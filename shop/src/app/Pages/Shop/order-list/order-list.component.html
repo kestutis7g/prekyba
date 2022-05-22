@@ -11,7 +11,7 @@
 
 <body>
   <div class="jumbotron text-center">
-    <h1>My orders</h1>
+    <h1>Mano užsakymai</h1>
   </div>
 
   <br>
@@ -20,23 +20,23 @@
 
       <table #table mat-table [dataSource]="orderList" class="work-table">
         <ng-container matColumnDef="number">
-          <th class="col" mat-header-cell *matHeaderCellDef>Number</th>
+          <th class="col" mat-header-cell *matHeaderCellDef>Užsakymo nr.</th>
           <td class="col" mat-cell *matCellDef="let row">{{row.number}}</td>
         </ng-container>
         <ng-container matColumnDef="date">
-          <th class="col" mat-header-cell *matHeaderCellDef>Date</th>
+          <th class="col" mat-header-cell *matHeaderCellDef>Data</th>
           <td class="col" mat-cell *matCellDef="let row">{{row.date}}</td>
         </ng-container>
         <ng-container matColumnDef="sum">
-          <th class="col" mat-header-cell *matHeaderCellDef>Total</th>
+          <th class="col" mat-header-cell *matHeaderCellDef>Visa kaina</th>
           <td class="col" mat-cell *matCellDef="let row">{{row.sum | currency:'EUR':'symbol-narrow':'1.2-2'}}</td>
         </ng-container>
         <ng-container matColumnDef="discount">
-          <th class="col" mat-header-cell *matHeaderCellDef>Discount</th>
+          <th class="col" mat-header-cell *matHeaderCellDef>Sutaupėte</th>
           <td class="col" mat-cell *matCellDef="let row">{{row.discount | currency:'EUR': 'symbol-narrow':'1.2-2'}}</td>
         </ng-container>
         <ng-container matColumnDef="status">
-          <th class="col" mat-header-cell *matHeaderCellDef>Status</th>
+          <th class="col" mat-header-cell *matHeaderCellDef>Būsena</th>
           <td class="col" mat-cell *matCellDef="let row">{{row.status}}</td>
         </ng-container>
         <ng-container matColumnDef="open">

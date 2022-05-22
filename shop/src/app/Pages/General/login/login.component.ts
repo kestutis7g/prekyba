@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
         },
         error: (error) => {
           console.log(error);
-          this.displayStatus('User does not exist')
+          this.displayStatus('Neteisingas prisijungimo vardas arba slaptažodis')
         }}
       );
 
@@ -65,14 +65,14 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('userId', this.data?.id.toString());
     }
     else {
-      this.displayStatus('Wrong password or login');
+      this.displayStatus('Neteisingas prisijungimo vardas arba slaptažodis');
     }
   }
 
   displayStatus(text: string){
     Swal.fire({
       icon: 'error',
-      title: 'Oops...',
+      title: '',
       text: text,
     })
   }

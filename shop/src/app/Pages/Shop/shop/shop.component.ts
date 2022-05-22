@@ -6,6 +6,10 @@ import { ItemService } from 'src/app/services/item.service';
 import { CartService } from 'src/app/services/cart.service';
 import { Cart, Item } from 'src/model/shop.types';
 
+interface Sort {
+  value: string;
+  viewValue: string;
+}
 
 
 @Component({
@@ -20,18 +24,87 @@ export class ShopComponent implements OnInit {
   isLoadingResults = true;
 
   itemList?: Item[];
+  allItems?: Item[];
   cartList?: Cart[];
   addedToCart!: boolean[];
   isVisible: boolean = true;
+
+  sortBy: Sort[] = [
+    {value: 'price-up', viewValue: 'Kaina ↑'},
+    {value: 'price-down', viewValue: 'Kaina ↓'},
+    {value: 'discount-up', viewValue: 'Nuolaida ↑'},
+    {value: 'discount-down', viewValue: 'Nuolaida ↓'},
+  ];
+
+  filter: Sort[] = [
+    {value: '', viewValue: '-'},
+    {value: 'Tranportas', viewValue: 'Transportas'},
+    {value: 'Kompiuterija', viewValue: 'Kompiuterija'},
+    {value: 'Komunikacija', viewValue: 'Komunikacija'},
+    {value: 'Drabužiai', viewValue: 'Drabužiai'},
+    {value: 'Technika', viewValue: 'Technika'},
+    {value: 'Buitis', viewValue: 'Buitis'},
+  ];
+
 
   constructor(private itemService: ItemService, private cartService: CartService,
     private route: Router) { }
 
   ngOnInit(): void {
+    this.getItemList();
+  }
+
+
+  filterList(value: string){
+    console.log(value);
+
+    if(value == ''){
+      this.getItemList();
+    }
+    else{
+      let temp: Item[] = [];
+      this.allItems!.forEach(item => {
+        if(item.type == value) temp.push(item);
+      });
+      this.itemList = temp;
+    }
+
+    this.getCartList();
+  }
+
+  sortList(value: string){
+    console.log(value);
+    switch(value) {
+      case 'price-up': {
+        this.itemList!.sort((a,b) => (b.price! - (b.price!*b.discount!/100)) - (a.price! - (a.price!*a.discount!/100)));
+        break;
+      }
+      case 'price-down': {
+        this.itemList!.sort((a,b) => (a.price! - (a.price!*a.discount!/100)) - (b.price! - (b.price!*b.discount!/100)));
+        break;
+      }
+      case 'discount-up': {
+        this.itemList!.sort((a,b) => b.discount! - a.discount!);
+        break;
+      }
+      case 'discount-down': {
+        this.itemList!.sort((a,b) => a.discount! - b.discount!);
+        break;
+      }
+      default: {
+        //statements;
+        break;
+      }
+   }
+    this.getCartList();
+  }
+
+  getItemList(){
     this.itemService.getItemList()
       .subscribe({
         next: (data) => {
           this.itemList = data;
+          this.allItems = data;
           this.getCartList();
         },
         error: (error) => {

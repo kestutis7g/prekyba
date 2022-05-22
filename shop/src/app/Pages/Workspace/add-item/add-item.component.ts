@@ -16,6 +16,7 @@ export class AddItemComponent implements OnInit {
   ) { }
 
   item: Item | null = null;
+  tipas: string = '';
 
   ngOnInit(): void {
     this.itemService.getItemDefaults().subscribe({
@@ -28,13 +29,34 @@ export class AddItemComponent implements OnInit {
   addItem() {
     let item: Item = this.item!;
 
+    if (!item.name.replace(/\s/g, '').length) {
+      this.displayStatus("Įrašykite pavadinimą")
+      return;
+    }
+    if (!item.description.replace(/\s/g, '').length) {
+      this.displayStatus("Įrašykite aprašymą")
+      return;
+    }
+    if(item.price == null || item.quantity == null || item.discount == null){
+      this.displayStatus("Įveskite visas privalomas reikšmes")
+      return;
+    }
+    if(!parseInt(item.price!.toString()) || !parseInt(item.quantity!.toString()) || !parseInt(item.discount!.toString())){
+      this.displayStatus("Netaisingai įvestas skaičiaus formatas")
+      return;
+    }
+    if(this.tipas == ''){
+      this.displayStatus("Pasirinkite tipą")
+      return;
+    }
+
     this.itemService.addItem(item).subscribe({
       next: () => {
         this.router.navigateByUrl('/workspace');
       },
       error: (error) => {
         console.log(error);
-        this.displayStatus("Nepavyko sukurti prekes")
+        this.displayStatus("Nepavyko sukurti prekės")
       }}
     )
 

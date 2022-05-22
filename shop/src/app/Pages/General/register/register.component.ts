@@ -29,11 +29,29 @@ export class RegisterComponent implements OnInit {
 
     let user: IUser = this.register!;
 
-    if (user.name == "" || user.lastname == "" || user.email == "" || user.phone == "" || user.login == "" || user.password == "") {
-      this.displayStatus('Please fill all information fields!')
+    if (user.name.replace(/\s/g, '').length == 0) {
+      this.displayStatus("Įrašykite savo vardą")
+      return;
     }
-    else if(user.password != this.confirmPass) {
-      this.displayStatus('Your password did not match!')
+    if (user.lastname.replace(/\s/g, '').length == 0) {
+      this.displayStatus("Įrašykite savo pavardę")
+      return;
+    }
+    if (user.email.replace(/\s/g, '').length == 0) {
+      this.displayStatus("Įrašykite savo el. pašto adresą")
+      return;
+    }
+    if (user.login.replace(/\s/g, '').length == 0) {
+      this.displayStatus("Įrašykite savo prisijungimo vardą")
+      return;
+    }
+    if (user.password.replace(/\s/g, '').length == 0) {
+      this.displayStatus("Įrašykite savo prisijungomi slaptažodį")
+      return;
+    }
+    if(user.password != this.confirmPass) {
+      this.displayStatus('Slaptažodis nesutapo. Bandykite dar kartą')
+      return;
     }
     else {
       user.type = "user"
@@ -58,7 +76,7 @@ export class RegisterComponent implements OnInit {
   displayStatus(text: string){
     Swal.fire({
       icon: 'error',
-      title: 'Oops...',
+      title: '',
       text: text,
     })
   }
