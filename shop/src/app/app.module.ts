@@ -30,6 +30,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatDividerModule} from '@angular/material/divider';
 
 import { MatTableModule } from '@angular/material/table'
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -86,6 +87,7 @@ import { ViewRouteComponent } from './Pages/Workspace/view-route/view-route.comp
     MatCardModule,
     MatChipsModule,
     MatMenuModule,
+    MatDividerModule,
 
     MatTableModule,
     MatPaginatorModule,

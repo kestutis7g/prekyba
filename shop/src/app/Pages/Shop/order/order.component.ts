@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ItemService } from 'src/app/services/item.service';
 import { OrderService } from 'src/app/services/order.service';
-import { Order } from 'src/model/shop.types';
+import { OrderItemService } from 'src/app/services/orderItem.service';
+import { Item, Order, OrderItem } from 'src/model/shop.types';
 
 @Component({
   selector: 'app-order',
@@ -13,10 +16,20 @@ export class OrderComponent implements OnInit {
   constructor(
     private orderService: OrderService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private itemService: ItemService,
+    private orederItemService: OrderItemService,
+    private changeDetectorRefs: ChangeDetectorRef
   ) { }
 
+  displayedColumns = ['name', 'price', 'discount', 'totalPrice', 'quantity', 'description', 'type', 'open']
+
   order: Order | undefined
+  orderItemList: OrderItem[] = [];
+  fullCost: number = 0;
+
+
+  itemList = new MatTableDataSource<Item>();
 
   ngOnInit(): void {
     let route = this.activatedRoute.params.subscribe(params => {
@@ -26,15 +39,50 @@ export class OrderComponent implements OnInit {
       }
 
       this.orderService.getOrderByNumber(id).subscribe({
-        next: (data) => {
-          this.order = data;
+        next: (order) => {
+          this.order = order;
 
+          this.orederItemService.getOrderItemListByOrderNumber(this.order.number).subscribe({
+            next: (data) => {
+              this.orderItemList = data;
+
+              let itemList: Item[] = [];
+
+
+              this.orderItemList.forEach(orderItem => {
+                this.itemService.getItemById(orderItem.itemId).subscribe({
+                  next: (item) => {
+                    let temp: Item = item;
+                    this.fullCost += item.price! * orderItem.quantity;
+                    temp.quantity = orderItem.quantity;
+
+                    this.changeDetectorRefs.detectChanges();
+                    itemList.push(temp);
+                    this.changeDetectorRefs.detectChanges();
+                    this.itemList.data = itemList;
+
+                  },
+                  error: (error) => {
+                    console.log(error);
+                  }
+                })
+
+              });
+            },
+            error: (error) => {
+              console.log(error);
+            }
+          })
         },
         error: (error) => {
           console.log(error);
         }}
       )
     });
+  }
+
+  openItem(id: number){
+    this.router.navigate(["item/" + id]);
   }
 
 }

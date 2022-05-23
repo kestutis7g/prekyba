@@ -30,6 +30,7 @@ export class ItemBalanceComponent implements OnInit {
   predicted1: number[] = [];
   predicted2: number[] = [];
   predicted3: number[] = [];
+  predicted4: number[] = [];
 
 
   ngOnInit(): void {
@@ -80,6 +81,7 @@ export class ItemBalanceComponent implements OnInit {
         this.getPrediction1()
         this.getPrediction2()
         this.getPrediction3()
+        this.getPrediction4()
 
         this.salesData = {
           labels: this.labels,
@@ -88,6 +90,7 @@ export class ItemBalanceComponent implements OnInit {
             { label: 'Predicted', data: this.predicted1, tension: 0.5 },
             { label: 'Predicted', data: this.predicted2, tension: 0.5 },
             { label: 'Predicted', data: this.predicted3, tension: 0.5 },
+            { label: 'Predicted', data: this.predicted4, tension: 0.5 },
           ],
         };
       },
@@ -207,6 +210,30 @@ export class ItemBalanceComponent implements OnInit {
       this.predicted3.push(previousBalance)
       maxPredict--;
       listIndex++;
+    }
+  }
+
+  getPrediction4(){
+    console.log(this.predicted1.length, this.predicted2.length, this.predicted3.length)
+    for (let index = 0; index < this.amount.length + 30; index++) {
+      let average: number = 0;
+      let p: number = 0;
+      if(this.predicted1[index] != null){
+        average += this.predicted1[index];
+        p++;
+      }
+      if(this.predicted2[index] != null){
+        average += this.predicted2[index];
+        p++;
+      }
+      if(this.predicted3[index] != null){
+        average += this.predicted3[index];
+        p++;
+      }
+
+
+      this.predicted4.push(average/3)
+
     }
   }
 

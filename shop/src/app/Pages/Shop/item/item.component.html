@@ -12,23 +12,23 @@
 
 <div>
   <div>
-    <img src={{item?.picture}} alt={{item?.name}}>
+    <img style="padding-left: 1rem;" src={{item?.picture}} alt={{item?.name}}>
   </div>
   <h1>
     {{item?.name}}
   </h1>
   <p>
-    Description
+    Aprašymas
   </p>
   <div>
     {{item?.description}}
   </div>
   <br>
   <div>
-    Type: {{item?.type}}
+    Tipas: {{item?.type}}
   </div>
   <div>
-    Amount left: {{item?.quantity}}
+    Sandėlyje likę: {{item?.quantity}} vnt.
   </div>
   <br>
   <div class="price" *ngIf="(item?.discount! > 0)">
@@ -43,6 +43,7 @@
       {{item?.price! - (item?.price!*item?.discount!/100) | currency:'EUR': 'symbol-narrow':'1.2-2'}}
     </div>
   </div>
+  <br>
 
   <div class="price" *ngIf="(item?.discount! == 0)">
     <td style="text-align: center;">

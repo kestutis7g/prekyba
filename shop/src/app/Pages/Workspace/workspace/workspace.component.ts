@@ -17,7 +17,6 @@ export class WorkspaceComponent implements OnInit {
   isLoadingResults = true;
 
   itemList: Item[] = [];
-  dialog: any;
 
   constructor(
     private itemService: ItemService,

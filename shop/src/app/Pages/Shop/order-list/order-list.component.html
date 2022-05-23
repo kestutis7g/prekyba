@@ -14,6 +14,28 @@
     <h1>Mano užsakymai</h1>
   </div>
 
+
+  <mat-menu #user="matMenu">
+    <button mat-menu-item  routerLink="/workspace">
+      <mat-icon>work</mat-icon>
+      <span>Darbas</span>
+    </button>
+    <button mat-menu-item routerLink="/register">Registruotis</button>
+    <button mat-menu-item routerLink="/login">Prisijungti</button>
+    <button mat-menu-item><mat-icon>cancel_presentation</mat-icon><span>Atsijungti</span>
+    </button>
+
+  </mat-menu>
+
+
+
+
+
+
+
+
+
+
   <br>
   <div class="order-container mat-elevation-z8">
     <div class="order-table-container">
