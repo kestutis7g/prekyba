@@ -94,24 +94,39 @@ namespace ShopAPI.Controllers
             List<ItemBalanceModel> todaysItemBalance = await _repository.GetItemBalanceListByDateAsync(date);
 
 
-            if (todaysItemBalance.Count == 0)
+            if (todaysItemBalance.Count < itemList.Count())
             {
+                Console.WriteLine("Reikia sukurti irasu" + todaysItemBalance.Count + "  " + itemList.Count());
                 foreach (var item in itemList)
                 {
-                    ItemBalanceModel balance = new ItemBalanceModel();
-                    balance.Id = 0;
-                    balance.Amount = item.Quantity;
-                    balance.Date = date;
-                    balance.ItemId = item.Id;
+                    bool todayCreated = false;
+                    foreach (var itembalance in todaysItemBalance)
+                    {
+                        if (itembalance.ItemId == item.Id)
+                        {
+                            todayCreated = true;
+                            Console.WriteLine("item id=" + item.Id + " irasas jau yra");
+                        }
+                    }
+                    if (!todayCreated)
+                    {
+                        Console.WriteLine("Sukuriamas item id=" + item.Id + " irasas");
+                        ItemBalanceModel balance = new ItemBalanceModel();
+                        balance.Id = 0;
+                        balance.Amount = item.Quantity;
+                        balance.Date = date;
+                        balance.ItemId = item.Id;
 
-                    await _repository.CreateItemBalanceAsync(balance);
-                    await _repository.SaveChangesAsync();
+                        await _repository.CreateItemBalanceAsync(balance);
+                        await _repository.SaveChangesAsync();
+                    }
+
 
                 }
             }
             else
             {
-                Console.WriteLine("Sendien irasas jau sukurtas");
+                Console.WriteLine("Sendien visi irasai jau sukurti");
                 return NoContent();
             }
 

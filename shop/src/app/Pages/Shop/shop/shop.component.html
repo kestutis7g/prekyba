@@ -62,7 +62,7 @@
 
           <td [ngClass]="(item.discount! > 0) ? 'strikethrough' : 'null'" style="text-align: center;">
             <div [matBadge]="item.discount +'%'" matBadgeOverlap="false" style="text-align: center;" class="stretch-badge">
-              €{{item.price}}
+              {{item.price | currency:'EUR': 'symbol-narrow':'1.2-2'}}
             </div>
           </td>
 
@@ -73,7 +73,7 @@
 
         <div class="price" *ngIf="(item.discount! == 0)">
           <td style="text-align: center;">
-              €{{item.price}}
+              {{item.price | currency:'EUR': 'symbol-narrow':'1.2-2'}}
           </td>
         </div>
 

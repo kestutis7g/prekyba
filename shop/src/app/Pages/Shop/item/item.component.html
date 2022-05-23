@@ -30,8 +30,24 @@
   <div>
     Amount left: {{item?.quantity}}
   </div>
-  <div>
-    ${{item?.price}}
+  <br>
+  <div class="price" *ngIf="(item?.discount! > 0)">
+
+    <td [ngClass]="(item?.discount! > 0) ? 'strikethrough' : 'null'" style="text-align: center;">
+      <div [matBadge]="item?.discount +'%'" matBadgeOverlap="false" style="text-align: center;" class="stretch-badge">
+        {{item?.price | currency:'EUR': 'symbol-narrow':'1.2-2'}}
+      </div>
+    </td>
+
+    <div *ngIf="(item?.discount! > 0)" class="discount">
+      {{item?.price! - (item?.price!*item?.discount!/100) | currency:'EUR': 'symbol-narrow':'1.2-2'}}
+    </div>
+  </div>
+
+  <div class="price" *ngIf="(item?.discount! == 0)">
+    <td style="text-align: center;">
+      {{item?.price | currency:'EUR': 'symbol-narrow':'1.2-2'}}
+    </td>
   </div>
 
 

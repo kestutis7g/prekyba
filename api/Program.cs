@@ -38,8 +38,8 @@ namespace ShopAPI
         {
             Schedule<MyJob>()
                     .NonReentrant() // Only one instance of the job can run at a time
-                    .ToRunOnceAt(DateTime.Now.AddSeconds(60))    // Delay startup for a while
-                    .AndEvery(2).Seconds();     // Interval
+                    .ToRunOnceAt(DateTime.Now.AddSeconds(30))    // Delay startup for a while
+                    .AndEvery(10).Seconds();     // Interval
 
             // TODO... Add more schedules here
         }

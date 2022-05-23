@@ -56,6 +56,8 @@ export class AddItemComponent implements OnInit {
       return;
     }
 
+    item.type = this.tipas;
+
     this.itemService.addItem(item).subscribe({
       next: () => {
         this.router.navigateByUrl('/workspace');
