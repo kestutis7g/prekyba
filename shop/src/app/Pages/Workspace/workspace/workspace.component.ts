@@ -94,7 +94,7 @@ export class WorkspaceComponent implements OnInit {
 
 
 
-  editItem(id: number) {
+  openEditItem(id: number) {
     this.route.navigate(["edit-item/" + id]);
   }
 

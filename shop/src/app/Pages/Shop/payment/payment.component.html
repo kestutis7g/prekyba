@@ -17,19 +17,30 @@
 </head>
 
 <h1>
-  Užpildykite apmokėjimo duomenis
-</h1>
-<h1>
-  {{total | currency:'EUR': 'symbol-narrow':'1.2-2'}}
-</h1>
 
-<mat-grid-list cols="4">
+</h1>
+<mat-card class="order-card mat-elevation-z8">
+  <mat-card-title style="text-align: center;">Užpildykite apmokėjimo duomenis</mat-card-title>
+</mat-card>
+<br>
+
+<mat-card class="order-card mat-elevation-z8">
+  <mat-card-title>Krepšelio suma</mat-card-title>
+  <mat-card-content>
+    Visa užsakymo suma: {{fullCost | currency:'EUR': 'symbol-narrow':'1.2-2'}}<br>
+    Pritaikytų nuolaidų suma: {{fullDiscount | currency:'EUR': 'symbol-narrow':'1.2-2'}}<br>
+    <mat-divider inset></mat-divider>
+    Užsakymo kaina: {{sum | currency:'EUR': 'symbol-narrow':'1.2-2'}}
+  </mat-card-content>
+</mat-card>
+<br>
+
+<mat-grid-list cols="4" style="max-width: 1570px; max-height: 800px; margin-left: auto; margin-right: auto;">
   <mat-grid-tile></mat-grid-tile>
-  <mat-grid-tile>
 
-    <mat-card class="payment-form" >
-
-      <div class="form" *ngIf="address">
+  <mat-grid-tile style="height: 550px;">
+    <mat-card class="payment-form mat-elevation-z8" style="height: 500px;">
+      <mat-card-content class="form" *ngIf="address" style="height: 500px;">
 
         <p>
           <mat-form-field appearance="legacy">
@@ -73,21 +84,14 @@
             <textarea matInput placeholder=" " [(ngModel)]="comment"></textarea>
           </mat-form-field>
         </p>
-
-      </div>
-
+      </mat-card-content>
     </mat-card>
-
-
   </mat-grid-tile>
 
 
-  <mat-grid-tile>
-
-
-    <mat-card class="payment-form">
-      <div class="form">
-
+  <mat-grid-tile style="height: 550px;">
+    <mat-card class="payment-form mat-elevation-z8" style="height: 500px;">
+      <mat-card-content class="form" style="height: 500px;">
         <p>
           <mat-form-field appearance="legacy">
             <mat-label>Sąskaitos numeris</mat-label>
@@ -116,15 +120,12 @@
           </mat-form-field>
         </p>
 
-        <button routerLink="/payment" mat-raised-button (click)="initiatePayment()">Apmokėti</button>
-      </div>
-
+        <button routerLink="/payment" mat-raised-button style="margin-right: 5px;" (click)="initiatePayment()">Apmokėti</button>
+        <button routerLink="/cart" mat-raised-button>Atšaukti</button>
+      </mat-card-content>
     </mat-card>
-
-
-
-
   </mat-grid-tile>
+
   <mat-grid-tile></mat-grid-tile>
 </mat-grid-list>
 

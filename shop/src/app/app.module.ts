@@ -31,12 +31,14 @@ import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { MatTableModule } from '@angular/material/table'
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatGridListModule } from '@angular/material/grid-list';
 
@@ -88,17 +90,23 @@ import { ViewRouteComponent } from './Pages/Workspace/view-route/view-route.comp
     MatChipsModule,
     MatMenuModule,
     MatDividerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
 
     MatTableModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatSelectModule,
     FormsModule,
+    ReactiveFormsModule,
     MatCheckboxModule,
     MatGridListModule,
     NgChartsModule
   ],
-  providers: [EncrDecrService],
+  providers: [
+    EncrDecrService,
+    MatDatepickerModule
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

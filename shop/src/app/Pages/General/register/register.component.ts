@@ -66,6 +66,7 @@ export class RegisterComponent implements OnInit {
           });
         },
         error: (error) => {
+          this.displayStatus('Kažkodėl nepavyko sukurti vartotojo')
           console.log(error);
         }}
       )

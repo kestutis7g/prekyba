@@ -56,6 +56,13 @@
 </div>
 <br>
 
+<mat-card class="order-card mat-elevation-z8" *ngIf="showOrderComment">
+  <mat-card-content>
+    Užsakymo komentaras: {{order?.comment}}
+
+  </mat-card-content>
+</mat-card>
+<br>
 
 <mat-card class="order-card mat-elevation-z8">
   <mat-card-title>{{order?.status}}</mat-card-title>

@@ -1,4 +1,13 @@
 /* Structure */
+.order-card {
+  text-align: left;
+  min-width: 800px;
+  max-width: 800px;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .cart-container {
     position: relative;
     margin: 4rem 28rem 0rem

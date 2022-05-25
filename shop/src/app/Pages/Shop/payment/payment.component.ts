@@ -49,8 +49,9 @@ export class PaymentComponent implements OnInit {
   ccv: string = "";
   pin: string = "";
 
-  total: number = 0;
-  discount: number = 0;
+  fullCost: number = 0;
+  fullDiscount: number = 0;
+  sum: number = 0;
 
 
   ngOnInit(): void {
@@ -83,8 +84,10 @@ export class PaymentComponent implements OnInit {
           });
 
           this.itemList.forEach(item => {
-            this.total += ((item.price! - (item.price!*item.discount!/100))*item.quantity!)
-            this.discount += ((item.price!*item.discount!/100)*item.quantity!)
+            this.fullCost += item.price!*item.quantity!
+            this.fullDiscount += ((item.price!*item.discount!/100)*item.quantity!)
+            this.sum += ((item.price! - (item.price!*item.discount!/100))*item.quantity!)
+
           });
         },
         error => {
@@ -130,8 +133,8 @@ export class PaymentComponent implements OnInit {
     let order: Order = {
       number: 0,
       date: date!.toString(),
-      sum: this.total,
-      discount: this.discount,
+      sum: this.sum,
+      discount: this.fullDiscount,
       comment: this.comment,
       status: "APMOKĖTAS",
       userId: parseInt(localStorage.getItem('userId') || "0")
@@ -171,56 +174,54 @@ export class PaymentComponent implements OnInit {
               this.displayStatus("Nepavyko sukurti order item")
             }}
           )
-
-          //sukuria address irasa
-          let address: Address = {
-            id : 0,
-            city: this.address!.city,
-            street: this.address!.street,
-            building: parseInt(this.address_b),
-            apartment: parseInt(this.address_a),
-            zipCode: parseInt(this.address_z)
-          }
-
-          let addressId: number;
-          this.addressService.addAddress(address).subscribe({
-            next: (address) => {
-              addressId = address.id;
-
-              let route: Route = {
-                id : 0,
-                dispatchDate: "",
-                deliveryDate: "",
-                orderNumber: orderNumber,
-                addressId: addressId,
-                userId: parseInt(localStorage.getItem('userId') || "0")
-              }
-
-              //sukuria route irasa
-              this.routeService.addRoute(route).subscribe({
-                next: () => {
-                },
-                error: (error) => {
-                  console.log(error);
-                  this.displayStatus("Nepavyko sukurti address")
-                }}
-              )
-
-              //isvalomas krepselis
-              this.itemList.forEach(item => {
-                this.cartService.deleteItemFromCart(item.id).subscribe(() => this.router.navigate(["order" , orderNumber]));
-              });
-
-
-            },
-            error: (error) => {
-              console.log(error);
-              this.displayStatus("Nepavyko sukurti address")
-            }}
-          )
-
-
         });
+
+        //sukuria address irasa
+        let address: Address = {
+          id : 0,
+          city: this.address!.city,
+          street: this.address!.street,
+          building: parseInt(this.address_b),
+          apartment: parseInt(this.address_a),
+          zipCode: parseInt(this.address_z)
+        }
+
+        let addressId: number;
+        this.addressService.addAddress(address).subscribe({
+          next: (address) => {
+            addressId = address.id;
+
+            let route: Route = {
+              id : 0,
+              dispatchDate: "",
+              deliveryDate: "",
+              orderNumber: orderNumber,
+              addressId: addressId,
+              userId: parseInt(localStorage.getItem('userId') || "0")
+            }
+
+            //sukuria route irasa
+            this.routeService.addRoute(route).subscribe({
+              next: () => {
+              },
+              error: (error) => {
+                console.log(error);
+                this.displayStatus("Nepavyko sukurti address")
+              }}
+            )
+
+            //isvalomas krepselis
+            this.itemList.forEach(item => {
+              this.cartService.deleteItemFromCart(item.id).subscribe(() => this.router.navigate(["order" , orderNumber]));
+            });
+
+
+          },
+          error: (error) => {
+            console.log(error);
+            this.displayStatus("Nepavyko sukurti address")
+          }}
+        )
         this.router.navigateByUrl('/home');
       },
       error: (error) => {

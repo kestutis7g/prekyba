@@ -65,6 +65,17 @@
 
 </div>
 <br>
+<mat-card class="order-card mat-elevation-z8">
+  <mat-card-title>Krepšelio suma</mat-card-title>
+  <mat-card-content>
+    Visa užsakymo suma: {{fullCost | currency:'EUR': 'symbol-narrow':'1.2-2'}}<br>
+    Pritaikytų nuolaidų suma: {{fullDiscount | currency:'EUR': 'symbol-narrow':'1.2-2'}}<br>
+    <mat-divider inset></mat-divider>
+    Užsakymo kaina: {{sum | currency:'EUR': 'symbol-narrow':'1.2-2'}}
+  </mat-card-content>
+</mat-card>
+
+<br>
 <p>
   <button routerLink="/payment" *ngIf="pay" mat-raised-button>Apmoketi</button>
 </p>

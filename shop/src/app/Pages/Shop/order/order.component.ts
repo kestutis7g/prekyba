@@ -25,6 +25,7 @@ export class OrderComponent implements OnInit {
   displayedColumns = ['name', 'price', 'discount', 'totalPrice', 'quantity', 'description', 'type', 'open']
 
   order: Order | undefined
+  showOrderComment = false;
   orderItemList: OrderItem[] = [];
   fullCost: number = 0;
 
@@ -41,6 +42,9 @@ export class OrderComponent implements OnInit {
       this.orderService.getOrderByNumber(id).subscribe({
         next: (order) => {
           this.order = order;
+          if (order.comment.replace(/\s/g, '').length != 0) {
+            this.showOrderComment = true;
+          }
 
           this.orederItemService.getOrderItemListByOrderNumber(this.order.number).subscribe({
             next: (data) => {

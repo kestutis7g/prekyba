@@ -1,0 +1,9 @@
+.datepicker{
+  position: absolute;
+  height: 100px;
+  width: 1200px;
+  left:50%;
+  margin-left:-600px;
+
+
+}

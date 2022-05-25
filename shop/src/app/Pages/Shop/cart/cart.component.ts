@@ -21,6 +21,10 @@ export class CartComponent implements OnInit {
   itemList: Item[] = []; //krepselio turinys item entity pavidalu
   cartList?: Cart[];
   pay: boolean = false;
+  fullCost: number = 0;
+  fullDiscount: number = 0;
+  sum: number = 0;
+
 
   constructor(
     private itemService: ItemService,
@@ -44,6 +48,14 @@ export class CartComponent implements OnInit {
       .subscribe(
         data => {
           this.itemList = data;
+
+          this.fullCost = 0;
+          this.fullDiscount = 0;
+          this.itemList.forEach(item => {
+            this.fullCost += item.price! * item.quantity!;
+            this.fullDiscount += ((item.price!*item.discount!/100) * item.quantity!)
+          });
+          this.sum = this.fullCost - this.fullDiscount;
 
           if (localStorage.getItem('type') != "guest") {
             if (this.itemList.length > 0) {
