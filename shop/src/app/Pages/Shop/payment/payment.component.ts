@@ -102,7 +102,7 @@ export class PaymentComponent implements OnInit {
       this.displayStatus("Užpildykite visus būtinus adreso laukus")
       return;
     }
-    if(!parseInt(this.address_b) || !parseInt(this.address_a) || !parseInt(this.address_z)){
+    if(!Number(this.address_b) || !Number(this.address_z)){
       this.displayStatus("Neteisingai įrašytas adresas")
       return;
     }

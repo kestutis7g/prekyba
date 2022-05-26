@@ -59,21 +59,21 @@
         <p>
           <mat-form-field appearance="legacy">
             <mat-label>Namo nr.</mat-label>
-            <input matInput placeholder=" " [(ngModel)]="address_b" required>
+            <input matInput NumbersOnly [allowDecimals]="false" placeholder=" " [(ngModel)]="address_b" required>
           </mat-form-field>
         </p>
 
         <p>
           <mat-form-field appearance="legacy">
             <mat-label>Buto nr.</mat-label>
-            <input matInput placeholder=" " [(ngModel)]="address_a" >
+            <input matInput NumbersOnly [allowDecimals]="false" placeholder=" " [(ngModel)]="address_a" >
           </mat-form-field>
         </p>
 
         <p>
           <mat-form-field appearance="legacy">
             <mat-label>Zip kodas</mat-label>
-            <input matInput placeholder=" " [(ngModel)]="address_z" required>
+            <input matInput NumbersOnly [allowDecimals]="false" placeholder=" " [(ngModel)]="address_z" required>
             <span matPrefix>LT-&nbsp;</span>
           </mat-form-field>
         </p>
@@ -95,7 +95,7 @@
         <p>
           <mat-form-field appearance="legacy">
             <mat-label>Sąskaitos numeris</mat-label>
-            <input matInput placeholder=" " [(ngModel)]="saskaita" required>
+            <input matInput NumbersOnly [allowDecimals]="false" placeholder=" " [(ngModel)]="saskaita" required>
           </mat-form-field>
         </p>
 
@@ -109,14 +109,14 @@
         <p>
           <mat-form-field appearance="legacy">
             <mat-label>CCV</mat-label>
-            <input matInput placeholder=" " [(ngModel)]="ccv" required>
+            <input matInput NumbersOnly [allowDecimals]="false" placeholder=" " [(ngModel)]="ccv" required>
           </mat-form-field>
         </p>
 
         <p>
           <mat-form-field appearance="legacy">
             <mat-label>Banko pin kodas</mat-label>
-            <input matInput placeholder=" " [(ngModel)]="pin" required>
+            <input matInput NumbersOnly [allowDecimals]="false" placeholder=" " [(ngModel)]="pin" required>
           </mat-form-field>
         </p>
 

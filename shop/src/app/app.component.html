@@ -12,7 +12,6 @@
       <span>Parduotuvė</span>
     </button>
     </span>
-
     <span class="toolbar-endspacer"></span>
     <!---
     <span class="toolbar-spacer menu-padding">{{username}}</span>
@@ -62,7 +61,9 @@
       <button mat-menu-item *ngIf="guest" routerLink="/register">Registruotis</button>
       <button mat-menu-item *ngIf="guest" routerLink="/login">Prisijungti</button>
       <button mat-menu-item *ngIf="signout" (click)="signOutUser()">
-        <mat-icon>cancel_presentation</mat-icon>
+        <!---<mat-icon>cancel_presentation</mat-icon>--->
+        <mat-icon>power_settings_new</mat-icon>
+        <!-- <i class="fa-solid fa-power-off fa-xl" style="color: rgba(0,0,0,.54)"></i> -->
         <span>Atsijungti</span>
       </button>
 

@@ -12,6 +12,7 @@
 <body>
   <div class="jumbotron text-center">
     <h1>Darbo aplinka</h1>
+    <!-- <i class="fa-solid fa-spin fs-1" style="width: 500px;">darbo aplinka</i> -->
     <p>Prekių sąrašas</p>
   </div>
 
@@ -62,27 +63,25 @@
         <ng-container matColumnDef="edit">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let row">
-            <button mat-button (click)="openEditItem(row.id)">
-              <mat-icon>edit</mat-icon>
-            </button>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="delete">
-          <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let row">
-            <button mat-button (click)="deleteItem(row.id, row.name)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="balance">
-          <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let row">
-            <button mat-button (click)="openItemBalance(row.id)">
-              <mat-icon>trending_up</mat-icon>
-            </button>
-          </td>
-        </ng-container>
+            <div class="d-flex">
+              <button mat-button (click)="openEditItem(row.id)" class="p-0 m-0" style="width: 1px;">
+                <!-- <mat-icon>edit</mat-icon> -->
+                <i class="fa-solid fa-pencil fa-lg p-0 m-0"></i>
+              </button>
+
+              <button mat-button (click)="deleteItem(row.id, row.name)" class=" p-0 m-0">
+                <!-- <mat-icon>delete</mat-icon> -->
+                <i class="fa-solid fa-trash-can fa-lg p-0 m-0"></i>
+              </button>
+
+              <button mat-button (click)="openItemBalance(row.id)" class=" p-0 m-0">
+                <!-- <mat-icon>trending_up</mat-icon> -->
+                <i class="fa-solid fa-chart-line fa-lg p-0 m-0"></i>
+              </button>
+            </div>
+
+            </td>
+          </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

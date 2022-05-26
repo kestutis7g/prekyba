@@ -51,7 +51,7 @@ import { AdminOrderListComponent } from './Pages/Workspace/admin-order-list/admi
 import { NgChartsModule } from 'ng2-charts';
 import { CreateRouteComponent } from './Pages/Workspace/create-route/create-route.component';
 import { ViewRouteComponent } from './Pages/Workspace/view-route/view-route.component';
-
+import { NumbersOnly } from './directives/numbers-only.directive';
 
 
 
@@ -74,7 +74,8 @@ import { ViewRouteComponent } from './Pages/Workspace/view-route/view-route.comp
     OrderListComponent,
     AdminOrderListComponent,
     CreateRouteComponent,
-    ViewRouteComponent
+    ViewRouteComponent,
+    NumbersOnly
   ],
   imports: [
     BrowserModule,

@@ -12,7 +12,7 @@ import Swal, { SweetAlertOptions } from 'sweetalert2';
 })
 export class WorkspaceComponent implements OnInit {
 
-  displayedColumns = ['name', 'price', 'discount', 'quantity', 'description', 'type', 'edit', 'delete', 'balance']
+  displayedColumns = ['name', 'price', 'discount', 'quantity', 'description', 'type', 'edit']
   //displayedColumns = ['name', 'price', 'description', 'quantity', 'discount', 'type']
   isLoadingResults = true;
 
