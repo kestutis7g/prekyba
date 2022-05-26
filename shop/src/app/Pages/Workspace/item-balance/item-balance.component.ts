@@ -56,7 +56,7 @@ export class ItemBalanceComponent implements OnInit {
     start: new FormControl(),
     end: new FormControl(),
   });
-
+  daysSelected: number = 30;
   date = new FormControl(moment());
 
   amount: number[] = [];
@@ -64,7 +64,7 @@ export class ItemBalanceComponent implements OnInit {
   predicted2: number[] = [];
   predicted3: number[] = [];
   predicted4: number[] = [];
-
+  regression: number[] = [];
 
   ngOnInit(): void {
 
@@ -83,7 +83,8 @@ export class ItemBalanceComponent implements OnInit {
     this.predicted2 = [];
     this.predicted3 = [];
     this.predicted4 = [];
-
+    this.regression = [];
+    let day: number = 0;
     this.itemBalanceService.getItemBalanceListByItemId(this.itemId).subscribe({
       next: (data) => {
         this.itemBalanceList = data;
@@ -93,15 +94,23 @@ export class ItemBalanceComponent implements OnInit {
 
         if(this.range.value.start && this.range.value.end){
 
-          //let start: string = this.range.value.start._i.year.toString + '-' + this.range.value.start._i.month.toString
+          let start = new Date(this.range.value.start.format('YYYY-MM-DD').toString());
+          let end = new Date(this.range.value.end.format('YYYY-MM-DD').toString());
+          let firstDate = new Date(this.itemBalanceList[0].date);
+
+          if( 0 > Math.floor((Date.UTC(start.getFullYear(), start.getMonth(), start.getDate()) - Date.UTC(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate()) ) /(1000 * 60 * 60 * 24))){
+            start = firstDate;
+          }
+          this.daysSelected = Math.floor((Date.UTC(end.getFullYear(), end.getMonth(), end.getDate()) - Date.UTC(start.getFullYear(), start.getMonth(), start.getDate()) ) /(1000 * 60 * 60 * 24)) + 1;
+
           this.itemBalanceList.forEach(balance => {
             let balanceDate = new Date(balance.date);
-            let start = new Date(this.range.value.start.format('YYYY-MM-DD').toString());
-            let end = new Date(this.range.value.end.format('YYYY-MM-DD').toString());
+
 
             if(balanceDate.getTime() >= start.getTime() && balanceDate.getTime() <= end.getTime()){
               this.amount.push(balance.amount)
               this.labels.push(balance.date)
+              day++
             }
           });
 
@@ -110,6 +119,7 @@ export class ItemBalanceComponent implements OnInit {
           this.itemBalanceList.forEach(balance => {
             this.amount.push(balance.amount)
             this.labels.push(balance.date)
+            day++
           });
         }
 
@@ -117,9 +127,8 @@ export class ItemBalanceComponent implements OnInit {
 
 
         let date = new Date();
-        let maxPredict: number = 30;
 
-        while (maxPredict > 0) {
+        while (day < this.daysSelected) {
 
           //sekanti diena
           date.setDate( date.getDate() + 1 );
@@ -130,13 +139,15 @@ export class ItemBalanceComponent implements OnInit {
           let d =this.datePipe.transform(date, 'yyyy-MM-dd');
           //pridedam i labels
           this.labels.push(d!.toString())
-          maxPredict--;
+          day++;
         }
 
+        this.linearRegression()
         this.getPrediction1()
         this.getPrediction2()
         this.getPrediction3()
         this.getPrediction4()
+
 
         this.salesData = {
           labels: this.labels,
@@ -146,6 +157,7 @@ export class ItemBalanceComponent implements OnInit {
             { label: 'Predicted', data: this.predicted2, tension: 0.5 },
             { label: 'Predicted', data: this.predicted3, tension: 0.5 },
             { label: 'Predicted', data: this.predicted4, tension: 0.5 },
+            { label: 'regression', data: this.regression, tension: 0.5 },
           ],
         };
       },
@@ -159,14 +171,16 @@ export class ItemBalanceComponent implements OnInit {
     let previousBalance: number = 0;
     let count = 0;
     let averageConsumption: number = 0;
-    this.itemBalanceList.forEach(balance => {
+    let day: number = 0;
+    this.amount.forEach(balance => {
 
-      this.predicted1.push(balance.amount)
-      if(previousBalance > balance.amount){
+      this.predicted1.push(balance)
+      day++
+      if(previousBalance > balance){
         count++;
-        averageConsumption = averageConsumption + (previousBalance - balance.amount);
+        averageConsumption = averageConsumption + (previousBalance - balance);
       }
-      previousBalance = balance.amount;
+      previousBalance = balance;
 
 
     });
@@ -178,33 +192,33 @@ export class ItemBalanceComponent implements OnInit {
       averageConsumption = averageConsumption / count;
     }
 
-    previousBalance = this.itemBalanceList[this.itemBalanceList.length-1].amount;
+    previousBalance = this.amount[this.amount.length-1];
 
-    let maxPredict: number = 30;
-    while (previousBalance > 0 && maxPredict > 0) {
+
+    while (previousBalance > 0 && this.daysSelected > day) {
 
       previousBalance -= averageConsumption;
 
       if(previousBalance < 0) previousBalance = 0;
       this.predicted1.push(previousBalance)
+      day++
 
     }
   }
-
 
   getPrediction2(){
     let previousBalance: number = 0;
     let count = 0;
     let averageConsumption: number = 0;
+    let day: number = 0;
+    this.amount.forEach(balance => {
 
-    this.itemBalanceList.forEach(balance => {
-
-      this.predicted2.push(balance.amount)
+      //this.predicted2.push(balance.amount)
       if(previousBalance > 0){
         count++;
-        averageConsumption = averageConsumption + (previousBalance - balance.amount);
+        averageConsumption = averageConsumption + (previousBalance - balance);
       }
-      previousBalance = balance.amount;
+      previousBalance = balance;
 
 
     });
@@ -214,16 +228,19 @@ export class ItemBalanceComponent implements OnInit {
     averageConsumption = averageConsumption / count;
 
 
-    previousBalance = this.itemBalanceList[this.itemBalanceList.length-1].amount;
+    //previousBalance = this.itemBalanceList[this.itemBalanceList.length-1].amount;
+    previousBalance = this.amount[0];
+    this.predicted2.push(previousBalance)
+    day++
 
-    let maxPredict: number = 30;
-    while (previousBalance > 0 && maxPredict > 0) {
+
+    while (previousBalance > 0 && this.daysSelected > day) {
 
       previousBalance -= averageConsumption;
 
       if(previousBalance < 0) previousBalance = 0;
       this.predicted2.push(previousBalance)
-      maxPredict--;
+      day++
     }
   }
 
@@ -231,14 +248,16 @@ export class ItemBalanceComponent implements OnInit {
     let previousBalance: number = 0;
     let count = 0;
     let averageConsumption: number = 0;
-    this.itemBalanceList.forEach(balance => {
+    let day: number = 0;
+    this.amount.forEach(balance => {
 
-      this.predicted3.push(balance.amount)
-      if(previousBalance > balance.amount){
+      this.predicted3.push(balance)
+      day++
+      if(previousBalance > balance){
         count++;
-        averageConsumption = averageConsumption + (previousBalance - balance.amount);
+        averageConsumption = averageConsumption + (previousBalance - balance);
       }
-      previousBalance = balance.amount;
+      previousBalance = balance;
 
 
     });
@@ -255,7 +274,7 @@ export class ItemBalanceComponent implements OnInit {
     let maxPredict: number = 30;
     let listIndex: number = 0;
 
-    while (previousBalance > 0 && maxPredict > 0) {
+    while (previousBalance > 0 && this.daysSelected > day) {
 
       if(listIndex >= this.predicted3.length - 1) listIndex = 0;
 
@@ -263,14 +282,14 @@ export class ItemBalanceComponent implements OnInit {
 
       if(previousBalance < 0) previousBalance = 0;
       this.predicted3.push(previousBalance)
-      maxPredict--;
+      day++
       listIndex++;
     }
   }
 
   getPrediction4(){
 
-    for (let index = 0; index < this.amount.length + 30; index++) {
+    for (let index = 0; index < this.daysSelected; index++) {
       let average: number = 0;
       let p: number = 0;
       if(this.predicted1[index] != null){
@@ -285,12 +304,88 @@ export class ItemBalanceComponent implements OnInit {
         average += this.predicted3[index];
         p++;
       }
+      if(this.regression[index] != null){
+        average += this.regression[index];
+        p++;
+      }
 
 
-      this.predicted4.push(average/3)
+      this.predicted4.push(average/4)
 
     }
   }
+
+  linearRegression(){
+  //  int n, i;
+  //  float x[S], y[S], sumX=0, sumX2=0, sumY=0, sumXY=0, a, b;
+    let n: number = this.amount.length
+    let i: number = 0
+    let x: number[] = []
+    let y: number[] = []
+    let sumX: number = 0
+    let sumX2: number = 0
+    let sumY: number = 0
+    let sumXY: number = 0
+    let a: number = 0
+    let b: number = 0
+  //  /* Input */
+  //  cout<<"How many data points? ";
+  //  cin>>n;
+
+  //  cout<<"Enter data:"<< endl;
+
+  //  for(i=1;i<=n;i++)
+  //  {
+  //   cout<<"x["<< i <<"] = ";
+  //   cin>>x[i];
+  //   cout<<"y["<< i <<"] = ";
+  //   cin>>y[i];
+  //  }
+      this.amount.forEach(element => {
+        x.push(i)
+        y.push(element)
+        i++
+      });
+
+  //  /* Calculating Required Sum */
+  //  for(i=1;i<=n;i++)
+  //  {
+  //   sumX = sumX + x[i];
+  //   sumX2 = sumX2 + x[i]*x[i];
+  //   sumY = sumY + y[i];
+  //   sumXY = sumXY + x[i]*y[i];
+  //  }
+
+      for (i = 0; i < n; i++) {
+        sumX = sumX + x[i];
+        sumX2 = sumX2 + x[i]*x[i];
+        sumY = sumY + y[i];
+        sumXY = sumXY + x[i]*y[i];
+      }
+  //  /* Calculating a and b */
+  //  b = (n*sumXY-sumX*sumY)/(n*sumX2-sumX*sumX);
+  //  a = (sumY - b*sumX)/n;
+      b = (n*sumXY-sumX*sumY)/(n*sumX2-sumX*sumX);
+      a = (sumY - b*sumX)/n;
+
+  //  /* Displaying value of a and b */
+  //  cout<<"Calculated value of a is "<< a << "and b is "<< b << endl;
+  //  cout<<"Equation of best fit is: y = "<< a <<" + "<< b<<"x";
+
+      //console.log("Equation of best fit is: y = " + a.toString() + '+' + b.toString() + 'x')
+
+      for (let index = 0; index <= this.daysSelected-1; index++) {
+        if( a + (b * index) <= 0) return
+
+        this.regression.push( a + (b * index))
+
+      }
+
+
+  }
+
+
+
 
 
   salesData: ChartData<'line'> = {
