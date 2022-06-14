@@ -28,9 +28,9 @@ namespace ShopAPI.Data.Route
             return await Task.FromResult(routeList);
         }
 
-        public async Task<RouteModel> GetRouteByOrderNumberAsync(int orderNumber)
+        public async Task<RouteModel> GetRouteByOrderNumberAsync(Guid orderNumber)
         {
-            RouteModel route = await _context.Route.FirstOrDefaultAsync(x => x.OrderNumber == orderNumber);
+            RouteModel route = await _context.Route.FirstOrDefaultAsync(x => x.OrderId == orderNumber);
 
             return route;
         }
@@ -45,7 +45,7 @@ namespace ShopAPI.Data.Route
             await Task.CompletedTask;
         }
 
-        public async Task DeleteRouteAsync(int id)
+        public async Task DeleteRouteAsync(Guid id)
         {
             RouteModel route = await _context.Route.FirstOrDefaultAsync(x => x.Id == id);
             if (route is null)

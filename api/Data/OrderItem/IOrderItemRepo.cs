@@ -10,9 +10,9 @@ namespace ShopAPI.Data.OrderItem
     {
         Task SaveChangesAsync();
         Task<IEnumerable<OrderItemModel>> GetOrderItemListAsync();
-        Task<List<OrderItemModel>> GetOrderItemListByOrderNumberAsync(int orderNumber);
+        Task<List<OrderItemModel>> GetOrderItemListByOrderNumberAsync(Guid orderNumber);
         Task CreateOrderItemAsync(OrderItemModel orderItemModel);
         Task UpdateOrderItemAsync(OrderItemModel orderItemModel);
-        Task DeleteOrderItemAsync(int id);
+        Task DeleteOrderItemAsync(Guid id);
     }
 }

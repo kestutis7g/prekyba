@@ -46,37 +46,36 @@ export class OrderComponent implements OnInit {
             this.showOrderComment = true;
           }
 
-          this.orederItemService.getOrderItemListByOrderNumber(this.order.number).subscribe({
-            next: (data) => {
-              this.orderItemList = data;
+          this.orederItemService
+            .getOrderItemListByOrderNumber(this.order.id!)
+            .subscribe({
+              next: (data) => {
+                this.orderItemList = data;
 
-              let itemList: Item[] = [];
+                let itemList: Item[] = [];
 
+                this.orderItemList.forEach((orderItem) => {
+                  this.itemService.getItemById(orderItem.itemId).subscribe({
+                    next: (item) => {
+                      let temp: Item = item;
+                      this.fullCost += item.price! * orderItem.quantity;
+                      temp.quantity = orderItem.quantity;
 
-              this.orderItemList.forEach(orderItem => {
-                this.itemService.getItemById(orderItem.itemId).subscribe({
-                  next: (item) => {
-                    let temp: Item = item;
-                    this.fullCost += item.price! * orderItem.quantity;
-                    temp.quantity = orderItem.quantity;
-
-                    this.changeDetectorRefs.detectChanges();
-                    itemList.push(temp);
-                    this.changeDetectorRefs.detectChanges();
-                    this.itemList.data = itemList;
-
-                  },
-                  error: (error) => {
-                    console.log(error);
-                  }
-                })
-
-              });
-            },
-            error: (error) => {
-              console.log(error);
-            }
-          })
+                      this.changeDetectorRefs.detectChanges();
+                      itemList.push(temp);
+                      this.changeDetectorRefs.detectChanges();
+                      this.itemList.data = itemList;
+                    },
+                    error: (error) => {
+                      console.log(error);
+                    },
+                  });
+                });
+              },
+              error: (error) => {
+                console.log(error);
+              },
+            });
         },
         error: (error) => {
           console.log(error);

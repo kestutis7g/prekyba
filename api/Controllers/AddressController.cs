@@ -33,7 +33,7 @@ namespace ShopAPI.Controllers
 
         // GET api/address/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<List<AddressModel>>> GetAddressByIdAsync([FromRoute] int id)
+        public async Task<ActionResult<List<AddressModel>>> GetAddressByIdAsync([FromRoute] Guid id)
         {
             var addressFromRepo = await _repository.GetAddressByIdAsync(id);
             if (addressFromRepo is null)
@@ -68,7 +68,7 @@ namespace ShopAPI.Controllers
 
         // Delete api/address/{id}
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteAddressByIdAsync([FromRoute] int id)
+        public async Task<ActionResult> DeleteAddressByIdAsync([FromRoute] Guid id)
         {
             await _repository.DeleteAddressAsync(id);
 

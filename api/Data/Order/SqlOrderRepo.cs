@@ -28,14 +28,14 @@ namespace ShopAPI.Data.Order
             return await Task.FromResult(orderList);
         }
 
-        public async Task<OrderModel> GetOrderByNumberAsync(int number)
+        public async Task<OrderModel> GetOrderByNumberAsync(Guid number)
         {
-            OrderModel order = await _context.Order.FirstOrDefaultAsync(x => x.Number == number);
+            OrderModel order = await _context.Order.FirstOrDefaultAsync(x => x.Id == number);
 
             return order;
         }
 
-        public async Task<List<OrderModel>> GetOrderListByUserIdAsync(int userId)
+        public async Task<List<OrderModel>> GetOrderListByUserIdAsync(Guid userId)
         {
             var orderListByBuyer = _context.Order.Where(x => x.UserId == userId).ToList();
 
@@ -52,9 +52,9 @@ namespace ShopAPI.Data.Order
             await Task.CompletedTask;
         }
 
-        public async Task DeleteOrderAsync(int number)
+        public async Task DeleteOrderAsync(Guid number)
         {
-            OrderModel order = await _context.Order.FirstOrDefaultAsync(x => x.Number == number);
+            OrderModel order = await _context.Order.FirstOrDefaultAsync(x => x.Id == number);
             if (order is null)
             {
                 throw new ArgumentException(nameof(order));

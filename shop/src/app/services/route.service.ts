@@ -6,31 +6,28 @@ import { Route } from 'src/model/shop.types';
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RouteService {
-
   readonly APIUrl = environment.APIUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getRouteDefaults(){
+  getRouteDefaults() {
     return of({
-      id : 0,
-      dispatchDate: "",
-      deliveryDate: "",
-      orderNumber: 0,
-      addressId:0,
-      userId: 0
-    } as Route)
-
+      dispatchDate: '',
+      deliveryDate: '',
+      orderNumber: '',
+      addressId: '',
+      userId: '',
+    } as Route);
   }
 
   getRouteList(): Observable<Route[]> {
     return this.http.get<Route[]>(this.APIUrl + 'Route');
   }
 
-  getRouteByOrderNumber(number: number): Observable<Route> {
+  getRouteByOrderNumber(number: string): Observable<Route> {
     return this.http.get<Route>(this.APIUrl + 'Route/' + number);
   }
 
@@ -42,7 +39,7 @@ export class RouteService {
     return this.http.put(this.APIUrl + 'Route', route);
   }
 
-  deleteRouteFromList(id: number) {
+  deleteRouteFromList(id: string) {
     return this.http.delete(this.APIUrl + 'Route/' + id);
   }
 }

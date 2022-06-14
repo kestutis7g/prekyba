@@ -34,7 +34,7 @@ namespace ShopAPI.Controllers
 
         // GET api/cart/{userIyd}
         [HttpGet("{userId}")]
-        public async Task<ActionResult<IEnumerable<CartModel>>> GetCartListByUserIdAsync([FromRoute] int userId)
+        public async Task<ActionResult<IEnumerable<CartModel>>> GetCartListByUserIdAsync([FromRoute] Guid userId)
         {
             var cartFromRepo = await _repository.GetCartListByUserIdAsync(userId);
             if (cartFromRepo is null)
@@ -68,7 +68,7 @@ namespace ShopAPI.Controllers
 
         // Delete api/cart/{id}
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteCartByIdAsync([FromRoute] int id)
+        public async Task<ActionResult> DeleteCartByIdAsync([FromRoute] Guid id)
         {
 
             await _repository.DeleteCartAsync(id);

@@ -33,7 +33,7 @@ namespace ShopAPI.Controllers
 
         // GET api/orderItem/{orderNumber}
         [HttpGet("list/{orderNumber}")]
-        public async Task<ActionResult<List<OrderItemModel>>> GetOrderItemListByOrderNumberAsync([FromRoute] int orderNumber)
+        public async Task<ActionResult<List<OrderItemModel>>> GetOrderItemListByOrderNumberAsync([FromRoute] Guid orderNumber)
         {
             var orderItemFromRepo = await _repository.GetOrderItemListByOrderNumberAsync(orderNumber);
             if (orderItemFromRepo is null)
@@ -68,7 +68,7 @@ namespace ShopAPI.Controllers
 
         // Delete api/orderItem/{id}
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteOrderItemByIdAsync([FromRoute] int id)
+        public async Task<ActionResult> DeleteOrderItemByIdAsync([FromRoute] Guid id)
         {
             await _repository.DeleteOrderItemAsync(id);
 

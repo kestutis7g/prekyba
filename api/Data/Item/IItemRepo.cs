@@ -10,8 +10,8 @@ namespace ShopAPI.Data.Item
     {
         Task SaveChangesAsync();
         Task<IEnumerable<ItemModel>> GetItemListAsync();
-        Task<ItemModel> GetItemByIdAsync(int id);
-        Task<List<ItemModel>> GetItemListByUserIdAsync(int userId);
+        Task<ItemModel> GetItemByIdAsync(Guid id);
+        Task<List<ItemModel>> GetItemListByUserIdAsync(Guid userId);
         Task CreateItemAsync(ItemModel itemModel);
         Task UpdateItemAsync(ItemModel itemModel);
         Task DeleteItemAsync(ItemModel itemModel);

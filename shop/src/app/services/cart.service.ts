@@ -6,23 +6,22 @@ import { Cart } from 'src/model/shop.types';
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartService {
-
   readonly APIUrl = environment.APIUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   addItemToCart(cartItem: Cart) {
     return this.http.post(this.APIUrl + 'Cart', cartItem);
   }
 
-  getCartListByUserId(userId: number): Observable<Cart[]> {
+  getCartListByUserId(userId: string): Observable<Cart[]> {
     return this.http.get<Cart[]>(this.APIUrl + 'Cart/' + userId);
   }
 
-  deleteItemFromCart(id: number) {
+  deleteItemFromCart(id: string) {
     return this.http.delete(this.APIUrl + 'Cart/' + id);
   }
 }

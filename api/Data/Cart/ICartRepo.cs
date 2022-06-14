@@ -10,9 +10,9 @@ namespace ShopAPI.Data.Cart
     {
         Task SaveChangesAsync();
         Task<IEnumerable<CartModel>> GetCartListAsync();
-        Task<IEnumerable<CartModel>> GetCartListByUserIdAsync(int id);
+        Task<IEnumerable<CartModel>> GetCartListByUserIdAsync(Guid id);
         Task CreateCartAsync(CartModel cartModel);
         Task UpdateCartAsync(CartModel cartModel);
-        Task DeleteCartAsync(int id);
+        Task DeleteCartAsync(Guid id);
     }
 }

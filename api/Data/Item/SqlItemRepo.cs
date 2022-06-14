@@ -27,13 +27,13 @@ namespace ShopAPI.Data.Item
 
             return await Task.FromResult(itemList);
         }
-        public async Task<ItemModel> GetItemByIdAsync(int id)
+        public async Task<ItemModel> GetItemByIdAsync(Guid id)
         {
             ItemModel item = await _context.Items.FirstOrDefaultAsync(x => x.Id == id);
             return item;
         }
 
-        public async Task<List<ItemModel>> GetItemListByUserIdAsync(int userId)
+        public async Task<List<ItemModel>> GetItemListByUserIdAsync(Guid userId)
         {
             List<ItemModel> itemList = new List<ItemModel>();
             var itemListByUser = _context.Carts.Where(x => x.UserId == userId).ToList();

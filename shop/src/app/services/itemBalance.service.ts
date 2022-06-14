@@ -16,10 +16,9 @@ export class ItemBalanceService {
 
   getItemBalanceDefaults(){
     return of({
-      id: 0,
       amount: 0,
       date: "",
-      itemId: 0
+      itemId: ""
     } as ItemBalance)
 
   }
@@ -28,7 +27,7 @@ export class ItemBalanceService {
     return this.http.get<ItemBalance[]>(this.APIUrl + 'ItemBalance');
   }
 
-  getItemBalanceListByItemId(itemId: number): Observable<ItemBalance[]> {
+  getItemBalanceListByItemId(itemId: string): Observable<ItemBalance[]> {
     return this.http.get<ItemBalance[]>(this.APIUrl + 'ItemBalance/list/' + itemId);
   }
 
@@ -40,7 +39,7 @@ export class ItemBalanceService {
     return this.http.put(this.APIUrl + 'ItemBalance', itemBalance);
   }
 
-  deleteItemBalanceFromList(id: number) {
+  deleteItemBalanceFromList(id: string) {
     return this.http.delete(this.APIUrl + 'ItemBalance/' + id);
   }
 }

@@ -33,7 +33,7 @@ namespace ShopAPI.Controllers
 
         // GET api/route/{orderNumber}
         [HttpGet("{orderNumber}")]
-        public async Task<ActionResult<RouteModel>> GetRouteByOrderNumberAsync([FromRoute] int orderNumber)
+        public async Task<ActionResult<RouteModel>> GetRouteByOrderNumberAsync([FromRoute] Guid orderNumber)
         {
             var routeFromRepo = await _repository.GetRouteByOrderNumberAsync(orderNumber);
             if (routeFromRepo is null)
@@ -68,7 +68,7 @@ namespace ShopAPI.Controllers
 
         // Delete api/route/{id}
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteRouteByIdAsync([FromRoute] int id)
+        public async Task<ActionResult> DeleteRouteByIdAsync([FromRoute] Guid id)
         {
             await _repository.DeleteRouteAsync(id);
 

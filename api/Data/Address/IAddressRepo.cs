@@ -10,9 +10,9 @@ namespace ShopAPI.Data.Address
     {
         Task SaveChangesAsync();
         Task<IEnumerable<AddressModel>> GetAddressListAsync();
-        Task<AddressModel> GetAddressByIdAsync(int id);
+        Task<AddressModel> GetAddressByIdAsync(Guid id);
         Task CreateAddressAsync(AddressModel addressModel);
         Task UpdateAddressAsync(AddressModel addressModel);
-        Task DeleteAddressAsync(int id);
+        Task DeleteAddressAsync(Guid id);
     }
 }

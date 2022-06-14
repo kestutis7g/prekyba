@@ -9,12 +9,22 @@ import { Cart, Item } from 'src/model/shop.types';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+  styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
   @ViewChild(MatTable) table!: MatTable<Item>;
-  cartDisplayedColumns = ['userId', 'itemId', 'quantity']
-  displayedColumns = ['name', 'price', 'quantity', 'discount', 'fullPrice', 'type', 'remove', 'add', 'delete']
+  cartDisplayedColumns = ['userId', 'itemId', 'quantity'];
+  displayedColumns = [
+    'name',
+    'price',
+    'quantity',
+    'discount',
+    'fullPrice',
+    'type',
+    'remove',
+    'add',
+    'delete',
+  ];
   //displayedColumns = ['name', 'price', 'description', 'quantity', 'discount', 'type']
   isLoadingResults = true;
 
@@ -25,99 +35,98 @@ export class CartComponent implements OnInit {
   fullDiscount: number = 0;
   sum: number = 0;
 
-
   constructor(
     private itemService: ItemService,
     private cartService: CartService,
     private route: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.refreshCartList();
     this.getCartList();
   }
 
-  deleteItem(id: number) {
-
-    this.cartService.deleteItemFromCart(id).subscribe(() => this.refreshCartList());
-
+  deleteItem(id: string) {
+    this.cartService
+      .deleteItemFromCart(id)
+      .subscribe(() => this.refreshCartList());
   }
 
-  refreshCartList() { //gauna krepselio sarasa item entity pavidalu
-    this.itemService.getItemListByUserId(parseInt(localStorage.getItem('userId') || "0"))
+  refreshCartList() {
+    //gauna krepselio sarasa item entity pavidalu
+    this.itemService
+      .getItemListByUserId(localStorage.getItem('userId') || '')
       .subscribe(
-        data => {
+        (data) => {
           this.itemList = data;
 
           this.fullCost = 0;
           this.fullDiscount = 0;
-          this.itemList.forEach(item => {
+          this.itemList.forEach((item) => {
             this.fullCost += item.price! * item.quantity!;
-            this.fullDiscount += ((item.price!*item.discount!/100) * item.quantity!)
+            this.fullDiscount +=
+              ((item.price! * item.discount!) / 100) * item.quantity!;
           });
           this.sum = this.fullCost - this.fullDiscount;
 
-          if (localStorage.getItem('type') != "guest") {
+          if (localStorage.getItem('type') != 'guest') {
             if (this.itemList.length > 0) {
               this.pay = true;
-            }
-            else {
+            } else {
               this.pay = false;
             }
-          }
-          else {
+          } else {
             this.pay = false;
           }
         },
-        error => {
+        (error) => {
           console.log(error);
         }
       );
   }
 
-  getCartList(){ //cart lenteles duomenys
+  getCartList() {
+    //cart lenteles duomenys
 
-    this.cartService.getCartListByUserId(parseInt(localStorage.getItem('userId') || "0"))
+    this.cartService
+      .getCartListByUserId(localStorage.getItem('userId') || '')
       .subscribe({
         next: (data) => {
           this.cartList = data;
         },
         error: (error) => {
           console.log(error);
-        }
+        },
       });
   }
 
   pushButton(id: number) {
-    this.route.navigate(["item/" + id]);
+    this.route.navigate(['item/' + id]);
   }
 
-  getItemIdByCartId(cartId: number){
+  getItemIdByCartId(cartId: string) {
     for (let i = 0; i < this.cartList!.length; i++) {
-      if(this.cartList![i].id == cartId){
+      if (this.cartList![i].id == cartId) {
         return this.cartList![i].itemId;
       }
     }
-    return 0;
+    return '';
   }
 
-  addToCart(id: number) {
-
+  addToCart(id: string) {
     let itemId = this.getItemIdByCartId(id);
     //patikrinam ar tiek dar yra itemu
-    let item: Item | undefined
+    let item: Item | undefined;
     this.itemService.getItemById(itemId).subscribe({
       next: (data) => {
         item = data;
 
         if (item!.quantity! > this.quantityInCart(id)) {
-
           let cartItem: Cart = {
-            id: 0,
             itemId: itemId,
-            userId: parseInt(localStorage.getItem('userId') || "0"),
-            quantity: 1
-          }
+            userId: localStorage.getItem('userId') || '',
+            quantity: 1,
+          };
 
           this.cartService.addItemToCart(cartItem).subscribe({
             next: (data) => {
@@ -125,20 +134,18 @@ export class CartComponent implements OnInit {
             },
             error: (error) => {
               console.log(error);
-            }}
-          );
+            },
+          });
         }
       },
       error: (error) => {
         console.log(error);
-      }}
-    )
-
+      },
+    });
   }
 
-  removeFromCart(id?: number) {
-
-    if(!id){
+  removeFromCart(id?: string) {
+    if (!id) {
       return;
     }
 
@@ -146,27 +153,24 @@ export class CartComponent implements OnInit {
 
     if (this.quantityInCart(id) > 1) {
       let cartItem: Cart = {
-        id: 0,
         itemId: itemId,
-        userId: parseInt(localStorage.getItem('userId') || "0"),
-        quantity: -1
-      }
+        userId: localStorage.getItem('userId') || '',
+        quantity: -1,
+      };
 
       this.cartService.addItemToCart(cartItem).subscribe(
-        data => {
-
+        (data) => {
           this.refreshCartList();
         },
-        error => {
+        (error) => {
           console.log(error);
         }
-      )
+      );
     }
-
   }
 
-  quantityInCart(itemId?: number): number {
-    if(!itemId){
+  quantityInCart(itemId?: string): number {
+    if (!itemId) {
       return 0;
     }
 
@@ -177,5 +181,4 @@ export class CartComponent implements OnInit {
     }
     return 0;
   }
-
 }

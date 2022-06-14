@@ -1,15 +1,14 @@
 using System.ComponentModel.DataAnnotations;
 namespace ShopAPI.Model
 {
-    public class OrderModel
+    public class OrderModel : BaseEntity
     {
-        [Key]
-        public int Number { get; set; }
         public string Date { get; set; }
         public double? Sum { get; set; }
         public double? Discount { get; set; }
         public string Comment { get; set; }
         public string Status { get; set; }
-        public int? UserId { get; set; }
+        public Guid? UserId { get; set; }
+        public UserModel User { get; set; }
     }
 }
