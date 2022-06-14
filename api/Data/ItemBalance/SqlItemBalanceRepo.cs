@@ -28,7 +28,7 @@ namespace ShopAPI.Data.ItemBalance
             return await Task.FromResult(itemBalanceList);
         }
 
-        public async Task<List<ItemBalanceModel>> GetItemBalanceListByItemIdAsync(int itemId)
+        public async Task<List<ItemBalanceModel>> GetItemBalanceListByItemIdAsync(Guid itemId)
         {
             var itemBalanceListByItemId = _context.ItemBalance.Where(x => x.ItemId == itemId).ToList();
 
@@ -51,7 +51,7 @@ namespace ShopAPI.Data.ItemBalance
             await Task.CompletedTask;
         }
 
-        public async Task DeleteItemBalanceAsync(int id)
+        public async Task DeleteItemBalanceAsync(Guid id)
         {
             ItemBalanceModel itemBalance = await _context.ItemBalance.FirstOrDefaultAsync(x => x.Id == id);
             if (itemBalance is null)

@@ -2,14 +2,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ShopAPI.Model
 {
-    public class OrderItemModel
+    public class OrderItemModel : BaseEntity
     {
-        public OrderModel Order { get; set; }
-        [Key]
-        public int Id { get; set; }
         public int Quantity { get; set; }
-        public int OrderNumber { get; set; }
-        public int ItemId { get; set; }
 
+        public Guid OrderId { get; set; }
+
+        public OrderModel Order { get; set; }
+
+        public Guid ItemId { get; set; }
+
+        public ItemModel Item { get; set; }
     }
 }

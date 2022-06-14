@@ -21,15 +21,16 @@ export class OrderListComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.orderService.getOrderListByUserId(parseInt(localStorage.getItem('userId') || "0"))
+    this.orderService
+      .getOrderListByUserId(localStorage.getItem('userId') || '')
       .subscribe({
         next: (data) => {
           this.orderList = data;
         },
         error: (error) => {
           console.log(error);
-        }}
-      );
+        },
+      });
   }
 
   openOrder(number: number) {

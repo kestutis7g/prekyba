@@ -11,38 +11,20 @@ namespace ShopAPI.Context
 
         }
 
-        public DbSet<ItemModel> Items { get; set; }
-        public DbSet<CartModel> Carts { get; set; }
-        public DbSet<UserModel> Users { get; set; }
-        public DbSet<OrderModel> Order { get; set; }
-        public DbSet<ItemBalanceModel> ItemBalance { get; set; }
-        public DbSet<OrderItemModel> OrderItem { get; set; }
-        public DbSet<RouteModel> Route { get; set; }
-        public DbSet<AddressModel> Address { get; set; }
+        public DbSet<ItemModel> Items => Set<ItemModel>();
+        public DbSet<CartModel> Carts => Set<CartModel>();
+        public DbSet<UserModel> Users => Set<UserModel>();
+        public DbSet<OrderModel> Order => Set<OrderModel>();
+        public DbSet<ItemBalanceModel> ItemBalance => Set<ItemBalanceModel>();
+        public DbSet<OrderItemModel> OrderItem => Set<OrderItemModel>();
+        public DbSet<RouteModel> Route => Set<RouteModel>();
+        public DbSet<AddressModel> Address => Set<AddressModel>();
 
         #region Required
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<CartModel>()
-                .HasOne(x => x.Item)
-                .WithMany()
-                .HasForeignKey(x => x.ItemId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<OrderItemModel>()
-                .HasOne(x => x.Order)
-                .WithMany()
-                .HasForeignKey(x => x.OrderNumber)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<RouteModel>()
-                .HasOne(x => x.Order)
-                .WithMany()
-                .HasForeignKey(x => x.OrderNumber)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(System.Reflection.Assembly.GetExecutingAssembly());
 
         }
         #endregion

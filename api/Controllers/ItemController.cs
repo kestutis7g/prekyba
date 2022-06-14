@@ -34,7 +34,7 @@ namespace ShopAPI.Controllers
 
         // GET api/item/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<ItemModel>> GetItemByIdAsync([FromRoute] int id)
+        public async Task<ActionResult<ItemModel>> GetItemByIdAsync([FromRoute] Guid id)
         {
             var itemFromRepo = await _repository.GetItemByIdAsync(id);
             if (itemFromRepo is null)
@@ -46,7 +46,7 @@ namespace ShopAPI.Controllers
 
         // GET api/item/{userId}
         [HttpGet("list/{userId}")]
-        public async Task<ActionResult<List<ItemModel>>> GetItemListByUserIdAsync([FromRoute] int userId)
+        public async Task<ActionResult<List<ItemModel>>> GetItemListByUserIdAsync([FromRoute] Guid userId)
         {
             var itemFromRepo = await _repository.GetItemListByUserIdAsync(userId);
             if (itemFromRepo is null)
@@ -71,7 +71,7 @@ namespace ShopAPI.Controllers
         [HttpPut]
         public async Task<ActionResult> UpdateItemAsync([FromBody] ItemModel itemModel)
         {
-            var model = await _repository.GetItemByIdAsync(itemModel.Id);
+            var model = await _repository.GetItemByIdAsync(itemModel.Id.Value);
             // model.Name = itemModel.Name ?? model.Name;
             // model.Picture = itemModel.Picture ?? model.Picture;
             // model.Price = itemModel.Price ?? model.Price;
@@ -97,7 +97,7 @@ namespace ShopAPI.Controllers
 
         // Delete api/item/{id}
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteItemByIdAsync([FromRoute] int id)
+        public async Task<ActionResult> DeleteItemByIdAsync([FromRoute] Guid id)
         {
 
             var item = await _repository.GetItemByIdAsync(id);

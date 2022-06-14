@@ -52,7 +52,7 @@ namespace ShopAPI.Data.User
             await Task.CompletedTask;
         }
 
-        public async Task DeleteUserAsync(int id)
+        public async Task DeleteUserAsync(Guid id)
         {
             UserModel user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
             if (user is null)

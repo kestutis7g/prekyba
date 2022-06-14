@@ -2,13 +2,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ShopAPI.Model
 {
-    public class CartModel
+    public class CartModel : BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
-        public int UserId { get; set; }
-        public int ItemId { get; set; }
-        public int Quantity { get; set; }
+        public Guid UserId { get; set; }
+
+        public UserModel User { get; set; }
+
+        public Guid ItemId { get; set; }
+
         public ItemModel Item { get; set; }
+
+        public int Quantity { get; set; }
     }
 }

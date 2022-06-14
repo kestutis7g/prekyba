@@ -16,13 +16,12 @@ export class AddressService {
 
   getAddressDefaults(){
     return of({
-      id : 0,
-      city: "",
-      street: "",
+      city: '',
+      street: '',
       building: 0,
-      apartment:0,
-      zipCode: 0
-    } as Address)
+      apartment: 0,
+      zipCode: 0,
+    } as Address);
 
   }
 
@@ -30,7 +29,7 @@ export class AddressService {
     return this.http.get<Address[]>(this.APIUrl + 'Address');
   }
 
-  getAddressById(id: number): Observable<Address> {
+  getAddressById(id: string): Observable<Address> {
     return this.http.get<Address>(this.APIUrl + 'Address/' + id);
   }
 
@@ -42,7 +41,7 @@ export class AddressService {
     return this.http.put(this.APIUrl + 'Address', address);
   }
 
-  deleteAddressFromList(id: number) {
+  deleteAddressFromList(id: string) {
     return this.http.delete(this.APIUrl + 'Address/' + id);
   }
 }

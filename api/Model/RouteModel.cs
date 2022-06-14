@@ -2,16 +2,22 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ShopAPI.Model
 {
-    public class RouteModel
+    public class RouteModel : BaseEntity
     {
-        public OrderModel Order { get; set; }
-        [Key]
-        public int Id { get; set; }
-        public string DispatchDate { get; set; }
-        public string DeliveryDate { get; set; }
-        public int OrderNumber { get; set; }
-        public int AddressId { get; set; }
-        public int UserId { get; set; }
+        public Guid OrderId { get; set; }
 
+        public OrderModel Order { get; set; }
+
+        public Guid UserId { get; set; }
+
+        public UserModel User { get; set; }
+
+        public Guid AddressId { get; set; }
+
+        public AddressModel Address { get; set; }
+
+        public string DispatchDate { get; set; }
+
+        public string DeliveryDate { get; set; }
     }
 }

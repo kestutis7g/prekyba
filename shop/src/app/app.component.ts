@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
   signOutUser() {
     localStorage.setItem('username', "Guest");
     localStorage.setItem('type', "guest");
-    localStorage.setItem('userId', "0");
+    localStorage.setItem('userId', '');
     window.location.reload();
     this.guest = true;
     this.signout = false;

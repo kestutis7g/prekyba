@@ -8,12 +8,11 @@ import { Cart, Item } from 'src/model/shop.types';
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
-  styleUrls: ['./item.component.css']
+  styleUrls: ['./item.component.css'],
 })
 export class ItemComponent implements OnInit {
-
-  item: Item | undefined
-  quantity: number = 1
+  item: Item | undefined;
+  quantity: number = 1;
   canEdit: boolean = false;
 
   addedToCart: boolean = false;
@@ -23,12 +22,12 @@ export class ItemComponent implements OnInit {
     private cartService: CartService,
     private activatedRoute: ActivatedRoute,
     private route: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
-    let route = this.activatedRoute.params.subscribe(params => {
+    let route = this.activatedRoute.params.subscribe((params) => {
       const id = params['id'];
-      if(!id){
+      if (!id) {
         return;
       }
 
@@ -39,101 +38,100 @@ export class ItemComponent implements OnInit {
         },
         error: (error) => {
           console.log(error);
-        }}
-      )
+        },
+      });
     });
 
-    if (localStorage.getItem('type') == "admin" || localStorage.getItem('type') == "seller") {
+    if (
+      localStorage.getItem('type') == 'admin' ||
+      localStorage.getItem('type') == 'seller'
+    ) {
       this.canEdit = true;
-    }
-    else {
+    } else {
       this.canEdit = false;
     }
   }
 
-  getCartList(){
-
-    this.cartService.getCartListByUserId(parseInt(localStorage.getItem('userId') || "0"))
+  getCartList() {
+    this.cartService
+      .getCartListByUserId(localStorage.getItem('userId') || '')
       .subscribe({
         next: (data) => {
           this.cartList = data;
-          this.addedToCart = data.findIndex(x => x.itemId === this.item?.id) !== -1;
-
+          this.addedToCart =
+            data.findIndex((x) => x.itemId === this.item?.id) !== -1;
         },
         error: (error) => {
           console.log(error);
-        }
+        },
       });
   }
 
-
-
-  addToCart(itemId?: number) {
-    if(!itemId){
+  addToCart(itemId?: string) {
+    if (!itemId) {
       return;
     }
-    if (this.quantity <= 0 || this.item!.quantity! <= this.quantityInCart(this.item!.id)) {
+    if (
+      this.quantity <= 0 ||
+      this.item!.quantity! <= this.quantityInCart(this.item!.id)
+    ) {
       return;
     }
 
     let cartItem: Cart = {
-      id: 0,
       itemId: itemId,
-      userId: parseInt(localStorage.getItem('userId') || "0"),
-      quantity: this.quantity
-    }
+      userId: localStorage.getItem('userId') || '',
+      quantity: this.quantity,
+    };
 
     this.cartService.addItemToCart(cartItem).subscribe(
-      data => {
+      (data) => {
         this.getCartList();
       },
-      error => {
+      (error) => {
         console.log(error);
       }
     );
   }
 
-  removeFromCart(itemId?: number) {
-    if(!itemId){
+  removeFromCart(itemId?: string) {
+    if (!itemId) {
       return;
     }
     if (this.quantityInCart(itemId) > 1) {
       let cartItem: Cart = {
-        id: 0,
         itemId: itemId,
-        userId: parseInt(localStorage.getItem('userId') || "0"),
-        quantity: -1
-      }
+        userId: localStorage.getItem('userId') || '',
+        quantity: -1,
+      };
 
       this.cartService.addItemToCart(cartItem).subscribe(
-        data => {
+        (data) => {
           this.getCartList();
         },
-        error => {
+        (error) => {
           console.log(error);
         }
-      )
-    }
-    else {
+      );
+    } else {
       for (let i = 0; i < this.cartList!.length; i++) {
         if (this.cartList?.[i].itemId == itemId) {
-          this.cartService.deleteItemFromCart(this.cartList?.[i].id).subscribe(
-            data => {
+          this.cartService.deleteItemFromCart(this.cartList?.[i].id!).subscribe(
+            (data) => {
               this.getCartList();
             },
-            error => {
+            (error) => {
               console.log(error);
             }
           );
           break;
         }
       }
-
     }
   }
 
-  quantityInCart(itemId?: number) {
-    if(!itemId){
+  quantityInCart(itemId?: string) {
+    if (!itemId) {
       return 0;
     }
     for (let i = 0; i < this.cartList!.length; i++) {
@@ -145,7 +143,6 @@ export class ItemComponent implements OnInit {
   }
 
   pushButton(id: number) {
-    this.route.navigate(["edit-item/" + id]);
+    this.route.navigate(['edit-item/' + id]);
   }
-
 }

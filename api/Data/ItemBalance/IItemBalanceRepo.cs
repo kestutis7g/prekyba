@@ -10,10 +10,10 @@ namespace ShopAPI.Data.ItemBalance
     {
         Task SaveChangesAsync();
         Task<IEnumerable<ItemBalanceModel>> GetItemBalanceListAsync();
-        Task<List<ItemBalanceModel>> GetItemBalanceListByItemIdAsync(int itemId);
+        Task<List<ItemBalanceModel>> GetItemBalanceListByItemIdAsync(Guid itemId);
         Task<List<ItemBalanceModel>> GetItemBalanceListByDateAsync(string date);
         Task CreateItemBalanceAsync(ItemBalanceModel itemBalanceModel);
         Task UpdateItemBalanceAsync(ItemBalanceModel itemBalanceModel);
-        Task DeleteItemBalanceAsync(int id);
+        Task DeleteItemBalanceAsync(Guid id);
     }
 }

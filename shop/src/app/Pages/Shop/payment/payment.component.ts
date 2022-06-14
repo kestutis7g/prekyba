@@ -67,12 +67,12 @@ export class PaymentComponent implements OnInit {
       }
     });
 
-    this.itemService.getItemListByUserId(parseInt(localStorage.getItem('userId') || "0"))
+    this.itemService.getItemListByUserId(localStorage.getItem('userId') || "0")
       .subscribe(
         data => {
           this.itemList = data;
           console.log(data);
-          this.cartService.getCartListByUserId(parseInt(localStorage.getItem('userId') || "0"))
+          this.cartService.getCartListByUserId(localStorage.getItem('userId') || "0")
             .subscribe({
             next: (data) => {
               this.cartList = data;
@@ -129,28 +129,26 @@ export class PaymentComponent implements OnInit {
   pay() {
     //order kurimas
     let date =this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
-    let orderNumber: number;
+    let orderNumber: string;
     let order: Order = {
-      number: 0,
       date: date!.toString(),
       sum: this.sum,
       discount: this.fullDiscount,
       comment: this.comment,
-      status: "APMOKĖTAS",
-      userId: parseInt(localStorage.getItem('userId') || "0")
-    }
+      status: 'APMOKĖTAS',
+      userId: localStorage.getItem('userId') || '',
+    };
 
     this.orderService.addOrder(order).subscribe({
       next: (order) => {
-        orderNumber = order.number;
+        orderNumber = order.id!;
 
-        this.cartList.forEach(cartItem => {
+        this.cartList.forEach((cartItem) => {
           let orderItem: OrderItem = {
-            id: 0,
             quantity: cartItem.quantity,
             orderNumber: orderNumber,
-            itemId: cartItem.itemId
-          }
+            itemId: cartItem.itemId,
+          };
           //atnaujina item kiekio reiksmes
           this.itemService.getItemById(cartItem.itemId).subscribe({
             next: (data) => {
@@ -158,77 +156,73 @@ export class PaymentComponent implements OnInit {
               item.id = cartItem.itemId;
               item.quantity = data.quantity! - cartItem.quantity;
 
-              this.itemService.updateItem(item).subscribe()
+              this.itemService.updateItem(item).subscribe();
             },
             error: (error) => {
               console.log(error);
-            }}
-          )
+            },
+          });
 
           //sukuria orderItem irasus
           this.orderItemService.addOrderItem(orderItem).subscribe({
-            next: () => {
-            },
+            next: () => {},
             error: (error) => {
               console.log(error);
-              this.displayStatus("Nepavyko sukurti order item")
-            }}
-          )
+              this.displayStatus('Nepavyko sukurti order item');
+            },
+          });
         });
 
         //sukuria address irasa
         let address: Address = {
-          id : 0,
           city: this.address!.city,
           street: this.address!.street,
           building: parseInt(this.address_b),
           apartment: parseInt(this.address_a),
-          zipCode: parseInt(this.address_z)
-        }
+          zipCode: parseInt(this.address_z),
+        };
 
-        let addressId: number;
+        let addressId: string;
         this.addressService.addAddress(address).subscribe({
           next: (address) => {
-            addressId = address.id;
+            addressId = address.id!;
 
             let route: Route = {
-              id : 0,
-              dispatchDate: "",
-              deliveryDate: "",
+              dispatchDate: '',
+              deliveryDate: '',
               orderNumber: orderNumber,
               addressId: addressId,
-              userId: parseInt(localStorage.getItem('userId') || "0")
-            }
+              userId: localStorage.getItem('userId') || '',
+            };
 
             //sukuria route irasa
             this.routeService.addRoute(route).subscribe({
-              next: () => {
-              },
+              next: () => {},
               error: (error) => {
                 console.log(error);
-                this.displayStatus("Nepavyko sukurti address")
-              }}
-            )
-
-            //isvalomas krepselis
-            this.itemList.forEach(item => {
-              this.cartService.deleteItemFromCart(item.id).subscribe(() => this.router.navigate(["order" , orderNumber]));
+                this.displayStatus('Nepavyko sukurti address');
+              },
             });
 
-
+            //isvalomas krepselis
+            this.itemList.forEach((item) => {
+              this.cartService
+                .deleteItemFromCart(item.id!)
+                .subscribe(() => this.router.navigate(['order', orderNumber]));
+            });
           },
           error: (error) => {
             console.log(error);
-            this.displayStatus("Nepavyko sukurti address")
-          }}
-        )
+            this.displayStatus('Nepavyko sukurti address');
+          },
+        });
         this.router.navigateByUrl('/home');
       },
       error: (error) => {
         console.log(error);
-        this.displayStatus("Nepavyko sukurti uzsakymo")
-      }}
-    )
+        this.displayStatus('Nepavyko sukurti uzsakymo');
+      },
+    });
 
 
 

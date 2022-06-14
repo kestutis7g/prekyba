@@ -10,9 +10,9 @@ namespace ShopAPI.Data.Route
     {
         Task SaveChangesAsync();
         Task<IEnumerable<RouteModel>> GetRouteListAsync();
-        Task<RouteModel> GetRouteByOrderNumberAsync(int orderNumber);
+        Task<RouteModel> GetRouteByOrderNumberAsync(Guid orderNumber);
         Task CreateRouteAsync(RouteModel routeModel);
         Task UpdateRouteAsync(RouteModel routeModel);
-        Task DeleteRouteAsync(int id);
+        Task DeleteRouteAsync(Guid id);
     }
 }

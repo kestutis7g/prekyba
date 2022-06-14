@@ -38,7 +38,7 @@ namespace ShopAPI.Controllers
 
         // GET api/itemBalance/{itemId}
         [HttpGet("list/{itemId}")]
-        public async Task<ActionResult<List<ItemBalanceModel>>> GetItemBalanceListByItemIdAsync([FromRoute] int itemId)
+        public async Task<ActionResult<List<ItemBalanceModel>>> GetItemBalanceListByItemIdAsync([FromRoute] Guid itemId)
         {
             var itemBalanceFromRepo = await _repository.GetItemBalanceListByItemIdAsync(itemId);
             if (itemBalanceFromRepo is null)
@@ -73,7 +73,7 @@ namespace ShopAPI.Controllers
 
         // Delete api/itemBalance/{id}
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteItemBalanceByIdAsync([FromRoute] int id)
+        public async Task<ActionResult> DeleteItemBalanceByIdAsync([FromRoute] Guid id)
         {
             await _repository.DeleteItemBalanceAsync(id);
 
@@ -112,10 +112,10 @@ namespace ShopAPI.Controllers
                     {
                         Console.WriteLine("Sukuriamas item id=" + item.Id + " irasas");
                         ItemBalanceModel balance = new ItemBalanceModel();
-                        balance.Id = 0;
+                        balance.Id = Guid.NewGuid();
                         balance.Amount = item.Quantity;
                         balance.Date = date;
-                        balance.ItemId = item.Id;
+                        balance.ItemId = item.Id.Value;
 
                         await _repository.CreateItemBalanceAsync(balance);
                         await _repository.SaveChangesAsync();

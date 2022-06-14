@@ -32,7 +32,7 @@ namespace ShopAPI.Controllers
         }
         // GET api/order/{number}
         [HttpGet("{number}")]
-        public async Task<ActionResult<OrderModel>> GetOrderByNumberAsync([FromRoute] int number)
+        public async Task<ActionResult<OrderModel>> GetOrderByNumberAsync([FromRoute] Guid number)
         {
             var orderFromRepo = await _repository.GetOrderByNumberAsync(number);
             if (orderFromRepo is null)
@@ -44,7 +44,7 @@ namespace ShopAPI.Controllers
 
         // GET api/order/{userId}
         [HttpGet("list/{userId}")]
-        public async Task<ActionResult<List<OrderModel>>> GetOrderListByUserIdAsync([FromRoute] int userId)
+        public async Task<ActionResult<List<OrderModel>>> GetOrderListByUserIdAsync([FromRoute] Guid userId)
         {
             var orderFromRepo = await _repository.GetOrderListByUserIdAsync(userId);
             if (orderFromRepo is null)
@@ -69,7 +69,7 @@ namespace ShopAPI.Controllers
         [HttpPut]
         public async Task<ActionResult> UpdateOrderAsync([FromBody] OrderModel orderModel)
         {
-            var model = await _repository.GetOrderByNumberAsync(orderModel.Number);
+            var model = await _repository.GetOrderByNumberAsync(orderModel.Id.Value);
 
             model.Date = !String.IsNullOrEmpty(orderModel.Date) ? orderModel.Date : model.Date;
             model.Sum = orderModel.Sum != null ? orderModel.Sum : model.Sum;
@@ -88,7 +88,7 @@ namespace ShopAPI.Controllers
 
         // Delete api/order/{number}
         [HttpDelete("{number}")]
-        public async Task<ActionResult> DeleteOrderByIdAsync([FromRoute] int number)
+        public async Task<ActionResult> DeleteOrderByIdAsync([FromRoute] Guid number)
         {
             await _repository.DeleteOrderAsync(number);
 

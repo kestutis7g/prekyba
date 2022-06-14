@@ -6,36 +6,33 @@ import { Order } from 'src/model/shop.types';
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrderService {
-
   readonly APIUrl = environment.APIUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getOrderDefaults(){
+  getOrderDefaults() {
     return of({
-      number: 0,
-      date: "",
+      date: '',
       sum: 0,
       discount: 0,
-      comment: "",
-      status: "",
-      userId: 0
-    } as Order)
-
+      comment: '',
+      status: '',
+      userId: '',
+    } as Order);
   }
 
   getOrderList(): Observable<Order[]> {
     return this.http.get<Order[]>(this.APIUrl + 'Order');
   }
 
-  getOrderByNumber(number: number): Observable<Order> {
+  getOrderByNumber(number: string): Observable<Order> {
     return this.http.get<Order>(this.APIUrl + 'Order/' + number);
   }
 
-  getOrderListByUserId(userId: number): Observable<Order[]> {
+  getOrderListByUserId(userId: string): Observable<Order[]> {
     return this.http.get<Order[]>(this.APIUrl + 'Order/list/' + userId);
   }
 
@@ -47,7 +44,7 @@ export class OrderService {
     return this.http.put(this.APIUrl + 'Order', order);
   }
 
-  deleteOrderFromList(number: number) {
+  deleteOrderFromList(number: string) {
     return this.http.delete(this.APIUrl + 'Order/' + number);
   }
 }

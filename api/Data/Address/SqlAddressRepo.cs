@@ -28,7 +28,7 @@ namespace ShopAPI.Data.Address
             return await Task.FromResult(addressList);
         }
 
-        public async Task<AddressModel> GetAddressByIdAsync(int id)
+        public async Task<AddressModel> GetAddressByIdAsync(Guid id)
         {
             AddressModel address = await _context.Address.FirstOrDefaultAsync(x => x.Id == id);
 
@@ -45,7 +45,7 @@ namespace ShopAPI.Data.Address
             await Task.CompletedTask;
         }
 
-        public async Task DeleteAddressAsync(int id)
+        public async Task DeleteAddressAsync(Guid id)
         {
             AddressModel address = await _context.Address.FirstOrDefaultAsync(x => x.Id == id);
             if (address is null)

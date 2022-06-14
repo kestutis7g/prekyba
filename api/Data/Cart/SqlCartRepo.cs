@@ -27,7 +27,7 @@ namespace ShopAPI.Data.Cart
 
             return await Task.FromResult(cartList);
         }
-        public async Task<IEnumerable<CartModel>> GetCartListByUserIdAsync(int userId)
+        public async Task<IEnumerable<CartModel>> GetCartListByUserIdAsync(Guid userId)
         {
             var cart = _context.Carts.Where(x => x.UserId == userId).ToList();
 
@@ -53,7 +53,7 @@ namespace ShopAPI.Data.Cart
             await Task.CompletedTask;
         }
 
-        public async Task DeleteCartAsync(int id)
+        public async Task DeleteCartAsync(Guid id)
         {
             CartModel cart = await _context.Carts.FirstOrDefaultAsync(x => x.Id == id);
             if (cart is null)

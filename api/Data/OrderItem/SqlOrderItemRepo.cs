@@ -28,9 +28,9 @@ namespace ShopAPI.Data.OrderItem
             return await Task.FromResult(orderItemList);
         }
 
-        public async Task<List<OrderItemModel>> GetOrderItemListByOrderNumberAsync(int orderNumber)
+        public async Task<List<OrderItemModel>> GetOrderItemListByOrderNumberAsync(Guid orderNumber)
         {
-            var orderItemListByOrderNumber = _context.OrderItem.Where(x => x.OrderNumber == orderNumber).ToList();
+            var orderItemListByOrderNumber = _context.OrderItem.Where(x => x.OrderId == orderNumber).ToList();
 
             return await Task.FromResult(orderItemListByOrderNumber);
         }
@@ -45,7 +45,7 @@ namespace ShopAPI.Data.OrderItem
             await Task.CompletedTask;
         }
 
-        public async Task DeleteOrderItemAsync(int id)
+        public async Task DeleteOrderItemAsync(Guid id)
         {
             OrderItemModel orderItem = await _context.OrderItem.FirstOrDefaultAsync(x => x.Id == id);
             if (orderItem is null)

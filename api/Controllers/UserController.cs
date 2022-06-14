@@ -90,7 +90,7 @@ namespace ShopAPI.Controllers
 
         // Delete api/user/{id}
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteUserByIdAsync([FromRoute] int id)
+        public async Task<ActionResult> DeleteUserByIdAsync([FromRoute] Guid id)
         {
             await _repository.DeleteUserAsync(id);
 
