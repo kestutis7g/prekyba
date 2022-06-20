@@ -45,8 +45,16 @@
     </mat-form-field>
   </p>
 
-  <button class="btn btn-dark"  (click)="loginUser()">Prisijungti</button>
-  <p> </p>
-  <button routerLink="/register" type="submit" class="btn btn-dark">Registruotis</button>
+  <div class="m-1">
+    <button class="btn btn-dark"  (click)="loginUser()">Prisijungti</button>
+  </div>
+
+  <div class="m-1">
+    <button class="btn btn-dark"  (click)="loginWithTrusty()">Prisijungti su Trusty</button>
+  </div>
+
+  <div class="m-1">
+    <button routerLink="/register" type="submit" class="btn btn-dark">Registruotis</button>
+  </div>
 
 </div>

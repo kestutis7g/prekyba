@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { RouteConfigLoadEnd, Router } from '@angular/router';
+import { ActivatedRoute, RouteConfigLoadEnd, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api-service';
 import { EncrDecrService } from 'src/app/services/EncrDecrService';
 import { IUser } from 'src/model/IUser';
 import Swal from 'sweetalert2';
+import { environment } from '../../../../environments/environment';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -28,10 +30,29 @@ export class LoginComponent implements OnInit {
   constructor(
     private service: ApiService,
     private route: Router,
-    private EncrDecr: EncrDecrService
+    private EncrDecr: EncrDecrService,
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe({
+      next: (params) => {
+        const token = params['token'];
+        if (!token) {
+          return;
+        }
+
+        this.authService.login(token);
+      },
+    });
+  }
+
+  public loginWithTrusty() {
+    location.replace(
+      `${environment.trustyWeb}?productId=${environment.productId}`
+    );
+  }
 
   loginUser() {
     this.service.getUserByLogin(this.login).subscribe({

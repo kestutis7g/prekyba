@@ -10,7 +10,7 @@ namespace ShopAPI.Data.User
     {
         Task SaveChangesAsync();
         Task<IEnumerable<UserModel>> GetUserListAsync();
-        //Task<UserModel> GetUserByIdAsync(int id);
+        Task<UserModel> GetUserByIdAsync(Guid id);
         Task<UserModel> GetUserByLoginAsync(string login);
         Task CreateUserAsync(UserModel userModel);
         Task UpdateUserAsync(UserModel userModel);
