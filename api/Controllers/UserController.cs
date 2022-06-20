@@ -31,10 +31,10 @@ namespace ShopAPI.Controllers
             return Ok(userList);
         }
 
-        /*
-        // GET api/user/{id}
-        [HttpGet("{id}")]
-        public async Task<ActionResult<UserModel>> GetUserByIdAsync([FromRoute] int id)
+
+        // GET api/user/id/{id}
+        [HttpGet("id/{id}")]
+        public async Task<ActionResult<UserModel>> GetUserByIdAsync([FromRoute] Guid id)
         {
             var userFromRepo = await _repository.GetUserByIdAsync(id);
             if (userFromRepo is null)
@@ -42,7 +42,7 @@ namespace ShopAPI.Controllers
                 return NotFound();
             }
             return Ok(userFromRepo);
-        }*/
+        }
 
         // GET api/user/{login}
         [HttpGet("{login}")]

@@ -6,6 +6,11 @@ export const environment = {
   production: false,
   //APIUrl: 'https://localhost:7285/api/'
   APIUrl: 'https://localhost:44372/api/',
+  productId: '19a7c7ab-6137-45eb-b86d-6a717f900000',
+  // trustyApi: 'https://trustyapi.azurewebsites.net/api',
+  trustyApi: 'https://localhost:44388/api',
+  // trustyWeb: 'https://trusty-web.herokuapp.com/sso/login',
+  trustyWeb: 'http://localhost:4200/sso/login',
 };
 
 /*
