@@ -110,5 +110,8 @@
       }
     }
   },
-  "defaultProject": "sportsystem"
+  "defaultProject": "sportsystem",
+  "cli": {
+    "analytics": "97a9c31b-c8e0-4daa-b259-b738602b3322"
+  }
 }

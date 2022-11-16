@@ -1,5 +1,5 @@
 export class IUser {
-  id?: string;
+  id?: '';
   name = '';
   lastname = '';
   email = '';
